@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
-import 'package:flutter_attendance/pages/login/components/textFieldUsername.dart';
+import 'package:flutter_attendance/pages/login/components/textField.dart';
 
-class RoundedInputField extends StatelessWidget {
+class RoundedInputField extends StatefulWidget {
   final String hintText;
   final IconData icon;
   final ValueChanged<String> onChanged;
@@ -14,16 +14,21 @@ class RoundedInputField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<RoundedInputField> createState() => _RoundedInputFieldState();
+}
+
+class _RoundedInputFieldState extends State<RoundedInputField> {
+  @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
-        onChanged: onChanged,
+        onChanged: widget.onChanged,
         decoration: InputDecoration(
           icon: Icon(
-            icon,
+            widget.icon,
             color: kPrimaryColor,
           ),
-          hintText: hintText,
+          hintText: widget.hintText,
           border: InputBorder.none,
         ),
       ),

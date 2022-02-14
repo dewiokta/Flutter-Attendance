@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
 
-class RoundedButton extends StatelessWidget {
+class RoundedButton extends StatefulWidget {
   final String text;
   final VoidCallback press;
   const RoundedButton({
@@ -10,6 +10,11 @@ class RoundedButton extends StatelessWidget {
     required this.press,
   }) : super(key: key);
 
+  @override
+  State<RoundedButton> createState() => _RoundedButtonState();
+}
+
+class _RoundedButtonState extends State<RoundedButton> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -20,9 +25,9 @@ class RoundedButton extends StatelessWidget {
         child: FlatButton(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
           color: kPrimaryColor,
-          onPressed: press,
+          onPressed: widget.press,
           child: Text(
-            text,
+            widget.text,
             style: TextStyle(color: Colors.white),
           ),
         ),

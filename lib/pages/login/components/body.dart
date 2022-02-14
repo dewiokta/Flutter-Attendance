@@ -7,11 +7,16 @@ import 'package:flutter_attendance/pages/login/components/rounded_field_password
 import 'package:flutter_attendance/pages/login/components/rounded_field_username.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
