@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
+import 'package:flutter_attendance/pages/profile/profile.dart';
 
 import 'pages/home/home.dart';
 
@@ -71,7 +72,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomePage())),
+            .push(MaterialPageRoute(builder: (context) => ProfilePage())),
         leading: Icon(
           Icons.person,
           color: Colors.indigo[400],
