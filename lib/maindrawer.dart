@@ -31,11 +31,10 @@ class _MaindrawState extends State<MainDrawer> {
                 backgroundColor: Color(00000),
                 child: ClipOval(
                   child: new SizedBox(
-                    width: 100.0,
-                    height: 100.0,
+                    width: 160.0,
+                    height: 130.0,
                     child: Image.asset(
-                      "assets/images/logo.png",
-                      height: 0.2,
+                      "assets/images/user.png",
                       fit: BoxFit.fill,
                     ),
                   ),
