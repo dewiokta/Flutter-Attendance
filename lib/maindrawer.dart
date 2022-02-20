@@ -27,7 +27,7 @@ class _MaindrawState extends State<MainDrawer> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
-                radius: 100,
+                radius: 80,
                 backgroundColor: Color(00000),
                 child: ClipOval(
                   child: new SizedBox(
