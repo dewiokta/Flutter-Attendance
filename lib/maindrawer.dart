@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/components/date_picker.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
+import 'package:flutter_attendance/pages/profile/profile.dart';
 
 import 'pages/home/home.dart';
 
@@ -27,15 +28,14 @@ class _MaindrawState extends State<MainDrawer> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
-                radius: 100,
+                radius: 80,
                 backgroundColor: Color(00000),
                 child: ClipOval(
                   child: new SizedBox(
-                    width: 100.0,
-                    height: 100.0,
+                    width: 160.0,
+                    height: 130.0,
                     child: Image.asset(
-                      "assets/images/logo.png",
-                      height: 0.2,
+                      "assets/images/user.png",
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -72,7 +72,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomePage())),
+            .push(MaterialPageRoute(builder: (context) => ProfilePage())),
         leading: Icon(
           Icons.person,
           color: Colors.indigo[400],
