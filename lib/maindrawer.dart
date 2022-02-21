@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_attendance/components/date_picker.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
 
 import 'pages/home/home.dart';
@@ -98,7 +99,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomePage())),
+            .push(MaterialPageRoute(builder: (context) => DatePickerWidget())),
         leading: Icon(
           Icons.history,
           color: Colors.indigo[400],

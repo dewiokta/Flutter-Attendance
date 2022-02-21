@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_attendance/constants.dart';
 
 import '../../maindrawer.dart';
 
@@ -13,7 +14,7 @@ class _HomePageState extends State<HomePage> {
     return new Scaffold(
       appBar: AppBar(
         title: Text("Asistencia"),
-        backgroundColor: Colors.indigo[400],
+        backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
         child: MainDrawer(),
