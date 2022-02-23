@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
+import 'package:flutter_attendance/pages/presensi/camera.dart';
 import 'package:flutter_attendance/pages/profile/profile.dart';
 
 import 'pages/home/home.dart';
@@ -89,7 +90,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomePage())),
+            .push(MaterialPageRoute(builder: (context) => CameraScreen())),
         leading: Icon(
           Icons.access_time_filled_outlined,
           color: Colors.indigo[400],

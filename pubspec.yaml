@@ -37,6 +37,9 @@ dependencies:
   google_fonts: ^1.1.0
   circular_profile_avatar: ^1.0.6
   flutter_svg: ^0.22.0
+  camera: ^0.5.8+5
+  path_provider: ^1.1.0
+  path: ^1.6.2
 
 dev_dependencies:
   flutter_test:
