@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_attendance/pages/presensi/presensi.dart';
+import 'package:flutter_attendance/pages/riwayat/riwayat.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
 import 'package:flutter_attendance/pages/presensi/camera.dart';
 import 'package:flutter_attendance/pages/profile/profile.dart';
@@ -31,7 +33,7 @@ class _MaindrawState extends State<MainDrawer> {
                 radius: 80,
                 backgroundColor: Color(00000),
                 child: ClipOval(
-                  child: new SizedBox(
+                  child: SizedBox(
                     width: 160.0,
                     height: 130.0,
                     child: Image.asset(
@@ -41,17 +43,17 @@ class _MaindrawState extends State<MainDrawer> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 2.0,
               ),
-              Text(
+              const Text(
                 " Nama User ",
                 style: TextStyle(
                   fontSize: 22.0,
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5.0,
               ),
             ],
@@ -81,7 +83,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomePage())),
+            .push(MaterialPageRoute(builder: (context) => Presensi())),
         leading: Icon(
           Icons.camera_enhance_rounded,
           color: Colors.indigo[400],
@@ -99,7 +101,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomePage())),
+            .push(MaterialPageRoute(builder: (context) => RiwayatWidget())),
         leading: Icon(
           Icons.history,
           color: Colors.indigo[400],

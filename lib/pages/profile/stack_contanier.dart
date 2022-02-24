@@ -10,14 +10,13 @@ class StackContainer extends StatelessWidget {
       height: 300.0,
       child: Stack(
         children: <Widget>[
-          Container(),
           ClipPath(
             clipper: MyCustomClipper(),
             child: Container(
               height: 200.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/gradient.PNG"),
+                  image: AssetImage("assets/images/gradient.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -33,8 +32,8 @@ class StackContainer extends StatelessWidget {
                   borderWidth: 1.0,
                   radius: 60.0,
                 ),
-                SizedBox(height: 4.0),
-                Text(
+                const SizedBox(height: 4.0),
+                const Text(
                   "User X",
                   style: TextStyle(
                     fontSize: 21.0,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_attendance/pages/riwayat/riwayat.dart';
+import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/pages/profile/profile.dart';
 import 'homeMenu.dart';
 import '../../maindrawer.dart';
@@ -14,7 +16,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Asistencia"),
-        backgroundColor: Colors.indigo[400],
+        backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
         child: MainDrawer(),
@@ -51,7 +53,7 @@ class _HomePageState extends State<HomePage> {
               text: "Riwayat Presensi",
               icon: "assets/icons/Log out.svg",
               press: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => ProfilePage())),
+                  .push(MaterialPageRoute(builder: (context) => RiwayatWidget())),
             ),
             HomeMenu(
               text: "Log Out",
