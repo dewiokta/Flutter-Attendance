@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,8 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CameraScreen extends StatefulWidget {
+  const CameraScreen({Key? key}) : super(key: key);
+
   @override
   _CameraScreenState createState() => _CameraScreenState();
 }
@@ -128,7 +129,7 @@ class _CameraScreenState extends State {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             FloatingActionButton(
-              child: Icon(
+              child: const Icon(
                 Icons.camera,
                 color: Colors.black,
               ),

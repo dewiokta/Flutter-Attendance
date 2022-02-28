@@ -11,7 +11,7 @@ class Presensi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Presensi Hadir"),
+        title: const Text("Presensi"),
         backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
@@ -27,7 +27,7 @@ class Presensi extends StatelessWidget {
               leading: const Image(
                 image: AssetImage("assets/images/presensi.png"),
               ),
-              title: Text("Presensi Hadir"),
+              title: Text("Presensi Datang"),
               trailing: Icon(Icons.arrow_forward),
             ),
             const SizedBox(height: 10),

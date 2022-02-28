@@ -46,6 +46,17 @@ class _PresensiPulangState extends State<PresensiPulang> {
               ],
             ),
           ),
+          const SizedBox(height: 470),
+          FlatButton(
+            onPressed: () {},
+            child: const Text(
+              "Presensi",
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            color: kPrimaryColor,
+            minWidth: 200,
+            height: 50,
+          ),
         ],
       ),
     );
