@@ -5,10 +5,16 @@ import 'package:flutter_attendance/pages/riwayat/riwayat.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
 import 'package:flutter_attendance/pages/presensi/camera.dart';
 import 'package:flutter_attendance/pages/profile/profile.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_attendance/blocs/Auth_bloc.dart';
+import 'package:flutter_attendance/event/auth_event.dart';
+import 'package:flutter_attendance/repository/auth_repository.dart';
+import 'package:flutter_attendance/state/auth_state.dart';
 import 'pages/home/home.dart';
 
 class MainDrawer extends StatefulWidget {
+  final AuthBloc authBloc;
+  const MainDrawer({Key? key, required this.authBloc}) : super(key: key);
   @override
   _MaindrawState createState() => _MaindrawState();
 }
@@ -19,6 +25,8 @@ class _MaindrawState extends State<MainDrawer> {
     super.initState();
   }
 
+  final AuthRepository authRepository = AuthRepository();
+  AuthBloc get _authBloc => widget.authBloc;
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -64,8 +72,8 @@ class _MaindrawState extends State<MainDrawer> {
         height: 20.0,
       ),
       ListTile(
-        onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomePage())),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => HomePage(authBloc: _authBloc))),
         leading: Icon(
           Icons.home,
           color: Colors.indigo[400],
@@ -73,8 +81,8 @@ class _MaindrawState extends State<MainDrawer> {
         title: Text("Home"),
       ),
       ListTile(
-        onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ProfilePage())),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProfilePage(authBloc: _authBloc))),
         leading: Icon(
           Icons.person,
           color: Colors.indigo[400],
@@ -82,8 +90,8 @@ class _MaindrawState extends State<MainDrawer> {
         title: Text("Profile Account"),
       ),
       ListTile(
-        onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Presensi())),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => Presensi(authBloc: _authBloc))),
         leading: Icon(
           Icons.camera_enhance_rounded,
           color: Colors.indigo[400],
@@ -100,8 +108,8 @@ class _MaindrawState extends State<MainDrawer> {
         title: Text("Jadwal Presensi"),
       ),
       ListTile(
-        onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => RiwayatWidget())),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RiwayatWidget(authBloc: _authBloc))),
         leading: Icon(
           Icons.history,
           color: Colors.indigo[400],
@@ -109,8 +117,8 @@ class _MaindrawState extends State<MainDrawer> {
         title: Text("Riwayat Presensi"),
       ),
       ListTile(
-        onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ProfilePage())),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RiwayatWidget(authBloc: _authBloc))),
         leading: Icon(
           Icons.logout,
           color: Colors.indigo[400],

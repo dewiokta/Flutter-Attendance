@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
               authBloc: authBloc,
             );
           if (state is AuthFailed || state is LoginFailed)
-            return LoginScreen(authBloc: authBloc);
+            return LoginPage(authBloc: authBloc);
           if (state is AuthLoading)
             return Container(
               color: Colors.white,

@@ -5,7 +5,12 @@ import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/pages/riwayat/list_riwayat.dart';
 import 'package:getwidget/getwidget.dart';
 
+import '../../blocs/Auth_bloc.dart';
+import '../../repository/auth_repository.dart';
+
 class RiwayatWidget extends StatefulWidget {
+  final AuthBloc authBloc;
+  const RiwayatWidget({Key? key, required this.authBloc}) : super(key: key);
   @override
   State<RiwayatWidget> createState() => _RiwayatWidgetState();
 }
@@ -13,6 +18,8 @@ class RiwayatWidget extends StatefulWidget {
 class _RiwayatWidgetState extends State<RiwayatWidget> {
   DateTimeRange dateRange =
       DateTimeRange(start: DateTime(2022, 2, 15), end: DateTime(2022, 3, 15));
+  final AuthRepository authRepository = AuthRepository();
+  AuthBloc get _authBloc => widget.authBloc;
   @override
   Widget build(BuildContext context) {
     final start = dateRange.start;
@@ -24,7 +31,7 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
         backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
-        child: MainDrawer(),
+        child: MainDrawer(authBloc: _authBloc),
       ),
       body: ListView(
         children: [
@@ -66,7 +73,6 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
                         shape: GFButtonShape.square,
                         type: GFButtonType.outline2x,
                         color: kPrimaryColor,
-                        
                       ),
                     ),
                   ],

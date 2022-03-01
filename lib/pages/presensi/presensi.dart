@@ -6,7 +6,19 @@ import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_hadir.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_pulang.dart';
 
-class Presensi extends StatelessWidget {
+import '../../blocs/Auth_bloc.dart';
+import '../../repository/auth_repository.dart';
+
+class Presensi extends StatefulWidget {
+  final AuthBloc authBloc;
+  const Presensi({Key? key, required this.authBloc}) : super(key: key);
+  @override
+  State<Presensi> createState() => _PresensiState();
+}
+
+class _PresensiState extends State<Presensi> {
+  final AuthRepository authRepository = AuthRepository();
+  AuthBloc get _authBloc => widget.authBloc;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +27,9 @@ class Presensi extends StatelessWidget {
         backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
-        child: MainDrawer(),
+        child: MainDrawer(
+          authBloc: _authBloc,
+        ),
       ),
       body: Container(
         margin: EdgeInsets.all(10),
