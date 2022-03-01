@@ -4,10 +4,11 @@ import 'package:flutter_attendance/constants.dart';
 class RoundedButton extends StatefulWidget {
   final String text;
   final VoidCallback press;
+  final Widget txt;
   const RoundedButton({
     Key? key, 
     required this.text, 
-    required this.press,
+    required this.press, required this.txt,
   }) : super(key: key);
 
   @override
@@ -26,10 +27,7 @@ class _RoundedButtonState extends State<RoundedButton> {
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
           color: kPrimaryColor,
           onPressed: widget.press,
-          child: Text(
-            widget.text,
-            style: TextStyle(color: Colors.white),
-          ),
+          child: widget.txt,
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/pages/login/components/textField.dart';
 
@@ -14,13 +15,18 @@ class RoundedFieldPassword extends StatefulWidget {
 }
 
 class _RoundedFieldPasswordState extends State<RoundedFieldPassword> {
+
+  final TextEditingController passwordController =
+      TextEditingController(text: "");
+
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
         obscureText: true,
         onChanged: widget.onChanged ,
-        decoration: InputDecoration(
+        controller: passwordController,
+        decoration: const InputDecoration(
           hintText: "Password",
           icon: Icon(
             Icons.lock,

@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
-  Future loginUser(String _email, String _password, String device) async {
-    String baseUrl = "http://10.0.2.2:8000/api/auth/login";
+  Future loginUser(String _email, String _password) async {
+    String baseUrl = "http://127.0.0.1:8000/api/auth/login";
 
     try {
       var response = await http.post(baseUrl, body: {
@@ -21,7 +21,7 @@ class AuthRepository {
   }
 
   Future userLogout(String token) async {
-    String baseUrl = "http://10.0.2.2:8000/api/auth/logout";
+    String baseUrl = "http://127.0.0.1:8000/api/auth/logout";
 
     try {
       var response = await http.post(baseUrl, headers: {
@@ -37,7 +37,7 @@ class AuthRepository {
   }
 
   Future getData(String token) async {
-    String baseUrl = "http://10.0.2.2:8000/api/auth/me";
+    String baseUrl = "http://127.0.0.1:8000/api/me";
 
     try {
       var response = await http.get(baseUrl, headers: {

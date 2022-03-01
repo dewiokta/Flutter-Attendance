@@ -36,7 +36,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield AuthLoading();
       try {
         final login = await authRepository.loginUser(
-            event.email, event.password, "Mobile Sanctum");
+            event.email, event.password);
         if (login.message != "failed") {
           yield LoginSuccess();
           await authRepository.setLocalToken(login.data.token);

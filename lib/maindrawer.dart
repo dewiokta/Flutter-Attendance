@@ -110,7 +110,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => LoginScreen())),
+            .push(MaterialPageRoute(builder: (context) => ProfilePage())),
         leading: Icon(
           Icons.logout,
           color: Colors.indigo[400],
