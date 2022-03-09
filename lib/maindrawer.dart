@@ -10,7 +10,7 @@ import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
 import 'package:flutter_attendance/repository/auth_repository.dart';
 import 'package:flutter_attendance/state/auth_state.dart';
-import 'pages/home/home.dart';
+import '/view/HomePage.dart';
 
 class MainDrawer extends StatefulWidget {
   final AuthBloc authBloc;
@@ -32,7 +32,7 @@ class _MaindrawState extends State<MainDrawer> {
     return Column(children: [
       Container(
         child: Padding(
-          padding: EdgeInsets.only(top: 50.0),
+          padding: const EdgeInsets.only(top: 50.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,7 +68,7 @@ class _MaindrawState extends State<MainDrawer> {
           ),
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 20.0,
       ),
       ListTile(
@@ -78,7 +78,7 @@ class _MaindrawState extends State<MainDrawer> {
           Icons.home,
           color: Colors.indigo[400],
         ),
-        title: Text("Home"),
+        title: const Text("Home"),
       ),
       ListTile(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(

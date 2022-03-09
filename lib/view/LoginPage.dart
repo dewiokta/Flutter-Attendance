@@ -4,6 +4,8 @@ import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
 import 'package:flutter_attendance/state/auth_state.dart';
 
+import '../pages/login/components/background.dart';
+
 class LoginPage extends StatefulWidget {
   final AuthBloc authBloc;
 
@@ -44,7 +46,9 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
+    return Background(
+      child:
+     BlocBuilder(
         bloc: widget.authBloc,
         builder: (context, state) {
           return Scaffold(
@@ -83,7 +87,8 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
           );
-        });
+        }),
+    );
   }
 
   void _login() {
