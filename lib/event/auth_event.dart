@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AuthEvent extends Equatable {
   @override
@@ -18,7 +19,18 @@ class GetDataWithToken extends AuthEvent {
   List<Object> get props => [token];
 }
 
-class LoggedOut extends AuthEvent {}
+class LoggedOut extends AuthEvent {
+  // var res = await Network().getData('/logout');
+  // var body = json.decode(res.body);
+  // if(body['success']){
+  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //   localStorage.remove('user');
+  //   localStorage.remove('token');
+  //   Navigator.push(
+  //       context,
+  //       MaterialPageRoute(builder: (context)=>Login()));
+  // }
+}
 
 class LoginProcess extends AuthEvent {
   final String email;

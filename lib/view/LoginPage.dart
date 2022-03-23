@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
@@ -46,49 +47,91 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(
-      child:
-     BlocBuilder(
+    Size size = MediaQuery.of(context).size;
+    return BlocBuilder(
         bloc: widget.authBloc,
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: Text("Login Page"),
-            ),
-            body: SingleChildScrollView(
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      TextField(
-                        controller: emailController,
-                        decoration: InputDecoration(labelText: "Email"),
+              backgroundColor: Colors.white,
+              body: Background(
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const Text(
+                            "LOGIN",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 29, 126, 172),
+                                fontSize: 20),
+                          ),
+                          SizedBox(height: size.height * 0.03),
+                          Image.asset("assets/images/logo.png",
+                              height: size.height * 0.2),
+                          SizedBox(height: size.height * 0.03),
+                          SizedBox(
+                            width: 300,
+                            child: TextField(
+                              controller: emailController,
+                              decoration: InputDecoration(
+                                labelText: "Email",
+                                filled: true,
+                                fillColor: kPrimaryColorLight,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(29),
+                                    borderSide: BorderSide(
+                                      color: kPrimaryColorLight,
+                                    )),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: size.height * 0.03),
+                          SizedBox(
+                            width: 300,
+                            child: TextField(
+                              controller: passwordController,
+                              decoration: InputDecoration(
+                                labelText: "Password",
+                                filled: true,
+                                fillColor: kPrimaryColorLight,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(29),
+                                    borderSide: BorderSide(
+                                      color: kPrimaryColorLight,
+                                    )),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: size.height * 0.03),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(29),
+                            child: FlatButton(
+                              onPressed: _login,
+                              child: (state is AuthLoading)
+                                  ? Text("Please wait")
+                                  : Text(
+                                      "LOGIN",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 40),
+                              color: kPrimaryColor,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          (state is LoginFailed) ? Text(state.error) : Text(""),
+                        ],
                       ),
-                      TextField(
-                        controller: passwordController,
-                        decoration: InputDecoration(labelText: "Password"),
-                      ),
-                      RaisedButton(
-                        onPressed: _login,
-                        child: (state is AuthLoading)
-                            ? Text("Please wait")
-                            : Text("Login"),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      (state is LoginFailed) ? Text(state.error) : Text(""),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-          );
-        }),
-    );
+              ));
+        });
   }
 
   void _login() {
