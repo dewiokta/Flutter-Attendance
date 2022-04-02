@@ -8,7 +8,7 @@ class AuthRepository {
     String baseUrl = "http://127.0.0.1:8000/api/auth/login";
 
     try {
-      var response = await http.post(baseUrl, body: {
+      var response = await http.post(Uri.parse(baseUrl), body: {
         'email': _email,
         'password': _password,
       });
@@ -24,7 +24,7 @@ class AuthRepository {
     String baseUrl = "http://127.0.0.1:8000/api/auth/logout";
 
     try {
-      var response = await http.post(baseUrl, headers: {
+      var response = await http.post(Uri.parse(baseUrl), headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'applcation/json'
       });
@@ -40,7 +40,7 @@ class AuthRepository {
     String baseUrl = "http://127.0.0.1:8000/api/me";
 
     try {
-      var response = await http.get(baseUrl, headers: {
+      var response = await http.get(Uri.parse(baseUrl), headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'applcation/json'
       });
@@ -69,6 +69,7 @@ class AuthRepository {
   Future unsetLocalToken() async {
     Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     final SharedPreferences local = await _prefs;
-    local.setString("token_sanctum", null);
+    var value = null;
+    local.setString("token_sanctum", value);
   }
 }

@@ -7,7 +7,7 @@ import 'package:flutter_attendance/state/auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
 
-  AuthBloc({required this.authRepository}) : assert(authRepository != null);
+  AuthBloc({required this.authRepository}) : assert(authRepository != null), super(AuthInit());
 
   @override
   AuthState get initialState => AuthInit();
