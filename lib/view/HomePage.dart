@@ -175,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                         ListTile(
-                          onTap:  () {
+                          onTap: () {
                             _authBloc.add(LoggedOut());
                           },
                           leading: Icon(
