@@ -99,8 +99,8 @@ class _MaindrawState extends State<MainDrawer> {
         title: Text("Presensi"),
       ),
       ListTile(
-        onTap: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => CameraScreen())),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => Presensi(authBloc: _authBloc))),
         leading: Icon(
           Icons.access_time_filled_outlined,
           color: Colors.indigo[400],

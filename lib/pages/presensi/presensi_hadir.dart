@@ -48,17 +48,17 @@ class _PresensiHadirState extends State<PresensiHadir> {
             ),
           ),
           const SizedBox(height: 470),
-          FlatButton(
-            onPressed:() => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => CameraScreen())),
-            child: const Text(
-              "Presensi",
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            color: kPrimaryColor,
-            minWidth: 200,
-            height: 50,
-          ),
+          // FlatButton(
+          //   onPressed:() => Navigator.of(context).push(
+          //         MaterialPageRoute(builder: (context) => CameraScreen())),
+          //   child: const Text(
+          //     "Presensi",
+          //     style: TextStyle(color: Colors.white, fontSize: 18),
+          //   ),
+          //   color: kPrimaryColor,
+          //   minWidth: 200,
+          //   height: 50,
+          // ),
         ],
       ),
     );

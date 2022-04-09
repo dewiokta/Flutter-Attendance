@@ -5,57 +5,64 @@ import 'package:flutter_attendance/repository/auth_repository.dart';
 import 'package:flutter_attendance/state/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  // AuthBloc({required this.authRepository}) : assert(authRepository != null);
+
+  AuthBloc({required this.authRepository})
+      : assert(authRepository != null),
+        super(AuthInit()) {
+    on<AuthCheck>(_onAuthCheck);
+    on<LoginProcess>(_onAuthLoginProcess);
+    on<GetDataWithToken>((event, emit) {});
+  }
+
+  // AuthState get initialState => AuthInit();
+
   final AuthRepository authRepository;
 
-  AuthBloc({required this.authRepository}) : assert(authRepository != null), super(AuthInit());
-
-  @override
-  AuthState get initialState => AuthInit();
-
-  @override
-  Stream<AuthState> mapEventToState(AuthEvent event) async* {
+  void _onAuthCheck(AuthEvent event, Emitter<AuthState> emit) async {
     if (event is AuthCheck) {
-      yield AuthLoading();
+      emit(AuthLoading());
 
       final hasToken = await authRepository.hasToken();
       if (hasToken != null) {
-        yield AuthHasToken(token: hasToken);
+        emit(AuthHasToken(token: hasToken));
       } else {
-        yield AuthFailed();
+        emit(AuthFailed());
       }
     }
 
     if (event is GetDataWithToken) {
-      yield AuthLoading();
+      emit(AuthLoading());
 
       final user = await authRepository.getData(event.token);
-      yield AuthData(email: user.email, name: user.name);
+      emit(AuthData(email: user.email, name: user.name));
     }
-
-    if (event is LoginProcess) {
-      yield AuthLoading();
-      try {
-        final login = await authRepository.loginUser(
-            event.email, event.password);
-        if (login.message != "failed") {
-          yield LoginSuccess();
-          await authRepository.setLocalToken(login.data.token);
-          yield AuthHasToken(token: login.data.token);
-        }
-      } catch (e) {
-        yield LoginFailed("login gagal");
-      }
-    }
-
     if (event is LoggedOut) {
       final String token = await authRepository.hasToken();
       try {
         final Logout logout = await authRepository.userLogout(token);
         if (logout.message == "success") {
           await authRepository.unsetLocalToken();
-          yield AuthFailed();
+          emit(AuthFailed());
         }
       } catch (e) {}
+    }
+  }
+
+  void _onAuthLoginProcess(AuthEvent event, Emitter<AuthState> emit) async {
+    if (event is LoginProcess) {
+      emit(AuthLoading());
+      try {
+        final login =
+            await authRepository.loginUser(event.email, event.password);
+        if (login.message != "failed") {
+          emit(LoginSuccess());
+          await authRepository.setLocalToken(login.data.token);
+          emit(AuthHasToken(token: login.data.token));
+        }
+      } catch (e) {
+        emit(LoginFailed("Login Gagal"));
+      }
     }
   }
 }

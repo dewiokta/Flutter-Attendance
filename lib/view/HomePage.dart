@@ -154,7 +154,8 @@ class _HomePageState extends State<HomePage> {
                         ListTile(
                           onTap: () => Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => CameraScreen())),
+                                  builder: (context) =>
+                                      RiwayatWidget(authBloc: _authBloc))),
                           leading: Icon(
                             Icons.access_time_filled_outlined,
                             color: Colors.indigo[400],
