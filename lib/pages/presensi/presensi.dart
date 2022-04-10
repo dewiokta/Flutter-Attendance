@@ -54,7 +54,7 @@ class _PresensiState extends State<Presensi> {
               title: const Text("Presensi Pulang"),
               trailing: const Icon(Icons.arrow_forward),
             ),
-            const SizedBox(height: 450),
+            const SizedBox(height: 380),
             FlatButton(
               onPressed: () {},
               child: const Text(

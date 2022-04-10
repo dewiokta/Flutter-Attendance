@@ -8,11 +8,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   // AuthBloc({required this.authRepository}) : assert(authRepository != null);
 
   AuthBloc({required this.authRepository})
+      // ignore: unnecessary_null_comparison
       : assert(authRepository != null),
         super(AuthInit()) {
     on<AuthCheck>(_onAuthCheck);
     on<LoginProcess>(_onAuthLoginProcess);
-    on<GetDataWithToken>((event, emit) {});
+    on<GetDataWithToken>(_onGetData);
   }
 
   // AuthState get initialState => AuthInit();
@@ -63,6 +64,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } catch (e) {
         emit(LoginFailed("Login Gagal"));
       }
+    }
+  }
+
+  void _onGetData(AuthEvent event, Emitter<AuthState> emit) async {
+    if (event is GetDataWithToken) {
+      emit(AuthLoading());
+
+      final user = await authRepository.getData(event.token);
+      emit(AuthData(email: user.email, name: user.name));
     }
   }
 }
