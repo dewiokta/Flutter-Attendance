@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
   Future loginUser(String _email, String _password) async {
-    String baseUrl = "http://127.0.0.1:8000/api/auth/login";
+    String baseUrl = "https://attendance.putraprima.id/api/auth/login";
 
     try {
       var response = await http.post(Uri.parse(baseUrl), body: {
@@ -21,7 +21,7 @@ class AuthRepository {
   }
 
   Future userLogout(String token) async {
-    String baseUrl = "http://127.0.0.1:8000/api/auth/logout";
+    String baseUrl = "https://attendance.putraprima.id/api/auth/logout";
 
     try {
       var response = await http.post(Uri.parse(baseUrl), headers: {
@@ -37,7 +37,7 @@ class AuthRepository {
   }
 
   Future getData(String token) async {
-    String baseUrl = "http://127.0.0.1:8000/api/me";
+    String baseUrl = "https://attendance.putraprima.id/api/me";
 
     try {
       var response = await http.get(Uri.parse(baseUrl), headers: {

@@ -1,5 +1,8 @@
+import 'dart:html';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/pages/presensi/camera.dart';
 
@@ -9,6 +12,7 @@ class PresensiHadir extends StatefulWidget {
 }
 
 class _PresensiHadirState extends State<PresensiHadir> {
+  String cameraStatus = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,17 +52,28 @@ class _PresensiHadirState extends State<PresensiHadir> {
             ),
           ),
           const SizedBox(height: 470),
-          // FlatButton(
-          //   onPressed:() => Navigator.of(context).push(
-          //         MaterialPageRoute(builder: (context) => CameraScreen())),
-          //   child: const Text(
-          //     "Presensi",
-          //     style: TextStyle(color: Colors.white, fontSize: 18),
-          //   ),
-          //   color: kPrimaryColor,
-          //   minWidth: 200,
-          //   height: 50,
-          // ),
+          FlatButton(
+            onPressed: () async {
+              PermissionStatus cameraStatus =
+                  await Permission.camera.request();
+
+              if (cameraStatus == PermissionStatus.granted) {
+                //open kamera
+              }
+
+              if (cameraStatus == PermissionStatus.denied) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("You need to provide camera permission")));
+              }
+            },
+            child: const Text(
+              "Presensi",
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            color: kPrimaryColor,
+            minWidth: 200,
+            height: 50,
+          ),
         ],
       ),
     );

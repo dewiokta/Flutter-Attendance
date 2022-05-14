@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 
 class PresensiPulang extends StatefulWidget {
@@ -48,7 +50,19 @@ class _PresensiPulangState extends State<PresensiPulang> {
           ),
           const SizedBox(height: 470),
           FlatButton(
-            onPressed: () {},
+            onPressed: () async {
+              PermissionStatus cameraStatus =
+                  await Permission.camera.request();
+
+              if (cameraStatus == PermissionStatus.granted) {
+                //open kamera
+              }
+
+              if (cameraStatus == PermissionStatus.denied) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("You need to provide camera permission")));
+              }
+            },
             child: const Text(
               "Presensi",
               style: TextStyle(color: Colors.white, fontSize: 18),

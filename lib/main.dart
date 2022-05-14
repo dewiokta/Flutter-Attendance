@@ -15,7 +15,8 @@ import 'view/LoginPage.dart';
 
 void main() {
   final AuthRepository authRepository = AuthRepository();
-  runApp(BlocProvider(
+  BlocOverrides.runZoned( 
+  () => runApp(BlocProvider(
     create: (context) {
       return AuthBloc(authRepository: authRepository);
     },
@@ -23,7 +24,8 @@ void main() {
       authRepository: authRepository,
       authBloc: AuthBloc(authRepository: authRepository),
     ),
-  ));
+  )),
+  );
 }
 
 class MyApp extends StatelessWidget {
