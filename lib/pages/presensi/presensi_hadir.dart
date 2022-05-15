@@ -13,6 +13,11 @@ class PresensiHadir extends StatefulWidget {
 
 class _PresensiHadirState extends State<PresensiHadir> {
   String cameraStatus = "";
+  // void getPosition() async {
+  //   var position =
+  //       await Geolocation().getCurrentPosition(enableHighAccuracy: true);
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,11 +59,19 @@ class _PresensiHadirState extends State<PresensiHadir> {
           const SizedBox(height: 470),
           FlatButton(
             onPressed: () async {
-              PermissionStatus cameraStatus =
-                  await Permission.camera.request();
+              PermissionStatus cameraStatus = await Permission.camera.request();
+              PermissionStatus locationStatus =
+                  await Permission.location.request();
 
               if (cameraStatus == PermissionStatus.granted) {
-                //open kamera
+                if (locationStatus == PermissionStatus.granted) {
+                  //open camera, ambil latitude longtitude
+
+                }
+                if (locationStatus == PermissionStatus.denied) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("You need to provide location permission")));
+                }
               }
 
               if (cameraStatus == PermissionStatus.denied) {

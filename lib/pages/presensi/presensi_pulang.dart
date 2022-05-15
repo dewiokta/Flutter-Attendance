@@ -53,9 +53,19 @@ class _PresensiPulangState extends State<PresensiPulang> {
             onPressed: () async {
               PermissionStatus cameraStatus =
                   await Permission.camera.request();
+                  PermissionStatus locationStatus =
+                  await Permission.location.request();
 
               if (cameraStatus == PermissionStatus.granted) {
-                //open kamera
+                if (locationStatus == PermissionStatus.granted) {
+                  //open camera, ambil latitude longtitude
+
+                }
+                if (locationStatus == PermissionStatus.denied) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("You need to provide location permission")));
+                }
+                
               }
 
               if (cameraStatus == PermissionStatus.denied) {
