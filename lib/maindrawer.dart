@@ -37,25 +37,8 @@ class _MaindrawState extends State<MainDrawer> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 80,
-                backgroundColor: Color(00000),
-                child: ClipOval(
-                  child: SizedBox(
-                    width: 160.0,
-                    height: 130.0,
-                    child: Image.asset(
-                      "assets/images/user.png",
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 2.0,
-              ),
               const Text(
-                " Nama User ",
+                " Main Menu ",
                 style: TextStyle(
                   fontSize: 22.0,
                   fontWeight: FontWeight.w800,

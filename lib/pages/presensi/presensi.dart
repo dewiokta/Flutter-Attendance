@@ -56,16 +56,6 @@ class _PresensiState extends State<Presensi> {
               trailing: const Icon(Icons.arrow_forward),
             ),
             const SizedBox(height: 380),
-            FlatButton(
-              onPressed: () {},
-              child: const Text(
-                "Presensi",
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-              color: kPrimaryColor,
-              minWidth: 400,
-              height: 50,
-            ),
           ],
         ),
       ),
