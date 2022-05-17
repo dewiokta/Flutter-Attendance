@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
+import 'package:flutter_attendance/pages/presensi/camera.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_hadir.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_pulang.dart';
 
@@ -47,7 +48,7 @@ class _PresensiState extends State<Presensi> {
             const SizedBox(height: 10),
             ListTile(
               onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PresensiPulang())),
+                  MaterialPageRoute(builder: (context) => CameraScreen())),
               leading: const Image(
                 image: AssetImage("assets/images/riwayat.png"),
               ),

@@ -1,4 +1,4 @@
-import 'dart:html';
+// import 'dart:html';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
@@ -70,7 +70,8 @@ class _PresensiHadirState extends State<PresensiHadir> {
                 }
                 if (locationStatus == PermissionStatus.denied) {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("You need to provide location permission")));
+                      content:
+                          Text("You need to provide location permission")));
                 }
               }
 
