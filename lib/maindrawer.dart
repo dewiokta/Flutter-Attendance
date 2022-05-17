@@ -5,11 +5,13 @@ import 'package:flutter_attendance/pages/riwayat/riwayat.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
 import 'package:flutter_attendance/pages/presensi/camera.dart';
 import 'package:flutter_attendance/pages/profile/profile.dart';
+import 'package:flutter_attendance/view/LoginPage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
 import 'package:flutter_attendance/repository/auth_repository.dart';
 import 'package:flutter_attendance/state/auth_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '/view/HomePage.dart';
 
 class MainDrawer extends StatefulWidget {
@@ -100,8 +102,15 @@ class _MaindrawState extends State<MainDrawer> {
         title: Text("Riwayat Presensi"),
       ),
       ListTile(
-        onTap: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => RiwayatWidget(authBloc: _authBloc))),
+        onTap: () async {
+          SharedPreferences pref = await SharedPreferences.getInstance();
+          await pref.clear();
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => LoginPage(authBloc: _authBloc),
+              ),
+              (route) => false);
+        },
         leading: Icon(
           Icons.logout,
           color: Colors.indigo[400],

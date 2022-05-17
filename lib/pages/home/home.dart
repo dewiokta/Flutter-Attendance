@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/riwayat/riwayat.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/pages/profile/profile.dart';
+import 'package:flutter_attendance/view/LoginPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'homeMenu.dart';
 import '../../maindrawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -99,7 +101,17 @@ class _HomePageState extends State<HomePage> {
                     HomeMenu(
                       text: "Log Out",
                       icon: "assets/icons/Log out.svg",
-                      press: () {},
+                      press: () async {
+                        SharedPreferences pref =
+                            await SharedPreferences.getInstance();
+                        await pref.clear();
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  LoginPage(authBloc: _authBloc),
+                            ),
+                            (route) => false);
+                      },
                     ),
                   ],
                 ),

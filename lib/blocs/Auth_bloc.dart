@@ -38,7 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final user = await authRepository.getData(event.token);
       emit(AuthData(email: user.email, name: user.name));
     }
-    if (event is LoggedOut) {
+    if (event is Logout) {
       final String token = await authRepository.hasToken();
       try {
         final Logout logout = await authRepository.userLogout(token);
