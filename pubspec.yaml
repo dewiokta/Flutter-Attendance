@@ -46,6 +46,7 @@ dependencies:
   equatable: ^2.0.3
   permission_handler: ^9.2.0
   image_picker: ^0.8.5+3
+  geolocator: ^8.2.1
 
 dev_dependencies:
   flutter_test:

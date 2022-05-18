@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/pages/presensi/camera.dart';
+import 'package:flutter_attendance/pages/presensi/geolocator.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_hadir.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_pulang.dart';
 
@@ -53,6 +54,16 @@ class _PresensiState extends State<Presensi> {
                 image: AssetImage("assets/images/riwayat.png"),
               ),
               title: const Text("Presensi Pulang"),
+              trailing: const Icon(Icons.arrow_forward),
+            ),
+            const SizedBox(height: 380),
+            ListTile(
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => LocationApp())),
+              leading: const Image(
+                image: AssetImage("assets/images/riwayat.png"),
+              ),
+              title: const Text("Coba Lokasi"),
               trailing: const Icon(Icons.arrow_forward),
             ),
             const SizedBox(height: 380),
