@@ -14,6 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthCheck>(_onAuthCheck);
     on<LoginProcess>(_onAuthLoginProcess);
     on<GetDataWithToken>(_onGetData);
+    on<LoggedOut>(_onLogout);
   }
 
   // AuthState get initialState => AuthInit();
@@ -38,7 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final user = await authRepository.getData(event.token);
       emit(AuthData(email: user.email, name: user.name));
     }
-    if (event is Logout) {
+    if (event is LoggedOut) {
       final String token = await authRepository.hasToken();
       try {
         final Logout logout = await authRepository.userLogout(token);
@@ -65,6 +66,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(LoginFailed("Login Gagal"));
       }
     }
+    if (event is LoggedOut) {
+      final String token = await authRepository.hasToken();
+      try {
+        final Logout logout = await authRepository.userLogout(token);
+        if (logout.message == "success") {
+          await authRepository.unsetLocalToken();
+          emit(AuthFailed());
+        }
+      } catch (e) {}
+    }
   }
 
   void _onGetData(AuthEvent event, Emitter<AuthState> emit) async {
@@ -73,6 +84,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       final user = await authRepository.getData(event.token);
       emit(AuthData(email: user.email, name: user.name));
+    }
+    if (event is LoggedOut) {
+      final String token = await authRepository.hasToken();
+      try {
+        final Logout logout = await authRepository.userLogout(token);
+        if (logout.message == "success") {
+          await authRepository.unsetLocalToken();
+          emit(AuthFailed());
+        }
+      } catch (e) {}
+    }
+  }
+
+  void _onLogout(AuthEvent event, Emitter<AuthState> emit) async {
+    if (event is LoggedOut) {
+      final String token = await authRepository.hasToken();
+      try {
+        final Logout logout = await authRepository.userLogout(token);
+        if (logout.message == "success") {
+          await authRepository.unsetLocalToken();
+          emit(AuthFailed());
+        }
+      } catch (e) {}
     }
   }
 }

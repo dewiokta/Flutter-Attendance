@@ -8,7 +8,8 @@ import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
 import 'package:flutter_attendance/repository/auth_repository.dart';
 import 'package:flutter_attendance/state/auth_state.dart';
-
+import 'package:flutter_attendance/view/LoginPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import '../maindrawer.dart';
 import '../pages/home/homeMenu.dart';
@@ -176,8 +177,16 @@ class _HomePageState extends State<HomePage> {
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                         ListTile(
-                          onTap: () {
-                            _authBloc.add(LoggedOut());
+                          onTap: () async {
+                            SharedPreferences pref =
+                                await SharedPreferences.getInstance();
+                            await pref.clear();
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      LoginPage(authBloc: _authBloc),
+                                ),
+                                (route) => false);
                           },
                           leading: Icon(
                             Icons.logout,

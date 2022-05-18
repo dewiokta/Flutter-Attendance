@@ -15,16 +15,16 @@ import 'view/LoginPage.dart';
 
 void main() {
   final AuthRepository authRepository = AuthRepository();
-  BlocOverrides.runZoned( 
-  () => runApp(BlocProvider(
-    create: (context) {
-      return AuthBloc(authRepository: authRepository);
-    },
-    child: MyApp(
-      authRepository: authRepository,
-      authBloc: AuthBloc(authRepository: authRepository),
-    ),
-  )),
+  BlocOverrides.runZoned(
+    () => runApp(BlocProvider(
+      create: (context) {
+        return AuthBloc(authRepository: authRepository);
+      },
+      child: MyApp(
+        authRepository: authRepository,
+        authBloc: AuthBloc(authRepository: authRepository),
+      ),
+    )),
   );
 }
 
@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
             );
           if (state is AuthFailed || state is LoginFailed)
             return LoginPage(authBloc: authBloc);
+          if (state is LoggedOut) return LoginPage(authBloc: authBloc);
           if (state is AuthLoading)
             return Container(
               color: Colors.white,

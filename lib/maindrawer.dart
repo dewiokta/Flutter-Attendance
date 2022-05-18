@@ -102,14 +102,8 @@ class _MaindrawState extends State<MainDrawer> {
         title: Text("Riwayat Presensi"),
       ),
       ListTile(
-        onTap: () async {
-          SharedPreferences pref = await SharedPreferences.getInstance();
-          await pref.clear();
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => LoginPage(authBloc: _authBloc),
-              ),
-              (route) => false);
+        onTap: () {
+          _authBloc.add(LoggedOut());
         },
         leading: Icon(
           Icons.logout,

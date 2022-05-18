@@ -20,16 +20,9 @@ class GetDataWithToken extends AuthEvent {
 }
 
 class LoggedOut extends AuthEvent {
-  // var res = await Network().getData('/logout');
-  // var body = json.decode(res.body);
-  // if(body['success']){
-  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
-  //   localStorage.remove('user');
-  //   localStorage.remove('token');
-  //   Navigator.push(
-  //       context,
-  //       MaterialPageRoute(builder: (context)=>Login()));
-  // }
+  // @override
+  // // TODO: implement props
+  // List<Object> get props => [];
 }
 
 class LoginProcess extends AuthEvent {
