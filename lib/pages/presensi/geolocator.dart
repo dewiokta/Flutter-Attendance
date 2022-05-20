@@ -1,29 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 import 'dart:async';
 
 class LocationApp extends StatefulWidget {
   const LocationApp({Key? key}) : super(key: key);
-
   @override
   _LocationAppState createState() => _LocationAppState();
 }
 
 class _LocationAppState extends State<LocationApp> {
-  String currentLocation = "";
-  String lastKnownPosition = "";
-  final LocationSettings locationSettings = LocationSettings(
-    accuracy: LocationAccuracy.high,
-    distanceFilter: 100,
-  );
+  var _latitude = "";
+  var _longtitude = "";
+  var _address = "";
 
-  @override
-  void initState() {
-    super.initState();
-    _determinePosition();
+  Future<void> _updatePosition() async {
+    Position pos = await _determinePosition();
+    List pm = await placemarkFromCoordinates(pos.latitude, pos.longitude);
+    // ignore: unused_element
+    setState(() {
+      _latitude = pos.latitude.toString();
+      _longtitude = pos.longitude.toString();
+      _address = pm[0].toString();
+
+    });
+  }
+
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    
+
+    if (!serviceEnabled) {
+      return Future.error('Location service are disabled!');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission == await Geolocator.requestPermission();
+
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permission are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('Location permission are permanently denied');
+    }
+    return await Geolocator.getCurrentPosition();
   }
 
   @override
+  // ignore: unused_element
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -53,77 +82,21 @@ class _LocationAppState extends State<LocationApp> {
             const SizedBox(
               height: 20,
             ),
-            Text("Current Position : $currentLocation"),
-            /*ElevatedButton(
-                onPressed: _determinePosition,
-                child: const Text('Autorisation',
-                style: TextStyle(
-                    color: Colors.white),
-                ),
-            ),*/
-            ElevatedButton(
-              onPressed: getCurrentLocation,
-              child: const Text(
-                'Get Current Location',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            Text("last Known Position : $lastKnownPosition"),
-            ElevatedButton(
-              onPressed: getLastKnownPosition,
-              child: const Text(
-                'Last Known Position',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+            const Text('Your last location is :'),
+            Text('Longtitude : ' + _longtitude),
+            Text('Latitude : ' + _latitude),
+            const Text('Address : '),
+            Text(_address),
+            
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: 
+        _updatePosition,
+        tooltip: 'Get gps location',
+        child: const Icon(Icons.change_circle_outlined)
+      ),
     );
-  }
-
-  /// Determine the current position of the device.
-  /// When the location services are not enabled or permissions
-  /// are denied the `Future` will return an error.
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    return await Geolocator.getCurrentPosition();
-  }
-
-  void getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    setState(() {
-      currentLocation = "${position.latitude}, ${position.longitude}";
-    });
-  }
-
-  void getLastKnownPosition() async {
-    Position? position = await Geolocator.getLastKnownPosition();
-    setState(() {
-      lastKnownPosition = "$position";
-    });
   }
 }

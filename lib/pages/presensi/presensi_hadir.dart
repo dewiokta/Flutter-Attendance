@@ -1,10 +1,12 @@
-// import 'dart:html';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/pages/presensi/camera.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+import 'dart:async';
 
 class PresensiHadir extends StatefulWidget {
   @override

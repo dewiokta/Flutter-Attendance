@@ -1,4 +1,3 @@
-// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
@@ -56,17 +55,17 @@ class _PresensiState extends State<Presensi> {
               title: const Text("Presensi Pulang"),
               trailing: const Icon(Icons.arrow_forward),
             ),
-            const SizedBox(height: 380),
+            const SizedBox(height: 10),
             ListTile(
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => LocationApp())),
+                  .push(MaterialPageRoute(builder: (context) => const LocationApp())),
               leading: const Image(
                 image: AssetImage("assets/images/riwayat.png"),
               ),
               title: const Text("Coba Lokasi"),
               trailing: const Icon(Icons.arrow_forward),
             ),
-            const SizedBox(height: 380),
+            // const SizedBox(height: 380),
           ],
         ),
       ),
