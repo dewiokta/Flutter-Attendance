@@ -6,6 +6,8 @@ import 'package:geocoding/geocoding.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 
+import '../../theme.dart';
+
 class CameraScreen extends StatefulWidget {
   @override
   _CameraScreenState createState() => _CameraScreenState();
@@ -32,6 +34,13 @@ class _CameraScreenState extends State<CameraScreen> {
     });
   }
 
+  check() {
+    // final form = _key.currentState;
+    // if (form.validate()) {
+    //   form.save();
+    //   submit();
+    // }
+  }
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -66,30 +75,78 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
-          children: [
-            Column(children: [
-              Center(
-                child: _image == null
-                    ? Text("No Image")
-                    : Image.file(_image!, width: 150),
-              ),
-            ]),
-            Column(
-              children: [
-                const Text('Your last location is :'),
-                Text('Longtitude : ' + _longtitude),
-                Text('Latitude : ' + _latitude),
-                const Text('Address : '),
-                Text(_address),
-              ],
+      body: ListView(
+        children: [
+          Column(children: [
+            Center(
+              child: _image == null
+                  ? Text("Klik Icon Kamera untuk Presensi")
+                  : Image.file(_image!, width: 250),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+          ]),
+          Column(
+            children: [
+              Padding(padding: EdgeInsets.only(top: 40)),
+              menuAccount("Longtitude", _longtitude),
+              Padding(padding: EdgeInsets.only(top: 20)),
+              menuAccount("Latitude", _latitude),
+              Padding(padding: EdgeInsets.only(top: 20)),
+              menuAccount("Address", _address),
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            width: 0.5,
+            height: 45,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 120, 100, 210),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              onPressed: () {},
+              child: const Text(
+                "Simpan",
+                style: TextStyle(
+                  color: Color(0xffffffff),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _updatePosition,
+        backgroundColor: const Color.fromARGB(255, 120, 100, 210),
+        child: Icon(Icons.camera_alt),
+      ),
+    );
+  }
+
+  Row menuAccount(String data, data1) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              data,
+              style: text,
+            ),
+            Text(
+              data1,
+              style: desc,
+            )
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _updatePosition,
-          backgroundColor: Colors.blue,
-          child: Icon(Icons.camera_alt),
-        ));
+      ],
+    );
   }
 }
