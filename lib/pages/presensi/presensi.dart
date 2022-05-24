@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
@@ -47,8 +46,8 @@ class _PresensiState extends State<Presensi> {
             ),
             const SizedBox(height: 10),
             ListTile(
-              onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => CameraScreen())),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => CameraScreen(authBloc: _authBloc))),
               leading: const Image(
                 image: AssetImage("assets/images/riwayat.png"),
               ),
@@ -57,8 +56,8 @@ class _PresensiState extends State<Presensi> {
             ),
             const SizedBox(height: 10),
             ListTile(
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => const LocationApp())),
+              onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const LocationApp())),
               leading: const Image(
                 image: AssetImage("assets/images/riwayat.png"),
               ),
