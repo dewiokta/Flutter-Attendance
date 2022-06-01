@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_attendance/pages/jadwal/jadwal.dart';
 import 'package:flutter_attendance/pages/presensi/presensi.dart';
 import 'package:flutter_attendance/pages/riwayat/riwayat.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
@@ -85,7 +86,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => Presensi(authBloc: _authBloc))),
+            builder: (context) => JadwalPages(authBloc: _authBloc))),
         leading: Icon(
           Icons.access_time_filled_outlined,
           color: Colors.indigo[400],
