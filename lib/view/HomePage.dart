@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_attendance/pages/jadwal/jadwal.dart';
 import 'package:flutter_attendance/pages/presensi/camera.dart';
 import 'package:flutter_attendance/pages/presensi/presensi.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_hadir.dart';
@@ -156,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                           onTap: () => Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      RiwayatWidget(authBloc: _authBloc))),
+                                      JadwalPages(authBloc: _authBloc))),
                           leading: Icon(
                             Icons.access_time_filled_outlined,
                             color: Colors.indigo[400],
