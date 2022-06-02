@@ -6,7 +6,7 @@ import 'package:flutter_attendance/pages/login/components/textField.dart';
 class RoundedFieldPassword extends StatefulWidget {
   final ValueChanged<String> onChanged;
   const RoundedFieldPassword({
-    Key? key, 
+    Key? key,
     required this.onChanged,
   }) : super(key: key);
 
@@ -15,29 +15,32 @@ class RoundedFieldPassword extends StatefulWidget {
 }
 
 class _RoundedFieldPasswordState extends State<RoundedFieldPassword> {
-
   final TextEditingController passwordController =
       TextEditingController(text: "");
-
+  bool _isHidden = true;
   @override
   Widget build(BuildContext context) {
-    return TextFieldContainer(
-      child: TextField(
-        obscureText: true,
-        onChanged: widget.onChanged ,
-        controller: passwordController,
-        decoration: const InputDecoration(
-          hintText: "Password",
-          icon: Icon(
-            Icons.lock,
-            color: kPrimaryColor,
+    return Scaffold(
+      body: Center(
+        child: TextField(
+          obscureText: _isHidden,
+          decoration: InputDecoration(
+            hintText: 'Password',
+            suffix: InkWell(
+              onTap: _togglePasswordView,
+              child: Icon(
+                _isHidden ? Icons.visibility : Icons.visibility_off,
+              ),
+            ),
           ),
-          suffixIcon: Icon(
-            Icons.visibility,
-            color: kPrimaryColor,
-          ),
-          border: InputBorder.none
         ),
-      ),);
+      ),
+    );
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
   }
 }
