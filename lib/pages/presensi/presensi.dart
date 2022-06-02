@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
-import 'package:flutter_attendance/pages/presensi/camera.dart';
+import 'package:flutter_attendance/pages/presensi/camera_pulang.dart';
 import 'package:flutter_attendance/pages/presensi/geolocator.dart';
-import 'package:flutter_attendance/pages/presensi/presensi_hadir.dart';
+import 'package:flutter_attendance/pages/presensi/presensi_datang.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_pulang.dart';
 
 import '../../blocs/Auth_bloc.dart';
@@ -36,8 +36,8 @@ class _PresensiState extends State<Presensi> {
         child: Column(
           children: [
             ListTile(
-              onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PresensiHadir())),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => PresensiDatang(authBloc: _authBloc))),
               leading: const Image(
                 image: AssetImage("assets/images/presensi.png"),
               ),
@@ -47,7 +47,7 @@ class _PresensiState extends State<Presensi> {
             const SizedBox(height: 10),
             ListTile(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => CameraScreen(authBloc: _authBloc))),
+                  builder: (context) => PresensiPulang(authBloc: _authBloc))),
               leading: const Image(
                 image: AssetImage("assets/images/riwayat.png"),
               ),

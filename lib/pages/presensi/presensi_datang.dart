@@ -11,14 +11,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../blocs/Auth_bloc.dart';
 import '../../theme.dart';
 
-class PresensiPulang extends StatefulWidget {
+class PresensiDatang extends StatefulWidget {
   final AuthBloc authBloc;
-  const PresensiPulang({Key? key, required this.authBloc}) : super(key: key);
+  const PresensiDatang({Key? key, required this.authBloc}) : super(key: key);
   @override
-  _PresensiPulangState createState() => _PresensiPulangState();
+  _PresensiDatangState createState() => _PresensiDatangState();
 }
 
-class _PresensiPulangState extends State<PresensiPulang> {
+class _PresensiDatangState extends State<PresensiDatang> {
   AuthBloc get _authBloc => widget.authBloc;
 
   var _latitude = "";

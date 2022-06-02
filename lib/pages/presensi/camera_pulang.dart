@@ -11,14 +11,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../blocs/Auth_bloc.dart';
 import '../../theme.dart';
 
-class CameraScreen extends StatefulWidget {
+class CameraScreenPulang extends StatefulWidget {
   final AuthBloc authBloc;
-  const CameraScreen({Key? key, required this.authBloc}) : super(key: key);
+  const CameraScreenPulang({Key? key, required this.authBloc})
+      : super(key: key);
   @override
-  _CameraScreenState createState() => _CameraScreenState();
+  _CameraScreenPulangState createState() => _CameraScreenPulangState();
 }
 
-class _CameraScreenState extends State<CameraScreen> {
+class _CameraScreenPulangState extends State<CameraScreenPulang> {
   AuthBloc get _authBloc => widget.authBloc;
 
   var _latitude = "";
