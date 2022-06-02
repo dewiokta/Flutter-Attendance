@@ -3,16 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/jadwal/jadwal.dart';
 import 'package:flutter_attendance/pages/presensi/presensi.dart';
 import 'package:flutter_attendance/pages/riwayat/riwayat.dart';
-import 'package:flutter_attendance/pages/login/login_screen.dart';
-import 'package:flutter_attendance/pages/presensi/camera.dart';
 import 'package:flutter_attendance/pages/profile/profile.dart';
-import 'package:flutter_attendance/view/LoginPage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
 import 'package:flutter_attendance/repository/auth_repository.dart';
-import 'package:flutter_attendance/state/auth_state.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '/view/HomePage.dart';
 
 class MainDrawer extends StatefulWidget {

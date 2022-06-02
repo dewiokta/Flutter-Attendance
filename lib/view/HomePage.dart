@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/jadwal/jadwal.dart';
-import 'package:flutter_attendance/pages/presensi/camera.dart';
 import 'package:flutter_attendance/pages/presensi/presensi.dart';
-import 'package:flutter_attendance/pages/presensi/presensi_hadir.dart';
-import 'package:flutter_attendance/pages/presensi/presensi_pulang.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
@@ -13,7 +10,6 @@ import 'package:flutter_attendance/view/LoginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import '../maindrawer.dart';
-import '../pages/home/homeMenu.dart';
 import '../pages/profile/profile.dart';
 import '../pages/riwayat/riwayat.dart';
 

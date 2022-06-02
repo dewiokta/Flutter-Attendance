@@ -183,6 +183,9 @@ class _JadwalPagesState extends State<JadwalPages> {
               visible: _isvisible5,
               child: const Text("Presensi Pulang          16.00 WIB"),
             ),
+            const SizedBox(
+              height: 25.0,
+            ),
           ],
         ),
       ),
