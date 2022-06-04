@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/components/rounded_button.dart';
 import 'package:flutter_attendance/constants.dart';
@@ -42,12 +44,12 @@ class _JadwalPagesState extends State<JadwalPages> {
                   _isvisible = !_isvisible;
                 });
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_downward,
                 size: 24.0,
               ),
-              label: Text('Senin'),
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+              label: const Text('Senin', textAlign: TextAlign.start),
+              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
             ),
             const SizedBox(
               height: 15.0,
@@ -72,12 +74,12 @@ class _JadwalPagesState extends State<JadwalPages> {
                   _isvisible2 = !_isvisible2;
                 });
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_downward,
                 size: 24.0,
               ),
-              label: Text('Selasa'),
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+              label: const Text('Selasa', textAlign: TextAlign.start),
+              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
             ),
             const SizedBox(
               height: 15.0,
@@ -102,12 +104,12 @@ class _JadwalPagesState extends State<JadwalPages> {
                   _isvisible3 = !_isvisible3;
                 });
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_downward,
                 size: 24.0,
               ),
-              label: Text('Rabu'),
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+              label: const Text('Rabu', textAlign: TextAlign.start),
+              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
             ),
             const SizedBox(
               height: 15.0,
@@ -132,12 +134,12 @@ class _JadwalPagesState extends State<JadwalPages> {
                   _isvisible4 = !_isvisible4;
                 });
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_downward,
                 size: 24.0,
               ),
-              label: Text('Kamis'),
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+              label: const Text('Kamis', textAlign: TextAlign.start),
+              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
             ),
             const SizedBox(
               height: 15.0,
@@ -162,12 +164,12 @@ class _JadwalPagesState extends State<JadwalPages> {
                   _isvisible5 = !_isvisible5;
                 });
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_downward,
                 size: 24.0,
               ),
-              label: Text('Jumat'),
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+              label: const Text('Jumat', textAlign: TextAlign.start),
+              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
             ),
             const SizedBox(
               height: 15.0,

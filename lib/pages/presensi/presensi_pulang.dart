@@ -24,6 +24,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
   var _latitude = "";
   var _longtitude = "";
   var _address = "";
+  var _status = "On Process";
 
   File? _image;
   final imagePicker = ImagePicker();
@@ -38,6 +39,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
       _longtitude = pos.longitude.toString();
       _address = pm[0].toString();
       _image = File(image!.path);
+      _status;
     });
   }
 
@@ -130,6 +132,8 @@ class _PresensiPulangState extends State<PresensiPulang> {
               menuAccount("Latitude", _latitude),
               Padding(padding: EdgeInsets.only(top: 20)),
               menuAccount("Address", _address),
+              Padding(padding: EdgeInsets.only(top: 20)),
+              menuAccount("Status", _status),
             ],
           ),
           const SizedBox(

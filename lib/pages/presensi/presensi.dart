@@ -47,7 +47,7 @@ class _PresensiState extends State<Presensi> {
             const SizedBox(height: 10),
             ListTile(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => PresensiPulang(authBloc: _authBloc))),
+                  builder: (context) => PresensiPulang(authBloc: _authBloc,))),
               leading: const Image(
                 image: AssetImage("assets/images/riwayat.png"),
               ),
