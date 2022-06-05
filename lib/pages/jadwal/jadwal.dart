@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/components/rounded_button.dart';
 import 'package:flutter_attendance/constants.dart';
@@ -36,159 +34,275 @@ class _JadwalPagesState extends State<JadwalPages> {
         child: MainDrawer(authBloc: _authBloc),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            FlatButton.icon(
-              onPressed: () {
-                setState(() {
-                  _isvisible = !_isvisible;
-                });
-              },
-              icon: const Icon(
-                Icons.arrow_downward,
-                size: 24.0,
+        child: Container(
+          margin: EdgeInsets.all(8),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Column(
+                    children: const <Widget>[
+                      Image(
+                        image: AssetImage("assets/images/riwayat2.png"),
+                        height: 60,
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: const [
+                      Text(
+                        "Senin  ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      FlatButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            _isvisible = !_isvisible;
+                          });
+                        },
+                        label: const Text('', textAlign: TextAlign.start),
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          size: 24.0,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 100, vertical: 15),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              label: const Text('Senin', textAlign: TextAlign.start),
-              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-            ),
-            const SizedBox(
-              height: 15.0,
-            ),
-            Visibility(
-              visible: _isvisible,
-              child: const Text("Presensi Datang          07.00 WIB"),
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            Visibility(
-              visible: _isvisible,
-              child: const Text("Presensi Pulang          16.00 WIB"),
-            ),
-            const SizedBox(
-              height: 25.0,
-            ),
-            FlatButton.icon(
-              onPressed: () {
-                setState(() {
-                  _isvisible2 = !_isvisible2;
-                });
-              },
-              icon: const Icon(
-                Icons.arrow_downward,
-                size: 24.0,
+              Visibility(
+                visible: _isvisible,
+                child: const Text("Presensi Datang          07.00 WIB"),
               ),
-              label: const Text('Selasa', textAlign: TextAlign.start),
-              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-            ),
-            const SizedBox(
-              height: 15.0,
-            ),
-            Visibility(
-              visible: _isvisible2,
-              child: const Text("Presensi Datang          07.00 WIB"),
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            Visibility(
-              visible: _isvisible2,
-              child: const Text("Presensi Pulang          16.00 WIB"),
-            ),
-            const SizedBox(
-              height: 25.0,
-            ),
-            FlatButton.icon(
-              onPressed: () {
-                setState(() {
-                  _isvisible3 = !_isvisible3;
-                });
-              },
-              icon: const Icon(
-                Icons.arrow_downward,
-                size: 24.0,
+              const SizedBox(
+                height: 5.0,
               ),
-              label: const Text('Rabu', textAlign: TextAlign.start),
-              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-            ),
-            const SizedBox(
-              height: 15.0,
-            ),
-            Visibility(
-              visible: _isvisible3,
-              child: const Text("Presensi Datang          07.00 WIB"),
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            Visibility(
-              visible: _isvisible3,
-              child: const Text("Presensi Pulang          16.00 WIB"),
-            ),
-            const SizedBox(
-              height: 25.0,
-            ),
-            FlatButton.icon(
-              onPressed: () {
-                setState(() {
-                  _isvisible4 = !_isvisible4;
-                });
-              },
-              icon: const Icon(
-                Icons.arrow_downward,
-                size: 24.0,
+              Visibility(
+                visible: _isvisible,
+                child: const Text("Presensi Pulang          16.00 WIB"),
               ),
-              label: const Text('Kamis', textAlign: TextAlign.start),
-              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-            ),
-            const SizedBox(
-              height: 15.0,
-            ),
-            Visibility(
-              visible: _isvisible4,
-              child: const Text("Presensi Datang          07.00 WIB"),
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            Visibility(
-              visible: _isvisible4,
-              child: const Text("Presensi Pulang          16.00 WIB"),
-            ),
-            const SizedBox(
-              height: 25.0,
-            ),
-            FlatButton.icon(
-              onPressed: () {
-                setState(() {
-                  _isvisible5 = !_isvisible5;
-                });
-              },
-              icon: const Icon(
-                Icons.arrow_downward,
-                size: 24.0,
+              Row(
+                children: [
+                  Column(
+                    children: const <Widget>[
+                      Image(
+                        image: AssetImage("assets/images/riwayat2.png"),
+                        height: 60,
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: const [
+                      Text(
+                        "Selasa",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      FlatButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            _isvisible2 = !_isvisible2;
+                          });
+                        },
+                        label: const Text('', textAlign: TextAlign.start),
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          size: 24.0,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 100, vertical: 15),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              label: const Text('Jumat', textAlign: TextAlign.start),
-              padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-            ),
-            const SizedBox(
-              height: 15.0,
-            ),
-            Visibility(
-              visible: _isvisible5,
-              child: const Text("Presensi Datang          07.00 WIB"),
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            Visibility(
-              visible: _isvisible5,
-              child: const Text("Presensi Pulang          16.00 WIB"),
-            ),
-            const SizedBox(
-              height: 25.0,
-            ),
-          ],
+              Visibility(
+                visible: _isvisible2,
+                child: const Text("Presensi Datang          07.00 WIB"),
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
+              Visibility(
+                visible: _isvisible2,
+                child: const Text("Presensi Pulang          16.00 WIB"),
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: const <Widget>[
+                      Image(
+                        image: AssetImage("assets/images/riwayat2.png"),
+                        height: 60,
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: const [
+                      Text(
+                        "Rabu   ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      FlatButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            _isvisible3 = !_isvisible3;
+                          });
+                        },
+                        label: const Text('', textAlign: TextAlign.start),
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          size: 24.0,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 100, vertical: 15),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Visibility(
+                visible: _isvisible3,
+                child: const Text("Presensi Datang          07.00 WIB"),
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
+              Visibility(
+                visible: _isvisible3,
+                child: const Text("Presensi Pulang          16.00 WIB"),
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: const <Widget>[
+                      Image(
+                        image: AssetImage("assets/images/riwayat2.png"),
+                        height: 60,
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: const [
+                      Text(
+                        "Kamis ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      FlatButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            _isvisible4 = !_isvisible4;
+                          });
+                        },
+                        label: const Text('', textAlign: TextAlign.start),
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          size: 24.0,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 100, vertical: 15),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Visibility(
+                visible: _isvisible4,
+                child: const Text("Presensi Datang          07.00 WIB"),
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
+              Visibility(
+                visible: _isvisible4,
+                child: const Text("Presensi Pulang          16.00 WIB"),
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: const <Widget>[
+                      Image(
+                        image: AssetImage("assets/images/riwayat2.png"),
+                        height: 60,
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: const [
+                      Text(
+                        "Jumat ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      FlatButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            _isvisible5 = !_isvisible5;
+                          });
+                        },
+                        label: const Text('', textAlign: TextAlign.start),
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          size: 24.0,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 100, vertical: 15),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Visibility(
+                visible: _isvisible5,
+                child: const Text("Presensi Datang          07.00 WIB"),
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
+              Visibility(
+                visible: _isvisible5,
+                child: const Text("Presensi Pulang          16.00 WIB"),
+              ),
+              const SizedBox(
+                height: 25.0,
+              ),
+            ],
+          ),
         ),
       ),
     );

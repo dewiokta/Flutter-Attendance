@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Welcome " + state.name + " !",
+                          "Welcome " + state.username + " !",
                           style: TextStyle(
                               fontSize: 30, fontWeight: FontWeight.bold),
                         ),
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                                   Row(
                                     children: [
                                       Text(
-                                        "" + state.name,
+                                        "" + state.username,
                                         style: TextStyle(
                                             fontSize: 30, color: Colors.white),
                                       ),

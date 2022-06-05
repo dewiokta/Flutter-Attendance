@@ -52,14 +52,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Padding(padding: EdgeInsets.only(top: 10)),
                             Text(
-                              state.name,
+                              state.username,
                               style: text,
                             )
                           ],
                         ),
                       ),
                       Padding(padding: EdgeInsets.only(top: 40)),
-                      menuAccount("Nama", state.name),
+                      menuAccount("Nama", state.username),
                       Padding(padding: EdgeInsets.only(top: 20)),
                       menuAccount("Email", state.email),
                       Padding(padding: EdgeInsets.only(top: 20)),

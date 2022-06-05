@@ -37,7 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading());
 
       final user = await authRepository.getData(event.token);
-      emit(AuthData(email: user.email, name: user.name));
+      emit(AuthData(email: user.email, username: user.username));
     }
     if (event is LoggedOut) {
       final String token = await authRepository.hasToken();
@@ -83,7 +83,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading());
 
       final user = await authRepository.getData(event.token);
-      emit(AuthData(email: user.email, name: user.name));
+      emit(AuthData(email: user.email, username: user.name));
     }
     if (event is LoggedOut) {
       final String token = await authRepository.hasToken();
