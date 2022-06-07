@@ -93,6 +93,7 @@ class _LoginFormState extends State<LoginForm> {
                             width: 300,
                             child: TextField(
                               controller: passwordController,
+                              obscureText: true,
                               decoration: InputDecoration(
                                 labelText: "Password",
                                 filled: true,

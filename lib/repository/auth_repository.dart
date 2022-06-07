@@ -46,6 +46,7 @@ class AuthRepository {
       });
 
       var body = json.decode(response.body);
+      print(body);
       return User.fromJson(body);
     } catch (e) {
       return e;

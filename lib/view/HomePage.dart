@@ -56,18 +56,18 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Welcome " + state.username + " !",
-                          style: TextStyle(
+                          "Welcome " + state.name + " !",
+                          style: const TextStyle(
                               fontSize: 30, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
                           padding: EdgeInsets.all(8),
                           height: 200,
                           width: 300,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                             color: kPrimaryColor,
                           ),
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                                   Row(
                                     children: [
                                       Text(
-                                        "" + state.username,
+                                        "" + state.name,
                                         style: TextStyle(
                                             fontSize: 30, color: Colors.white),
                                       ),

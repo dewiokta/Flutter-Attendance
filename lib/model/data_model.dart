@@ -25,9 +25,9 @@ class User {
   User({required this.name, required this.email});
 
   User.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      name = json['data']['username'];
-      email = json['data']['email'];
+    if (json != null) {
+      name = json['name'];
+      email = json['email'];
     } else {
       name = "";
       email = "";
