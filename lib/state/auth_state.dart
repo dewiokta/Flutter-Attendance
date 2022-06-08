@@ -39,3 +39,20 @@ class LoginFailed extends AuthState {
   @override
   List<Object> get props => [error];
 }
+
+// class DataAnggota extends AuthState {
+//   final String name;
+//   final String ttl;
+//   final String alamat;
+//   final String jabatan;
+//   final String jenisKelamin;
+
+//   DataAnggota(
+//       {required this.ttl,
+//       required this.name,
+//       required this.alamat,
+//       required this.jabatan,
+//       required this.jenisKelamin});
+//   @override
+//   List<Object> get props => [name, ttl, alamat, jabatan, jenisKelamin];
+// }

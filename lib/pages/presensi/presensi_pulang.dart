@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/maindrawer.dart';
+import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -13,13 +14,17 @@ import '../../theme.dart';
 
 class PresensiPulang extends StatefulWidget {
   final AuthBloc authBloc;
-  const PresensiPulang({Key? key, required this.authBloc}) : super(key: key);
+  final ProfileBloc profileBloc;
+  const PresensiPulang(
+      {Key? key, required this.authBloc, required this.profileBloc})
+      : super(key: key);
   @override
   _PresensiPulangState createState() => _PresensiPulangState();
 }
 
 class _PresensiPulangState extends State<PresensiPulang> {
   AuthBloc get _authBloc => widget.authBloc;
+  ProfileBloc get _profileBloc => widget.profileBloc;
 
   var _latitude = "";
   var _longtitude = "";
@@ -110,7 +115,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
         backgroundColor: Colors.indigo[400],
       ),
       drawer: Drawer(
-        child: MainDrawer(authBloc: _authBloc),
+        child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
       ),
       body: ListView(
         children: [

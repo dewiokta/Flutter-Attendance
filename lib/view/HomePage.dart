@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/jadwal/jadwal.dart';
 import 'package:flutter_attendance/pages/presensi/presensi.dart';
+import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
@@ -15,8 +16,10 @@ import '../pages/riwayat/riwayat.dart';
 
 class HomePage extends StatefulWidget {
   final AuthBloc authBloc;
+  final ProfileBloc profileBloc;
 
-  const HomePage({Key? key, required this.authBloc}) : super(key: key);
+  const HomePage({Key? key, required this.authBloc, required this.profileBloc})
+      : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -24,6 +27,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
+  ProfileBloc get _profileBloc => widget.profileBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,7 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: MainDrawer(
           authBloc: _authBloc,
+          profileBloc: _profileBloc,
         ),
       ),
       backgroundColor: Colors.white,
@@ -114,10 +119,12 @@ class _HomePageState extends State<HomePage> {
                           height: 10,
                         ),
                         ListTile(
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      HomePage(authBloc: _authBloc))),
+                          onTap: () =>
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => HomePage(
+                                        authBloc: _authBloc,
+                                        profileBloc: _profileBloc,
+                                      ))),
                           leading: Icon(
                             Icons.home,
                             color: Colors.indigo[400],
@@ -126,10 +133,12 @@ class _HomePageState extends State<HomePage> {
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                         ListTile(
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      ProfilePage(authBloc: _authBloc))),
+                          onTap: () =>
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ProfilePage(
+                                        authBloc: _authBloc,
+                                        profileBloc: _profileBloc,
+                                      ))),
                           leading: Icon(
                             Icons.person,
                             color: Colors.indigo[400],
@@ -138,10 +147,12 @@ class _HomePageState extends State<HomePage> {
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                         ListTile(
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      Presensi(authBloc: _authBloc))),
+                          onTap: () =>
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Presensi(
+                                        authBloc: _authBloc,
+                                        profileBloc: _profileBloc,
+                                      ))),
                           leading: Icon(
                             Icons.camera_enhance_rounded,
                             color: Colors.indigo[400],
@@ -150,10 +161,12 @@ class _HomePageState extends State<HomePage> {
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                         ListTile(
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      JadwalPages(authBloc: _authBloc))),
+                          onTap: () =>
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => JadwalPages(
+                                        authBloc: _authBloc,
+                                        profileBloc: _profileBloc,
+                                      ))),
                           leading: Icon(
                             Icons.access_time_filled_outlined,
                             color: Colors.indigo[400],
@@ -162,10 +175,12 @@ class _HomePageState extends State<HomePage> {
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                         ListTile(
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      RiwayatWidget(authBloc: _authBloc))),
+                          onTap: () =>
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => RiwayatWidget(
+                                        authBloc: _authBloc,
+                                        profileBloc: _profileBloc,
+                                      ))),
                           leading: Icon(
                             Icons.history,
                             color: Colors.indigo[400],

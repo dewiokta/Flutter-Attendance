@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_attendance/event/auth_event.dart';
+import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../blocs/Auth_bloc.dart';
 import '../../maindrawer.dart';
 import '../../repository/auth_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_attendance/theme.dart';
 
 import '../../state/auth_state.dart';
+import 'bloc/profile_bloc.dart';
 
 class ProfilePage extends StatefulWidget {
+  final ProfileBloc profileBloc;
   final AuthBloc authBloc;
-  const ProfilePage({Key? key, required this.authBloc}) : super(key: key);
+  const ProfilePage(
+      {Key? key, required this.profileBloc, required this.authBloc})
+      : super(key: key);
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
   final AuthRepository authRepository = AuthRepository();
+  ProfileBloc get _profileBloc => widget.profileBloc;
   AuthBloc get _authBloc => widget.authBloc;
   @override
   Widget build(BuildContext context) {
@@ -27,12 +31,15 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: Colors.indigo[400],
       ),
       drawer: Drawer(
-        child: MainDrawer(authBloc: _authBloc),
+        child: MainDrawer(
+          profileBloc: _profileBloc,
+          authBloc: _authBloc,
+        ),
       ),
-      body: BlocBuilder<AuthBloc, AuthState>(
-          bloc: _authBloc,
+      body: BlocBuilder<ProfileBloc, ProfileState>(
+          bloc: _profileBloc,
           builder: (context, state) {
-            if (state is AuthData) {
+            if (state is DataAnggota) {
               return Container(
                 child: SingleChildScrollView(
                     child: SafeArea(
@@ -61,13 +68,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       Padding(padding: EdgeInsets.only(top: 40)),
                       menuAccount("Nama", state.name),
                       Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Email", state.email),
+                      menuAccount("Tempat Tanggal Lahir", state.ttl),
                       Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Alamat", "Alamat User"),
+                      menuAccount("Alamat", state.alamat),
                       Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Jenis Kelamin", "Laki-Laki"),
+                      menuAccount("Jenis Kelamin", state.jenisKelamin),
                       Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Tanggal Lahir", "29 Februari 1997"),
+                      menuAccount("Jabatan", state.jabatan),
                       Padding(padding: EdgeInsets.only(top: 20)),
                     ],
                   ),

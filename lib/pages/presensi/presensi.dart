@@ -5,13 +5,16 @@ import 'package:flutter_attendance/pages/presensi/camera_pulang.dart';
 import 'package:flutter_attendance/pages/presensi/geolocator.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_datang.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_pulang.dart';
+import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 
 import '../../blocs/Auth_bloc.dart';
 import '../../repository/auth_repository.dart';
 
 class Presensi extends StatefulWidget {
   final AuthBloc authBloc;
-  const Presensi({Key? key, required this.authBloc}) : super(key: key);
+  final ProfileBloc profileBloc;
+  const Presensi({Key? key, required this.authBloc, required this.profileBloc})
+      : super(key: key);
   @override
   State<Presensi> createState() => _PresensiState();
 }
@@ -19,6 +22,7 @@ class Presensi extends StatefulWidget {
 class _PresensiState extends State<Presensi> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
+  ProfileBloc get _profileBloc => widget.profileBloc;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +33,7 @@ class _PresensiState extends State<Presensi> {
       drawer: Drawer(
         child: MainDrawer(
           authBloc: _authBloc,
+          profileBloc: _profileBloc,
         ),
       ),
       body: Container(
@@ -37,7 +42,10 @@ class _PresensiState extends State<Presensi> {
           children: [
             ListTile(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => PresensiDatang(authBloc: _authBloc))),
+                  builder: (context) => PresensiDatang(
+                        authBloc: _authBloc,
+                        profileBloc: _profileBloc,
+                      ))),
               leading: const Image(
                 image: AssetImage("assets/images/presensi.png"),
               ),
@@ -47,7 +55,10 @@ class _PresensiState extends State<Presensi> {
             const SizedBox(height: 10),
             ListTile(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => PresensiPulang(authBloc: _authBloc,))),
+                  builder: (context) => PresensiPulang(
+                        authBloc: _authBloc,
+                        profileBloc: _profileBloc,
+                      ))),
               leading: const Image(
                 image: AssetImage("assets/images/riwayat.png"),
               ),
