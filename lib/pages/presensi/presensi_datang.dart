@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
@@ -10,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../blocs/Auth_bloc.dart';
 import '../../theme.dart';
+import 'package:path/path.dart' as path;
 
 class PresensiDatang extends StatefulWidget {
   final AuthBloc authBloc;
@@ -25,9 +28,55 @@ class _PresensiDatangState extends State<PresensiDatang> {
   var _longtitude = "";
   var _address = "";
   var _status = "On Process";
+  var _user_id = "4";
 
   File? _image;
   final imagePicker = ImagePicker();
+  final _key = new GlobalKey<FormState>();
+
+  // getPref() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     user_id = preferences.getString("id")!;
+  //   });
+  // }
+
+  check() {
+    final form = _key.currentState;
+    submit();
+  }
+
+  submit() async {
+    String BaseUrl = "https://attendance.putraprima.id/api/presensi-datang";
+    try {
+      var stream = new http.ByteStream(_image!.openRead());
+      var length = await _image?.length();
+      var uri = Uri.parse(BaseUrl);
+      var request = http.MultipartRequest("POST", uri);
+      request.fields['longtitude'] = _longtitude;
+      request.fields['latitude'] = _latitude;
+      request.fields['user_id'] = _user_id;
+
+      request.files.add(http.MultipartFile("foto_datang", stream, length!,
+          filename: path.basename(_image!.path)));
+      var response = await request.send();
+      if (response.statusCode > 2) {
+        print("image upload");
+        setState(() {
+          Navigator.pop(context);
+        });
+      } else {
+        print("image failed");
+      }
+    } catch (e) {
+      debugPrint("Error $e");
+    }
+
+    print(_longtitude);
+    print(_latitude);
+    print(_status);
+    print(_image);
+  }
 
   Future<void> _updatePosition() async {
     Position pos = await _determinePosition();
@@ -102,6 +151,13 @@ class _PresensiDatangState extends State<PresensiDatang> {
   //   });
   // }
 
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   getPref();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +206,7 @@ class _PresensiDatangState extends State<PresensiDatang> {
                 ),
               ),
               onPressed: () {
-                saveData();
+                submit();
               },
               child: const Text(
                 "Simpan",

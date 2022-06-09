@@ -21,13 +21,15 @@ class TokenAuth {
 class User {
   late String name;
   late String email;
+  late int id;
 
-  User({required this.name, required this.email});
+  User({required this.name, required this.email, required this.id});
 
   User.fromJson(Map<String, dynamic> json) {
     if (json != null) {
       name = json['name'];
       email = json['email'];
+      id = json['id'];
     } else {
       name = "";
       email = "";
