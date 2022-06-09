@@ -21,7 +21,7 @@ class TokenAuth {
 class User {
   late String name;
   late String email;
-  late int id;
+  late String id;
 
   User({required this.name, required this.email, required this.id});
 
@@ -29,10 +29,11 @@ class User {
     if (json != null) {
       name = json['name'];
       email = json['email'];
-      id = json['id'];
+      id = json["id"].toString();
     } else {
       name = "";
       email = "";
+      id = "";
     }
   }
 }
