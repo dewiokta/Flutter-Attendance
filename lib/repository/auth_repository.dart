@@ -64,7 +64,7 @@ class AuthRepository {
       });
 
       var detail = json.decode(response.body);
-      print(detail);
+      // print(detail);
       return Anggota.fromJson(detail);
     } catch (e) {
       return e;

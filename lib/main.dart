@@ -3,7 +3,6 @@ import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
-import 'package:flutter_attendance/pages/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
