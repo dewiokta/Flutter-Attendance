@@ -177,7 +177,6 @@ class _PresensiDatangState extends State<PresensiDatang> {
   //   getPref();
   // }
 
-  AuthBloc get _authBloc => widget.authBloc;
   final AuthRepository authRepository = AuthRepository();
 
   @override
