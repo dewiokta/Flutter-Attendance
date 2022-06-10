@@ -34,3 +34,12 @@ class LoginProcess extends AuthEvent {
   @override
   List<Object> get props => [email, password];
 }
+
+// class GetDataAnggota extends AuthEvent {
+//   final String token;
+
+//   GetDataAnggota(this.token);
+
+//   @override
+//   List<Object> get props => [token];
+// }

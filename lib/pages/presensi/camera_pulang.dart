@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/maindrawer.dart';
+import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -13,7 +14,9 @@ import '../../theme.dart';
 
 class CameraScreenPulang extends StatefulWidget {
   final AuthBloc authBloc;
-  const CameraScreenPulang({Key? key, required this.authBloc})
+  final ProfileBloc profileBloc;
+  const CameraScreenPulang(
+      {Key? key, required this.authBloc, required this.profileBloc})
       : super(key: key);
   @override
   _CameraScreenPulangState createState() => _CameraScreenPulangState();
@@ -21,6 +24,7 @@ class CameraScreenPulang extends StatefulWidget {
 
 class _CameraScreenPulangState extends State<CameraScreenPulang> {
   AuthBloc get _authBloc => widget.authBloc;
+  ProfileBloc get _profileBloc => widget.profileBloc;
 
   var _latitude = "";
   var _longtitude = "";
@@ -109,7 +113,7 @@ class _CameraScreenPulangState extends State<CameraScreenPulang> {
         backgroundColor: Colors.indigo[400],
       ),
       drawer: Drawer(
-        child: MainDrawer(authBloc: _authBloc),
+        child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
       ),
       body: ListView(
         children: [

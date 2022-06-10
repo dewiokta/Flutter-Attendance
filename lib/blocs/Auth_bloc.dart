@@ -14,6 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthCheck>(_onAuthCheck);
     on<LoginProcess>(_onAuthLoginProcess);
     on<GetDataWithToken>(_onGetData);
+    // on<GetDataAnggota>(_onGetDataAnggota);
     on<LoggedOut>(_onLogout);
   }
 
@@ -99,6 +100,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } catch (e) {}
     }
   }
+
+  // void _onGetDataAnggota(AuthEvent event, Emitter<AuthState> emit) async {
+  //   if (event is GetDataAnggota) {
+  //     emit(AuthLoading());
+
+  //     final anggota = await authRepository.getDataAnggota(event.token);
+  //     emit(DataAnggota(
+  //         name: anggota.name,
+  //         ttl: anggota.ttl,
+  //         alamat: anggota.alamat,
+  //         jabatan: anggota.jabatan,
+  //         jenisKelamin: anggota.jenisKelamin));
+  //     // print(anggota.ttl);
+  //     // print(anggota.name);
+  //     // print(anggota.alamat);
+  //     // print(anggota.jabatan);
+  //     // print(anggota.jenisKelamin);
+  //   }
+  // }
 
   void _onLogout(AuthEvent event, Emitter<AuthState> emit) async {
     if (event is LoggedOut) {

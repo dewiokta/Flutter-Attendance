@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_attendance/components/rounded_button.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
+import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_attendance/pages/riwayat/list_riwayat.dart';
 import 'package:getwidget/getwidget.dart';
 
@@ -10,7 +11,10 @@ import '../../repository/auth_repository.dart';
 
 class RiwayatWidget extends StatefulWidget {
   final AuthBloc authBloc;
-  const RiwayatWidget({Key? key, required this.authBloc}) : super(key: key);
+  final ProfileBloc profileBloc;
+  const RiwayatWidget(
+      {Key? key, required this.authBloc, required this.profileBloc})
+      : super(key: key);
   @override
   State<RiwayatWidget> createState() => _RiwayatWidgetState();
 }
@@ -20,6 +24,7 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
       DateTimeRange(start: DateTime(2022, 2, 15), end: DateTime(2022, 3, 15));
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
+  ProfileBloc get _profileBloc => widget.profileBloc;
   @override
   Widget build(BuildContext context) {
     final start = dateRange.start;
@@ -31,7 +36,7 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
         backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
-        child: MainDrawer(authBloc: _authBloc),
+        child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
       ),
       body: ListView(
         children: [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_attendance/components/rounded_button.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
+import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:getwidget/getwidget.dart';
 
 import '../../blocs/Auth_bloc.dart';
@@ -9,7 +10,10 @@ import '../../repository/auth_repository.dart';
 
 class JadwalPages extends StatefulWidget {
   final AuthBloc authBloc;
-  const JadwalPages({Key? key, required this.authBloc}) : super(key: key);
+  final ProfileBloc profileBloc;
+  const JadwalPages(
+      {Key? key, required this.authBloc, required this.profileBloc})
+      : super(key: key);
   @override
   State<JadwalPages> createState() => _JadwalPagesState();
 }
@@ -17,6 +21,7 @@ class JadwalPages extends StatefulWidget {
 class _JadwalPagesState extends State<JadwalPages> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
+  ProfileBloc get _profileBloc => widget.profileBloc;
   bool _isvisible = false;
   bool _isvisible2 = false;
   bool _isvisible3 = false;
@@ -31,7 +36,7 @@ class _JadwalPagesState extends State<JadwalPages> {
         backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
-        child: MainDrawer(authBloc: _authBloc),
+        child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
       ),
       body: SingleChildScrollView(
         child: Container(

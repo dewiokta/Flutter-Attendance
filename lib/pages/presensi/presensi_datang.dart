@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
 import 'package:flutter_attendance/maindrawer.dart';
+import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_attendance/state/auth_state.dart';
 import 'package:flutter_attendance/repository/auth_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,16 +21,23 @@ import 'package:path/path.dart' as path;
 
 class PresensiDatang extends StatefulWidget {
   final AuthBloc authBloc;
-  const PresensiDatang({Key? key, required this.authBloc}) : super(key: key);
+  final ProfileBloc profileBloc;
+  const PresensiDatang(
+      {Key? key, required this.authBloc, required this.profileBloc})
+      : super(key: key);
   @override
   _PresensiDatangState createState() => _PresensiDatangState();
 }
 
 class _PresensiDatangState extends State<PresensiDatang> {
+  AuthBloc get _authBloc => widget.authBloc;
+  ProfileBloc get _profileBloc => widget.profileBloc;
+
   getID(String id) {
     _user_id = id;
     // print(_user_id);
   }
+
 
   var _latitude = "";
   var _longtitude = "";
@@ -180,7 +188,7 @@ class _PresensiDatangState extends State<PresensiDatang> {
         backgroundColor: Colors.indigo[400],
       ),
       drawer: Drawer(
-        child: MainDrawer(authBloc: _authBloc),
+        child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
       ),
       body: BlocBuilder<AuthBloc, AuthState>(
           bloc: _authBloc,
@@ -245,6 +253,7 @@ class _PresensiDatangState extends State<PresensiDatang> {
                       ),
                     ),
                   ],
+
                 ),
               );
             }
