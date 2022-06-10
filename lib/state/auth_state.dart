@@ -22,8 +22,9 @@ class AuthFailed extends AuthState {}
 class AuthData extends AuthState {
   final String name;
   final String email;
+  final String id;
 
-  AuthData({required this.email, required this.name});
+  AuthData({required this.email, required this.name, required this.id});
   @override
   List<Object> get props => [name, email];
 }
