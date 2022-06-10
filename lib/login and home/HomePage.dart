@@ -7,7 +7,7 @@ import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
 import 'package:flutter_attendance/repository/auth_repository.dart';
 import 'package:flutter_attendance/state/auth_state.dart';
-import 'package:flutter_attendance/view/LoginPage.dart';
+import 'package:flutter_attendance/login and home/LoginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import '../maindrawer.dart';

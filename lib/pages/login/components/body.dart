@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/components/rounded_button.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
-import 'package:flutter_attendance/pages/home/home.dart';
 import 'package:flutter_attendance/pages/login/components/background.dart';
 import 'package:flutter_attendance/pages/login/components/forgor_password.dart';
 import 'package:flutter_attendance/pages/login/components/rounded_field_password.dart';

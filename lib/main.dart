@@ -9,10 +9,10 @@ import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/repository/auth_repository.dart';
 import 'package:flutter_attendance/state/auth_state.dart';
-import 'package:flutter_attendance/view/HomePage.dart';
+import 'package:flutter_attendance/login and home/HomePage.dart';
 import 'blocs/Auth_bloc.dart';
 import 'event/auth_event.dart';
-import 'view/LoginPage.dart';
+import 'login and home/LoginPage.dart';
 
 void main() {
   final AuthRepository authRepository = AuthRepository();

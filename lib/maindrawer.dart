@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/event/auth_event.dart';
 import 'package:flutter_attendance/repository/auth_repository.dart';
-import '/view/HomePage.dart';
+import '/login and home/HomePage.dart';
 
 class MainDrawer extends StatefulWidget {
   final AuthBloc authBloc;
