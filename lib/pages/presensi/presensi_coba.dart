@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_attendance/dio_service/service.dart';
+import 'package:flutter_attendance/login%20and%20home/HomePage.dart';
 import 'package:flutter_attendance/maindrawer.dart';
-import 'package:flutter_attendance/model/presensidatang_model.dart';
-import 'package:flutter_attendance/model/presensipulang_model.dart';
+import 'package:flutter_attendance/pages/presensi/presensi.dart';
 import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
@@ -12,21 +14,21 @@ import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../blocs/Auth_bloc.dart';
-import '../../dio_service/service.dart';
+import 'package:flutter_attendance/model/presensipulang_model.dart';
 import '../../theme.dart';
 
-class PresensiPulang extends StatefulWidget {
+class PresensiCoba extends StatefulWidget {
   final AuthBloc authBloc;
   final ProfileBloc profileBloc;
-  const PresensiPulang(
+  const PresensiCoba(
       {Key? key, required this.authBloc, required this.profileBloc})
       : super(key: key);
   @override
-  _PresensiPulangState createState() => _PresensiPulangState();
+  _PresensiCobaState createState() => _PresensiCobaState();
 }
 
-class _PresensiPulangState extends State<PresensiPulang> {
-  PresensiDatangModel? presensi;
+class _PresensiCobaState extends State<PresensiCoba> {
+  final _formKey = GlobalKey<FormState>();
   AuthBloc get _authBloc => widget.authBloc;
   ProfileBloc get _profileBloc => widget.profileBloc;
 
@@ -34,7 +36,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
   var _longtitude = "";
   var _address = "";
   var _status = "On Process";
-  var _user_id = null;
+  var _user_id = "";
   var _foto_datang = "coba.png";
 
   getID(String id) {
@@ -56,7 +58,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
       _address = pm[0].toString();
       _image = File(image!.path);
       _status;
-      _user_id = (getID(_user_id));
+      _user_id = getID(_user_id);
     });
   }
 
@@ -84,12 +86,19 @@ class _PresensiPulangState extends State<PresensiPulang> {
     return await Geolocator.getCurrentPosition();
   }
 
-  // Future getImage() async {
-  //   final image = await imagePicker.getImage(source: ImageSource.camera);
-  //   setState(() {
-  //     _image = File(image!.path);
-  //   });
-  // }
+  Future saveData() async {
+    final response = await http.post(
+        Uri.parse("https://attendance.putraprima.id/api/presensi-datang"),
+        body: {
+          "user_id": _user_id,
+          "longtitude": _longtitude,
+          "latitude": _latitude,
+          "status": _status,
+          "foto_datang": _foto_datang
+        });
+
+    return json.decode(response.body);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,15 +147,14 @@ class _PresensiPulangState extends State<PresensiPulang> {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              onPressed: () async {
-                PresensiDatangModel? result =
-                    await Services.createPresensiDatang(_user_id, _latitude,
-                        _longtitude, _foto_datang, _status);
-                if (result != null) {
-                  setState(() {
-                    presensi = result;
-                  });
-                }
+              onPressed: () {
+                saveData().then((value) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Presensi(
+                              authBloc: _authBloc, profileBloc: _profileBloc)));
+                });
               },
               child: const Text(
                 "Simpan",

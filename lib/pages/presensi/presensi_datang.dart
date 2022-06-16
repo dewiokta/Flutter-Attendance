@@ -38,7 +38,6 @@ class _PresensiDatangState extends State<PresensiDatang> {
     // print(_user_id);
   }
 
-
   var _latitude = "";
   var _longtitude = "";
   var _address = "";
@@ -48,18 +47,6 @@ class _PresensiDatangState extends State<PresensiDatang> {
   File? _image;
   final imagePicker = ImagePicker();
   final _key = new GlobalKey<FormState>();
-
-  // getPref() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     _user_id = preferences.getString("id");
-  //   });
-  // }
-
-  // check() {
-  //   final form = _key.currentState;
-  //   submit();
-  // }
 
   submit() async {
     String BaseUrl = "https://attendance.putraprima.id/api/presensi-datang";
@@ -110,35 +97,6 @@ class _PresensiDatangState extends State<PresensiDatang> {
     });
   }
 
-  // Future<void> saveData() async {
-  //   setState(() {
-  //     bool showSpinner = true;
-  //   });
-  //   var stream = new http.ByteStream(_image!.openRead());
-  //   stream.cast();
-  //   var length = await _image!.length();
-  //   var uri = Uri.parse('https://attendance.putraprima.id/api/presensi-datang');
-  //   var request = new http.MultipartRequest('POST', uri);
-  //   request.fields['longtitude'] = _longtitude;
-  //   request.fields['latitude'] = _latitude;
-
-  //   var multiport = new http.MultipartFile('image', stream, length);
-  //   request.files.add(multiport);
-  //   var response = await request.send();
-  //   print(response.stream.toString());
-  //   if (response.statusCode == 200) {
-  //     setState(() {
-  //       bool showSpinner = false;
-  //     });
-  //     print('image uploaded');
-  //   } else {
-  //     print('failed');
-  //     setState(() {
-  //       bool showSpinner = false;
-  //     });
-  //   }
-  // }
-
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -162,20 +120,6 @@ class _PresensiDatangState extends State<PresensiDatang> {
     }
     return await Geolocator.getCurrentPosition();
   }
-
-  // Future getImage() async {
-  //   final image = await imagePicker.getImage(source: ImageSource.camera);
-  //   setState(() {
-  //     _image = File(image!.path);
-  //   });
-  // }
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   getPref();
-  // }
 
   final AuthRepository authRepository = AuthRepository();
 
@@ -252,7 +196,6 @@ class _PresensiDatangState extends State<PresensiDatang> {
                       ),
                     ),
                   ],
-
                 ),
               );
             }
