@@ -34,7 +34,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
   var _longtitude = "";
   var _address = "";
   var _status = "On Process";
-  var _user_id = null;
+  var _user_id = "";
   var _foto_datang = "coba.png";
 
   getID(String id) {
@@ -48,16 +48,27 @@ class _PresensiPulangState extends State<PresensiPulang> {
   Future<void> _updatePosition() async {
     Position pos = await _determinePosition();
     List pm = await placemarkFromCoordinates(pos.latitude, pos.longitude);
-    final image = await imagePicker.getImage(source: ImageSource.camera);
+    // final image = await imagePicker.getImage(source: ImageSource.camera);
     // ignore: unused_element
     setState(() {
       _latitude = pos.latitude.toString();
       _longtitude = pos.longitude.toString();
       _address = pm[0].toString();
-      _image = File(image!.path);
+      // _image = File(image!.path);
       _status;
+      _foto_datang;
       _user_id = (getID(_user_id));
     });
+  }
+
+  Future<void> _submit() async {
+    PresensiDatangModel? result = await Services.createPresensiDatang(
+        this._user_id, this._latitude, this._longtitude, this._foto_datang, this._status);
+    if (result != null) {
+      setState(() {
+        presensi = result;
+      });
+    }
   }
 
   Future<Position> _determinePosition() async {
@@ -138,16 +149,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              onPressed: () async {
-                PresensiDatangModel? result =
-                    await Services.createPresensiDatang(_user_id, _latitude,
-                        _longtitude, _foto_datang, _status);
-                if (result != null) {
-                  setState(() {
-                    presensi = result;
-                  });
-                }
-              },
+              onPressed: _submit,
               child: const Text(
                 "Simpan",
                 style: TextStyle(

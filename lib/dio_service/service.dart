@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 abstract class Services {
   static Future<PresensiDatangModel?> createPresensiDatang(
-      int user_id,
+      String user_id,
       String latitude,
       String longtitude,
       String foto_datang,
@@ -13,9 +13,9 @@ abstract class Services {
       var response = await Dio()
           .post("https://attendance.putraprima.id/api/presensi-datang/",
               data: {
-                'user_id': user_id,
-                'latitude': latitude,
-                'longtitude': longtitude,
+                'user_id': int.tryParse(user_id),
+                'latitude': double.tryParse(latitude),
+                'longtitude': double.tryParse(longtitude),
                 'foto_datang': foto_datang,
                 'status': status
               },
@@ -27,8 +27,8 @@ abstract class Services {
       if (response.statusMessage != null) {
         return PresensiDatangModel(
             userId: int.tryParse(response.data['user_id'].toString()) ?? 0,
-            latitude: response.data['latitude'],
-            longtitude: response.data['longtitude'],
+            latitude: double.tryParse(response.data['latitude'].toString()) ?? 0,
+            longtitude: double.tryParse(response.data['longtitude'].toString()) ?? 0,
             fotoDatang: response.data['foto_datang'],
             status: response.data['status']);
       }
