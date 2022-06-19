@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../maindrawer.dart';
+import '../../model/anggota_model.dart';
+import '../../network/api_service.dart';
 import '../login/blocs/auth_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_attendance/theme.dart';
@@ -23,8 +25,41 @@ class _ProfilePageState extends State<ProfilePage> {
   final AuthRepository authRepository = AuthRepository();
   ProfileBloc get _profileBloc => widget.profileBloc;
   AuthBloc get _authBloc => widget.authBloc;
+  late BuildContext context;
+  late ApiService apiService;
+
+  @override
+  void initState() {
+    super.initState();
+    apiService = ApiService();
+  }
+
   @override
   Widget build(BuildContext context) {
+    this.context = context;
+    return SafeArea(
+      child: FutureBuilder(
+        future: apiService.getDataAnggota(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}"),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            List<AnggotaDataResponse>? dataanggota = snapshot.data?.data;
+            return _buildListView(dataanggota!);
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _buildListView(List<AnggotaDataResponse> dataanggota) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Asistencia"),
@@ -36,16 +71,16 @@ class _ProfilePageState extends State<ProfilePage> {
           authBloc: _authBloc,
         ),
       ),
-      body: BlocBuilder<ProfileBloc, ProfileState>(
-          bloc: _profileBloc,
-          builder: (context, state) {
-            if (state is DataAnggota) {
-              return Container(
-                child: SingleChildScrollView(
-                    child: SafeArea(
-                        child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
+      body: Container(
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  AnggotaDataResponse profile = dataanggota[index];
+                  child:
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(padding: EdgeInsets.only(top: 40)),
@@ -59,30 +94,33 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Padding(padding: EdgeInsets.only(top: 10)),
                             Text(
-                              state.name,
+                              profile.name,
                               style: text,
                             )
                           ],
                         ),
                       ),
                       Padding(padding: EdgeInsets.only(top: 40)),
-                      menuAccount("Nama", state.name),
+                      menuAccount("Nama", profile.name),
                       Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Tempat Tanggal Lahir", state.ttl),
+                      menuAccount("Tempat Tanggal Lahir", profile.ttl),
                       Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Alamat", state.alamat),
+                      menuAccount("Alamat", profile.alamat),
                       Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Jenis Kelamin", state.jenisKelamin),
+                      menuAccount("Jenis Kelamin", profile.jenisKelamin),
                       Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Jabatan", state.jabatan),
+                      menuAccount("Jabatan", profile.jabatan),
                       Padding(padding: EdgeInsets.only(top: 20)),
                     ],
-                  ),
-                ))),
-              );
-            }
-            return Container();
-          }),
+                  );
+                  return Container();
+                },
+                itemCount: dataanggota.length,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
