@@ -27,8 +27,10 @@ abstract class Services {
       if (response.statusMessage != null) {
         return PresensiDatangModel(
             userId: int.tryParse(response.data['user_id'].toString()) ?? 0,
-            latitude: double.tryParse(response.data['latitude'].toString()) ?? 0,
-            longtitude: double.tryParse(response.data['longtitude'].toString()) ?? 0,
+            latitude:
+                double.tryParse(response.data['latitude'].toString()) ?? 0,
+            longtitude:
+                double.tryParse(response.data['longtitude'].toString()) ?? 0,
             fotoDatang: response.data['foto_datang'],
             status: response.data['status']);
       }

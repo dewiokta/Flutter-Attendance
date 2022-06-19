@@ -11,7 +11,7 @@ import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../blocs/Auth_bloc.dart';
+import '../login/blocs/Auth_bloc.dart';
 import '../../dio_service/service.dart';
 import '../../theme.dart';
 
@@ -63,7 +63,11 @@ class _PresensiPulangState extends State<PresensiPulang> {
 
   Future<void> _submit() async {
     PresensiDatangModel? result = await Services.createPresensiDatang(
-        this._user_id, this._latitude, this._longtitude, this._foto_datang, this._status);
+        this._user_id,
+        this._latitude,
+        this._longtitude,
+        this._foto_datang,
+        this._status);
     if (result != null) {
       setState(() {
         presensi = result;

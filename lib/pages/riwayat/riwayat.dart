@@ -6,8 +6,8 @@ import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_attendance/pages/riwayat/list_riwayat.dart';
 import 'package:getwidget/getwidget.dart';
 
-import '../../blocs/Auth_bloc.dart';
-import '../../repository/auth_repository.dart';
+import '../login/blocs/Auth_bloc.dart';
+import '../login/blocs/auth_repository.dart';
 
 class RiwayatWidget extends StatefulWidget {
   final AuthBloc authBloc;

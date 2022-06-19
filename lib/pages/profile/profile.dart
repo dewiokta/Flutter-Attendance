@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_attendance/blocs/Auth_bloc.dart';
+import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../maindrawer.dart';
-import '../../repository/auth_repository.dart';
+import '../login/blocs/auth_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_attendance/theme.dart';
 
-import '../../state/auth_state.dart';
+import '../login/blocs/auth_state.dart';
 import 'bloc/profile_bloc.dart';
 
 class ProfilePage extends StatefulWidget {

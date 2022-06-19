@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_attendance/blocs/Auth_bloc.dart';
+import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/components/rounded_button.dart';
-import 'package:flutter_attendance/event/auth_event.dart';
+import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/pages/login/components/background.dart';
 import 'package:flutter_attendance/pages/login/components/forgor_password.dart';
 import 'package:flutter_attendance/pages/login/components/rounded_field_password.dart';
 import 'package:flutter_attendance/pages/login/components/rounded_field_username.dart';
 import 'package:flutter_attendance/pages/login/login_screen.dart';
-import 'package:flutter_attendance/state/auth_state.dart';
+import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Body extends StatefulWidget {

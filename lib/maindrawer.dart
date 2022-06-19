@@ -6,9 +6,9 @@ import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_attendance/pages/riwayat/riwayat.dart';
 import 'package:flutter_attendance/pages/profile/profile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_attendance/blocs/Auth_bloc.dart';
-import 'package:flutter_attendance/event/auth_event.dart';
-import 'package:flutter_attendance/repository/auth_repository.dart';
+import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
+import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
+import 'package:flutter_attendance/pages/login/blocs/auth_repository.dart';
 import '/login and home/HomePage.dart';
 
 class MainDrawer extends StatefulWidget {
