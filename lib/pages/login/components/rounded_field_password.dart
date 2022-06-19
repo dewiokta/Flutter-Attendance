@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_attendance/blocs/Auth_bloc.dart';
+import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/pages/login/components/textField.dart';
 

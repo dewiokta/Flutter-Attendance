@@ -8,8 +8,8 @@ import 'package:flutter_attendance/pages/presensi/presensi_datang.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_pulang.dart';
 import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 
-import '../../blocs/Auth_bloc.dart';
-import '../../repository/auth_repository.dart';
+import '../login/blocs/Auth_bloc.dart';
+import '../login/blocs/auth_repository.dart';
 
 class Presensi extends StatefulWidget {
   final AuthBloc authBloc;

@@ -6,11 +6,11 @@ import 'package:flutter_attendance/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_attendance/repository/auth_repository.dart';
-import 'package:flutter_attendance/state/auth_state.dart';
+import 'package:flutter_attendance/pages/login/blocs/auth_repository.dart';
+import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
 import 'package:flutter_attendance/login and home/HomePage.dart';
-import 'blocs/Auth_bloc.dart';
-import 'event/auth_event.dart';
+import 'pages/login/blocs/Auth_bloc.dart';
+import 'pages/login/blocs/auth_event.dart';
 import 'login and home/LoginPage.dart';
 
 void main() {

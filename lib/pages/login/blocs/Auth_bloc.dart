@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_attendance/event/auth_event.dart';
+import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/model/data_model.dart';
-import 'package:flutter_attendance/repository/auth_repository.dart';
-import 'package:flutter_attendance/state/auth_state.dart';
+import 'package:flutter_attendance/pages/login/blocs/auth_repository.dart';
+import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   // AuthBloc({required this.authRepository}) : assert(authRepository != null);

@@ -5,8 +5,8 @@ import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:getwidget/getwidget.dart';
 
-import '../../blocs/Auth_bloc.dart';
-import '../../repository/auth_repository.dart';
+import '../login/blocs/Auth_bloc.dart';
+import '../login/blocs/auth_repository.dart';
 
 class JadwalPages extends StatefulWidget {
   final AuthBloc authBloc;
