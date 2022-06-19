@@ -34,13 +34,13 @@ class _PresensiPulangState extends State<PresensiPulang> {
   var _longtitude = "";
   var _address = "";
   var _status = "On Process";
-  var _user_id = "";
+  int _user_id = 0;
   var _foto_datang = "coba.png";
 
-  getID(String id) {
-    _user_id = id;
-    // print(_user_id);
-  }
+  // getID(String id) {
+  //   _user_id = id;
+  //   // print(_user_id);
+  // }
 
   File? _image;
   final imagePicker = ImagePicker();
@@ -57,13 +57,13 @@ class _PresensiPulangState extends State<PresensiPulang> {
       // _image = File(image!.path);
       _status;
       _foto_datang;
-      _user_id = (getID(_user_id));
+      // _user_id = (getID(_user_id));
     });
   }
 
   Future<void> _submit() async {
     PresensiDatangModel? result = await Services.createPresensiDatang(
-        this._user_id, this._latitude, this._longtitude, this._foto_datang, this._status);
+        4, -1.394829384, 212.214134, "abs.jpg", "On Process");
     if (result != null) {
       setState(() {
         presensi = result;

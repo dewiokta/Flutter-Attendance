@@ -8,6 +8,12 @@ String presensiDatangModelToJson(PresensiDatangModel data) =>
     json.encode(data.toJson());
 
 class PresensiDatangModel {
+  final int userId;
+  final double latitude;
+  final double longtitude;
+  final String fotoDatang;
+  final String status;
+
   PresensiDatangModel({
     required this.userId,
     required this.latitude,
@@ -15,12 +21,6 @@ class PresensiDatangModel {
     required this.fotoDatang,
     required this.status,
   });
-
-  final int userId;
-  final double latitude;
-  final double longtitude;
-  final String fotoDatang;
-  final String status;
 
   factory PresensiDatangModel.fromJson(Map<String, dynamic> json) =>
       PresensiDatangModel(

@@ -4,35 +4,39 @@ import 'package:dio/dio.dart';
 
 abstract class Services {
   static Future<PresensiDatangModel?> createPresensiDatang(
-      String user_id,
-      String latitude,
-      String longtitude,
+      int user_id,
+      double latitude,
+      double longtitude,
       String foto_datang,
       String status) async {
     try {
       var response = await Dio()
           .post("https://attendance.putraprima.id/api/presensi-datang/",
               data: {
-                'user_id': int.tryParse(user_id),
-                'latitude': double.tryParse(latitude),
-                'longtitude': double.tryParse(longtitude),
+                'user_id': user_id,
+                'latitude': latitude,
+                'longtitude': longtitude,
                 'foto_datang': foto_datang,
                 'status': status
               },
               options: Options(
-                  followRedirects: false,
+                  followRedirects: true,
                   validateStatus: (status) {
                     return status! < 500;
-                  }));
-      if (response.statusMessage != null) {
+                  },
+                  headers: {"Accept": "application/json"}));
+      if (response.statusMessage == null) {
+        print("data berhasil diupload");
         return PresensiDatangModel(
             userId: int.tryParse(response.data['user_id'].toString()) ?? 0,
-            latitude: double.tryParse(response.data['latitude'].toString()) ?? 0,
-            longtitude: double.tryParse(response.data['longtitude'].toString()) ?? 0,
+            latitude: double.tryParse(response.data['latitude']) ?? 0,
+            longtitude: double.tryParse(response.data['longtitude']) ?? 0,
             fotoDatang: response.data['foto_datang'],
             status: response.data['status']);
+      } else {
+        print("gagal");
+        return null;
       }
-      return null;
     } catch (e) {
       throw Exception(e.toString());
     }
