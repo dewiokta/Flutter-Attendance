@@ -40,7 +40,8 @@ class _ProfilePageState extends State<ProfilePage> {
     return SafeArea(
       child: FutureBuilder(
         future: apiService.getDataAnggota(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<AnggotaResponse> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(

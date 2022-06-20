@@ -17,12 +17,12 @@ class ApiService {
     return token;
   }
 
-  Future<AnggotaDataResponse> getDataAnggota() async {
-    String baseUrl = "https://attendance.putraprima.id/api/anggota-detail/";
+  Future<AnggotaResponse> getDataAnggota() async {
     final token = await _loadToken();
     final _response = await _dio.get(Endpoint.getDataAnggota,
         options: Options(headers: {"authorization": "Bearer $token"}));
-    print(token);
-    return AnggotaDataResponse.fromJson(jsonDecode(_response.data));
+    print(_response);
+    final listAnggota = AnggotaResponse.fromJson(_response.data);
+    return listAnggota;
   }
 }
