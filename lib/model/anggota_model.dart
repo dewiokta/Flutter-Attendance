@@ -31,33 +31,49 @@ class AnggotaResponse {
 
 class AnggotaDataResponse {
   AnggotaDataResponse({
-    required this.name,
+    required this.id,
+    required this.user_id,
+    required this.full_name,
     required this.alamat,
     required this.ttl,
-    required this.jenisKelamin,
+    required this.jenis_kelamin,
     required this.jabatan,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
-  final String name;
+  final int id;
+  final int user_id;
+  final String full_name;
   final String alamat;
   final String ttl;
-  final String jenisKelamin;
+  final String jenis_kelamin;
   final String jabatan;
+  final String createdAt;
+  final String updatedAt;
 
   factory AnggotaDataResponse.fromJson(Map<String, dynamic> json) =>
       AnggotaDataResponse(
-        name: json["name"],
-        alamat: json["alamat"],
-        ttl: json["ttl"],
-        jenisKelamin: json["jenisKelamin"],
-        jabatan: json["jabatan"],
+        id: json['id'],
+        user_id: json['user_id'],
+        full_name: json['full_name'],
+        alamat: json['alamat'],
+        ttl: json['ttl'],
+        jenis_kelamin: json['jenis_kelamin'],
+        jabatan: json['jabatan'],
+        createdAt: json['created_at'],
+        updatedAt: json['updated_at'],
       );
 
   Map<String, dynamic> toJson() => {
-        "name": name,
+        "id": id,
+        "user_id": user_id,
+        "full_name": full_name,
         "alamat": alamat,
         "ttl": ttl,
-        "jenisKelamin": jenisKelamin,
+        "jenis_kelamin": jenis_kelamin,
         "jabatan": jabatan,
+        "created_at": createdAt,
+        "updated_at": updatedAt,
       };
 }
