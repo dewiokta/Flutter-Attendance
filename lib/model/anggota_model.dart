@@ -14,50 +14,61 @@ class AnggotaResponse {
   });
 
   final String message;
-  final List<AnggotaDataResponse> data;
+  final AnggotaDataResponse data;
 
   factory AnggotaResponse.fromJson(Map<String, dynamic> json) =>
       AnggotaResponse(
         message: json["message"],
-        data: List<AnggotaDataResponse>.from(
-            json["data"].map((x) => AnggotaDataResponse.fromJson(x))),
+        data: AnggotaDataResponse.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
         "message": message,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "data": data.toJson(),
       };
 }
 
 class AnggotaDataResponse {
   AnggotaDataResponse({
+    required this.id,
+    required this.idUser,
     required this.name,
     required this.alamat,
     required this.ttl,
     required this.jenisKelamin,
     required this.jabatan,
+    required this.createdAt,
   });
 
+  final int id;
+  final int idUser;
   final String name;
   final String alamat;
   final String ttl;
   final String jenisKelamin;
   final String jabatan;
+  final String createdAt;
 
   factory AnggotaDataResponse.fromJson(Map<String, dynamic> json) =>
       AnggotaDataResponse(
-        name: json["name"],
+        id: json["id"],
+        idUser: json["user_id"],
+        name: json["full_name"],
         alamat: json["alamat"],
         ttl: json["ttl"],
-        jenisKelamin: json["jenisKelamin"],
+        jenisKelamin: json["jenis_kelamin"],
         jabatan: json["jabatan"],
+        createdAt: json["created_at"],
       );
 
   Map<String, dynamic> toJson() => {
-        "name": name,
+        "id": id,
+        "user_id": idUser,
+        "full_name": name,
         "alamat": alamat,
         "ttl": ttl,
-        "jenisKelamin": jenisKelamin,
+        "jenis_kelamin": jenisKelamin,
         "jabatan": jabatan,
+        "created_at": createdAt,
       };
 }
