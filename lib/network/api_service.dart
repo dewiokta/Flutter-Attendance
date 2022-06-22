@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter_attendance/model/presensidatang_model.dart';
 import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,5 +25,48 @@ class ApiService {
     print(_response);
     final listAnggota = AnggotaResponse.fromJson(_response.data);
     return listAnggota;
+  }
+
+  Future<PresensiDatangModel?> createPresensiDatang(int user_id, double latitude,
+      double longtitude, String foto_datang, String status) async {
+    try {
+      final token = await _loadToken();
+      final response = await Dio().post(Endpoint.createPresensiPulang,
+        data: {
+          'user_id': user_id,
+          'latitude': latitude,
+          'longtitude': longtitude,
+          'foto_datang': foto_datang,
+          'status': status
+        },
+        options: Options(
+            followRedirects: true,
+            validateStatus: (status) => true,
+            // validateStatus: (status) {
+            //   return status! < 500;
+            // },
+            headers: {
+              "Accept": "application/json",
+              "authorization": "Bearer $token"
+            }),
+      );
+      var _response = response.data.toString();
+      print(response.statusMessage);
+      print(response.statusCode);
+      if (response.statusMessage == null) {
+        print("gagal");
+        return null;
+      } else {
+        // print("data berhasil diupload");
+        return PresensiDatangModel(
+            userId: int.tryParse(response.data['user_id'].toString()) ?? 0,
+            latitude: response.data['latitude'],
+            longtitude: response.data['longtitude'],
+            fotoDatang: response.data['foto_datang'],
+            status: response.data['status']);
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }

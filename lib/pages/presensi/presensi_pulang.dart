@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/model/presensidatang_model.dart';
 import 'package:flutter_attendance/model/presensipulang_model.dart';
+import 'package:flutter_attendance/network/api_service.dart';
 import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
@@ -34,13 +35,13 @@ class _PresensiPulangState extends State<PresensiPulang> {
   var _longtitude = "";
   var _address = "";
   var _status = "On Process";
-  int _user_id = 0;
+  var _user_id = null;
   var _foto_datang = "coba.png";
 
-  // getID(String id) {
-  //   _user_id = id;
-  //   // print(_user_id);
-  // }
+  getID(int id) {
+    _user_id = id;
+    print(_user_id);
+  }
 
   File? _image;
   final imagePicker = ImagePicker();
@@ -57,13 +58,13 @@ class _PresensiPulangState extends State<PresensiPulang> {
       // _image = File(image!.path);
       _status;
       _foto_datang;
-      // _user_id = (getID(_user_id));
+      _user_id = (getID(_user_id));
     });
   }
 
   Future<void> _submit() async {
-    PresensiDatangModel? result = await Services.createPresensiDatang(
-        4, -1.394829384, 212.214134, "abs.jpg", "On Process");
+    PresensiDatangModel? result = await ApiService().createPresensiDatang(
+        4, -1.394829384, 212.214134, _foto_datang, _status);
     if (result != null) {
       setState(() {
         presensi = result;
