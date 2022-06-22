@@ -48,8 +48,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   "Something wrong with message: ${snapshot.error.toString()}"),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            List<AnggotaDataResponse>? dataanggota = snapshot.data?.data;
-            return _buildListView(dataanggota!);
+            AnggotaDataResponse dataanggota = snapshot.data!.data;
+
+            return _buildListView(dataanggota);
           } else {
             return const Center(
               child: CircularProgressIndicator(),
@@ -60,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildListView(List<AnggotaDataResponse> dataanggota) {
+  Widget _buildListView(AnggotaDataResponse dataanggota) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Asistencia"),
@@ -79,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.all(20),
               child: ListView.builder(
                 itemBuilder: (context, index) {
-                  AnggotaDataResponse profile = dataanggota[index];
+                  AnggotaDataResponse profile = dataanggota;
                   child:
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,20 +96,20 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Padding(padding: EdgeInsets.only(top: 10)),
                             Text(
-                              profile.full_name,
+                              profile.name,
                               style: text,
                             )
                           ],
                         ),
                       ),
                       Padding(padding: EdgeInsets.only(top: 40)),
-                      menuAccount("Nama", profile.full_name),
+                      menuAccount("Nama", profile.name),
                       Padding(padding: EdgeInsets.only(top: 20)),
                       menuAccount("Tempat Tanggal Lahir", profile.ttl),
                       Padding(padding: EdgeInsets.only(top: 20)),
                       menuAccount("Alamat", profile.alamat),
                       Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Jenis Kelamin", profile.jenis_kelamin),
+                      menuAccount("Jenis Kelamin", profile.jenisKelamin),
                       Padding(padding: EdgeInsets.only(top: 20)),
                       menuAccount("Jabatan", profile.jabatan),
                       Padding(padding: EdgeInsets.only(top: 20)),
@@ -116,7 +117,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                   return Container();
                 },
-                itemCount: dataanggota.length,
               ),
             ),
           ),
