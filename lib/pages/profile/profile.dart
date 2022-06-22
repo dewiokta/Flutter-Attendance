@@ -38,89 +38,73 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     this.context = context;
     return SafeArea(
-      child: FutureBuilder(
+      child: FutureBuilder<AnggotaResponse?>(
         future: apiService.getDataAnggota(),
-        builder:
-            (BuildContext context, AsyncSnapshot<AnggotaResponse> snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                  "Something wrong with message: ${snapshot.error.toString()}"),
-            );
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            AnggotaDataResponse dataanggota = snapshot.data!.data;
-
-            return _buildListView(dataanggota);
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
-    );
-  }
-
-  Widget _buildListView(AnggotaDataResponse dataanggota) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Asistencia"),
-        backgroundColor: Colors.indigo[400],
-      ),
-      drawer: Drawer(
-        child: MainDrawer(
-          profileBloc: _profileBloc,
-          authBloc: _authBloc,
-        ),
-      ),
-      body: Container(
-        child: SingleChildScrollView(
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  AnggotaDataResponse profile = dataanggota;
-                  child:
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(padding: EdgeInsets.only(top: 40)),
-                      Center(
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            AnggotaResponse? dataanggota = snapshot.data;
+            if (dataanggota != null) {
+              AnggotaDataResponse anggotaData = dataanggota.data;
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text("Asistencia"),
+                  backgroundColor: Colors.indigo[400],
+                ),
+                drawer: Drawer(
+                  child: MainDrawer(
+                    profileBloc: _profileBloc,
+                    authBloc: _authBloc,
+                  ),
+                ),
+                body: Container(
+                  child: SingleChildScrollView(
+                    child: SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
-                              CupertinoIcons.profile_circled,
-                              size: 80,
-                              color: purple,
+                            Padding(padding: EdgeInsets.only(top: 40)),
+                            Center(
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    CupertinoIcons.profile_circled,
+                                    size: 80,
+                                    color: purple,
+                                  ),
+                                  Padding(padding: EdgeInsets.only(top: 10)),
+                                  Text(
+                                    anggotaData.name,
+                                    style: text,
+                                  )
+                                ],
+                              ),
                             ),
-                            Padding(padding: EdgeInsets.only(top: 10)),
-                            Text(
-                              profile.name,
-                              style: text,
-                            )
+                            Padding(padding: EdgeInsets.only(top: 40)),
+                            menuAccount("Nama", anggotaData.name),
+                            Padding(padding: EdgeInsets.only(top: 20)),
+                            menuAccount(
+                                "Tempat Tanggal Lahir", anggotaData.ttl),
+                            Padding(padding: EdgeInsets.only(top: 20)),
+                            menuAccount("Alamat", anggotaData.alamat),
+                            Padding(padding: EdgeInsets.only(top: 20)),
+                            menuAccount(
+                                "Jenis Kelamin", anggotaData.jenisKelamin),
+                            Padding(padding: EdgeInsets.only(top: 20)),
+                            menuAccount("Jabatan", anggotaData.jabatan),
+                            Padding(padding: EdgeInsets.only(top: 20)),
                           ],
                         ),
                       ),
-                      Padding(padding: EdgeInsets.only(top: 40)),
-                      menuAccount("Nama", profile.name),
-                      Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Tempat Tanggal Lahir", profile.ttl),
-                      Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Alamat", profile.alamat),
-                      Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Jenis Kelamin", profile.jenisKelamin),
-                      Padding(padding: EdgeInsets.only(top: 20)),
-                      menuAccount("Jabatan", profile.jabatan),
-                      Padding(padding: EdgeInsets.only(top: 20)),
-                    ],
-                  );
-                  return Container();
-                },
-              ),
-            ),
-          ),
-        ),
+                    ),
+                  ),
+                ),
+              );
+            }
+          }
+          return CircularProgressIndicator();
+        },
       ),
     );
   }

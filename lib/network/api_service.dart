@@ -18,20 +18,42 @@ class ApiService {
     return token;
   }
 
-  Future<AnggotaResponse> getDataAnggota() async {
+  Future<AnggotaResponse?> getDataAnggota() async {
+    AnggotaResponse? listAnggota;
     final token = await _loadToken();
-    final _response = await _dio.get(Endpoint.getDataAnggota,
-        options: Options(headers: {"authorization": "Bearer $token"}));
-    print(_response);
-    final listAnggota = AnggotaResponse.fromJson(_response.data);
+    try {
+      final _response = await _dio.get(Endpoint.getDataAnggota,
+          options: Options(headers: {"authorization": "Bearer $token"}));
+      print(_response);
+      listAnggota = AnggotaResponse.fromJson(_response.data);
+      return listAnggota;
+    } on DioError catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data}');
+        print('HEADERS: ${e.response?.headers}');
+      } else {
+        // Error due to setting up or sending the request
+        print('Error sending request!');
+        print(e.message);
+      }
+    }
     return listAnggota;
   }
 
-  Future<PresensiDatangModel?> createPresensiDatang(int user_id, double latitude,
-      double longtitude, String foto_datang, String status) async {
+  Future<PresensiDatangModel?> createPresensiDatang(
+      int user_id,
+      double latitude,
+      double longtitude,
+      String foto_datang,
+      String status) async {
     try {
       final token = await _loadToken();
-      final response = await Dio().post(Endpoint.createPresensiPulang,
+      final response = await Dio().post(
+        Endpoint.createPresensiPulang,
         data: {
           'user_id': user_id,
           'latitude': latitude,
