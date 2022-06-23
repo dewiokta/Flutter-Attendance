@@ -5,6 +5,9 @@ class Endpoint {
 
   static const getDataAnggota =
       'https://attendance.putraprima.id/api/anggota-detail';
-  
-  static const createPresensiPulang = "https://attendance.putraprima.id/api/presensi-datang/";
+
+  static const createPresensiPulang =
+      "https://attendance.putraprima.id/api/presensi-datang/";
+  static const getPresensiDatang =
+      "https://attendance.putraprima.id/api/presensi-datang/";
 }
