@@ -64,7 +64,7 @@ class _PresensiDatangState extends State<PresensiDatang> {
 
   Future<void> _submit() async {
     PresensiDatangModel? result = await ApiService().createPresensiDatang(
-        4, -1.394829384, 212.214134, _foto_datang, _status);
+        _latitude, _longtitude, _image, _status);
     if (result != null) {
       setState(() {
         presensi = result;

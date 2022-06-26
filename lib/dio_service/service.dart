@@ -36,7 +36,6 @@ abstract class Services {
       } else {
         // print("data berhasil diupload");
         return PresensiDatangModel(
-            userId: int.tryParse(response.data['user_id'].toString()) ?? 0,
             latitude: double.tryParse(response.data['latitude']) ?? 0,
             longtitude: double.tryParse(response.data['longtitude']) ?? 0,
             fotoDatang: response.data['foto_datang'],
