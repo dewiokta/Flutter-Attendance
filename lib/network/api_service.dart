@@ -1,11 +1,10 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_attendance/model/presensidatang_model.dart';
-import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
+import 'package:flutter_attendance/pages/riwayat/list_riwayat.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/anggota_model.dart';
+import '../model/riwayatdatang_model.dart';
 import 'endpoint.dart';
 
 class ApiService {
@@ -87,5 +86,14 @@ class ApiService {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  Future<RiwayatDatangResponse> getDataRiwayatDatang() async {
+    final token = await _loadToken();
+    final _response = await _dio.get(Endpoint.getPresensiDatang,
+        options: Options(headers: {"authorization": "Bearer $token"}));
+    print(_response);
+    final listRiwayat = RiwayatDatangResponse.fromJson(_response.data);
+    return listRiwayat;
   }
 }

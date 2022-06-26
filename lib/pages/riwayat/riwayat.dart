@@ -6,6 +6,8 @@ import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_attendance/pages/riwayat/list_riwayat.dart';
 import 'package:getwidget/getwidget.dart';
 
+import '../../model/riwayatdatang_model.dart';
+import '../../network/api_service.dart';
 import '../login/blocs/Auth_bloc.dart';
 import '../login/blocs/auth_repository.dart';
 
@@ -20,109 +22,73 @@ class RiwayatWidget extends StatefulWidget {
 }
 
 class _RiwayatWidgetState extends State<RiwayatWidget> {
-  DateTimeRange dateRange =
-      DateTimeRange(start: DateTime(2022, 2, 15), end: DateTime(2022, 3, 15));
   final AuthRepository authRepository = AuthRepository();
-  AuthBloc get _authBloc => widget.authBloc;
   ProfileBloc get _profileBloc => widget.profileBloc;
+  AuthBloc get _authBloc => widget.authBloc;
+  late BuildContext context;
+  late ApiService apiService;
+
+  @override
+  void initState() {
+    super.initState();
+    apiService = ApiService();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final start = dateRange.start;
-    final end = dateRange.end;
-
+    this.context = context;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Riwayat Presensi"),
-        backgroundColor: kPrimaryColor,
+        title: Text("Asistencia"),
+        backgroundColor: Colors.indigo[400],
       ),
       drawer: Drawer(
-        child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
+        child: MainDrawer(
+          profileBloc: _profileBloc,
+          authBloc: _authBloc,
+        ),
       ),
-      body: ListView(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Row(
-                  children: const [
-                    Text(
-                      "Detail Riwayat Mingguan",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SizedBox(
-                      width: 140,
-                      child: GFButton(
-                        onPressed: pickDate,
-                        text: "${start.year}/${start.month}/${start.day}",
-                        shape: GFButtonShape.square,
-                        type: GFButtonType.outline2x,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                    const SizedBox(
-                      child: Icon(Icons.arrow_right),
-                    ),
-                    SizedBox(
-                      width: 140,
-                      child: GFButton(
-                        onPressed: pickDate,
-                        text: "${end.year}/${end.month}/${end.day}",
-                        shape: GFButtonShape.square,
-                        type: GFButtonType.outline2x,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Row(
-                  children: const [
-                    Text(
-                      "see all",
-                      style: TextStyle(fontSize: 15, color: kPrimaryColor),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                const ListRiwayat(),
-                SizedBox(height: 20),
-                const ListRiwayat(),
-                SizedBox(height: 20),
-                const ListRiwayat(),
-                SizedBox(height: 20),
-                const ListRiwayat(),
-                SizedBox(height: 20),
-                const ListRiwayat(),
-                SizedBox(height: 20),
-                const ListRiwayat(),
-                SizedBox(height: 20),
-              ],
-            ),
-          ),
-        ],
+      body: FutureBuilder(
+        future: apiService.getDataRiwayatDatang(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Text('OKE');
+          } else {
+            return Text('gagal');
+          }
+        },
       ),
     );
   }
 
-  Future pickDate() async {
-    DateTimeRange? newDateRange = await showDateRangePicker(
-      context: context,
-      initialDateRange: dateRange,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
-    );
-
-    if (newDateRange == null) return; //press X
-
-    setState(() => dateRange = newDateRange);
-  }
+//   Widget _buildListView(List<RiwayatDatangDataResponse> dataRiwayatDatang) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+//       child: ListView.builder(
+//         itemBuilder: (context, index) {
+//           // RiwayatDatangDataResponse profile = dataRiwayatDatang[index];
+//           return Padding(
+//             padding: const EdgeInsets.only(top: 8.0),
+//             child: Card(
+//               child: Padding(
+//                 padding: const EdgeInsets.all(16.0),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: <Widget>[
+//                     Text(
+//                       dataRiwayatDatang[index].createdAt,
+//                       style: Theme.of(context).textTheme.headline6,
+//                     ),
+//                     Text(dataRiwayatDatang[index].status),
+//                     Text(dataRiwayatDatang[index].latitude),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           );
+//         },
+//         itemCount: dataRiwayatDatang.length,
+//       ),
+//     );
+//   }
 }
