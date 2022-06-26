@@ -22,73 +22,187 @@ class RiwayatWidget extends StatefulWidget {
 }
 
 class _RiwayatWidgetState extends State<RiwayatWidget> {
+  DateTimeRange dateRange =
+      DateTimeRange(start: DateTime(2022, 2, 15), end: DateTime(2022, 3, 15));
   final AuthRepository authRepository = AuthRepository();
-  ProfileBloc get _profileBloc => widget.profileBloc;
   AuthBloc get _authBloc => widget.authBloc;
+  ProfileBloc get _profileBloc => widget.profileBloc;
   late BuildContext context;
   late ApiService apiService;
-
   @override
   void initState() {
     super.initState();
     apiService = ApiService();
   }
 
-  @override
   Widget build(BuildContext context) {
     this.context = context;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Asistencia"),
-        backgroundColor: Colors.indigo[400],
-      ),
-      drawer: Drawer(
-        child: MainDrawer(
-          profileBloc: _profileBloc,
-          authBloc: _authBloc,
-        ),
-      ),
-      body: FutureBuilder(
+    return SafeArea(
+      child: FutureBuilder(
         future: apiService.getDataRiwayatDatang(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Text('OKE');
+        builder: (BuildContext context,
+            AsyncSnapshot<RiwayatDatangResponse> snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                  "Something wrong with message: ${snapshot.error.toString()}"),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            List<RiwayatDatangDataResponse>? datariwayat = snapshot.data?.data;
+            return _buildListView(datariwayat!);
           } else {
-            return Text('gagal');
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
         },
       ),
     );
   }
 
-//   Widget _buildListView(List<RiwayatDatangDataResponse> dataRiwayatDatang) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-//       child: ListView.builder(
-//         itemBuilder: (context, index) {
-//           // RiwayatDatangDataResponse profile = dataRiwayatDatang[index];
-//           return Padding(
-//             padding: const EdgeInsets.only(top: 8.0),
-//             child: Card(
-//               child: Padding(
-//                 padding: const EdgeInsets.all(16.0),
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: <Widget>[
-//                     Text(
-//                       dataRiwayatDatang[index].createdAt,
-//                       style: Theme.of(context).textTheme.headline6,
-//                     ),
-//                     Text(dataRiwayatDatang[index].status),
-//                     Text(dataRiwayatDatang[index].latitude),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           );
-//         },
-//         itemCount: dataRiwayatDatang.length,
-//       ),
-//     );
-//   }
+  Widget _buildListView(List<RiwayatDatangDataResponse> datariwayat) {
+    final start = dateRange.start;
+    final end = dateRange.end;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Riwayat Presensi"),
+        backgroundColor: kPrimaryColor,
+      ),
+      drawer: Drawer(
+        child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
+      ),
+      body: ListView(
+        children: [
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                RiwayatDatangDataResponse state = datariwayat[index];
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Row(
+                            children: const [
+                              Text(
+                                "Detail Riwayat Mingguan",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(
+                                width: 140,
+                                child: GFButton(
+                                  onPressed: pickDate,
+                                  text:
+                                      "${start.year}/${start.month}/${start.day}",
+                                  shape: GFButtonShape.square,
+                                  type: GFButtonType.outline2x,
+                                  color: kPrimaryColor,
+                                ),
+                              ),
+                              const SizedBox(
+                                child: Icon(Icons.arrow_right),
+                              ),
+                              SizedBox(
+                                width: 140,
+                                child: GFButton(
+                                  onPressed: pickDate,
+                                  text: "${end.year}/${end.month}/${end.day}",
+                                  shape: GFButtonShape.square,
+                                  type: GFButtonType.outline2x,
+                                  color: kPrimaryColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: const [
+                              Text(
+                                "see all",
+                                style: TextStyle(
+                                    fontSize: 15, color: kPrimaryColor),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: const <Widget>[
+                                  Image(
+                                    image:
+                                        AssetImage("assets/images/riwayat.png"),
+                                    height: 50,
+                                  )
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    state.waktu,
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: const <Widget>[
+                                  Text(
+                                    "Datang",
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    state.status,
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: const <Widget>[
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/images/centang-riwayat.png"),
+                                    height: 20,
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+              itemCount: datariwayat.length,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future pickDate() async {
+    DateTimeRange? newDateRange = await showDateRangePicker(
+      context: context,
+      initialDateRange: dateRange,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+    if (newDateRange == null) return; //press X
+    setState(() => dateRange = newDateRange);
+  }
 }

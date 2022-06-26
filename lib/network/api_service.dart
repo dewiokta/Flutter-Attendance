@@ -45,15 +45,12 @@ class ApiService {
     return listAnggota;
   }
 
-  Future<PresensiDatangModel?> createPresensiDatang(
-      String latitude,
-      String longtitude,
-      File? foto_datang,
-      String status) async {
+  Future<PresensiDatangModel?> createPresensiDatang(String latitude,
+      String longtitude, File? foto_datang, String status) async {
     try {
       final token = await _loadToken();
       final response = await Dio().post(
-        Endpoint.createPresensiPulang,
+        Endpoint.createPresensiDatang,
         data: {
           'latitude': double.parse(latitude).toString(),
           'longtitude': double.parse(longtitude).toString(),
@@ -80,8 +77,10 @@ class ApiService {
       } else {
         // print("data berhasil diupload");
         return PresensiDatangModel(
-            latitude: double.tryParse(response.data['latitude'].toString()) ?? 0,
-            longtitude: double.tryParse(response.data['longtitude'].toString()) ?? 0,
+            latitude:
+                double.tryParse(response.data['latitude'].toString()) ?? 0,
+            longtitude:
+                double.tryParse(response.data['longtitude'].toString()) ?? 0,
             fotoDatang: response.data['foto_datang'],
             status: response.data['status']);
       }
@@ -92,10 +91,10 @@ class ApiService {
 
   Future<RiwayatDatangResponse> getDataRiwayatDatang() async {
     final token = await _loadToken();
-    final _response = await _dio.get(Endpoint.getPresensiDatang,
+    final _response = await _dio.get(Endpoint.createPresensiDatang,
         options: Options(headers: {"authorization": "Bearer $token"}));
     print(_response);
-    final listRiwayat = RiwayatDatangResponse.fromJson(_response.data);
-    return listRiwayat;
+    final ListRiwayat = RiwayatDatangResponse.fromJson(_response.data);
+    return ListRiwayat;
   }
 }
