@@ -45,20 +45,18 @@ class ApiService {
   }
 
   Future<PresensiDatangModel?> createPresensiDatang(
-      int user_id,
-      double latitude,
-      double longtitude,
-      String foto_datang,
+      String latitude,
+      String longtitude,
+      File? foto_datang,
       String status) async {
     try {
       final token = await _loadToken();
       final response = await Dio().post(
         Endpoint.createPresensiPulang,
         data: {
-          'user_id': user_id,
-          'latitude': latitude,
-          'longtitude': longtitude,
-          'foto_datang': foto_datang,
+          'latitude': double.parse(latitude).toString(),
+          'longtitude': double.parse(longtitude).toString(),
+          'foto_datang': await MultipartFile.fromFile(foto_datang!.path),
           'status': status
         },
         options: Options(
@@ -73,17 +71,16 @@ class ApiService {
             }),
       );
       var _response = response.data.toString();
-      print(response.statusMessage);
       print(response.statusCode);
+      print(response.toString());
       if (response.statusMessage == null) {
         print("gagal");
         return null;
       } else {
         // print("data berhasil diupload");
         return PresensiDatangModel(
-            userId: int.tryParse(response.data['user_id'].toString()) ?? 0,
-            latitude: response.data['latitude'],
-            longtitude: response.data['longtitude'],
+            latitude: double.tryParse(response.data['latitude'].toString()) ?? 0,
+            longtitude: double.tryParse(response.data['longtitude'].toString()) ?? 0,
             fotoDatang: response.data['foto_datang'],
             status: response.data['status']);
       }

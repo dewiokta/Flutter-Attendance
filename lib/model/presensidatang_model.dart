@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
@@ -8,14 +10,12 @@ String presensiDatangModelToJson(PresensiDatangModel data) =>
     json.encode(data.toJson());
 
 class PresensiDatangModel {
-  final int userId;
   final double latitude;
   final double longtitude;
-  final String fotoDatang;
+  final File? fotoDatang;
   final String status;
 
   PresensiDatangModel({
-    required this.userId,
     required this.latitude,
     required this.longtitude,
     required this.fotoDatang,
@@ -24,7 +24,6 @@ class PresensiDatangModel {
 
   factory PresensiDatangModel.fromJson(Map<String, dynamic> json) =>
       PresensiDatangModel(
-        userId: json["user_id"],
         latitude: json["latitude"].toDouble(),
         longtitude: json["longtitude"].toDouble(),
         fotoDatang: json["foto_datang"],
@@ -32,7 +31,6 @@ class PresensiDatangModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "user_id": userId,
         "latitude": latitude,
         "longtitude": longtitude,
         "foto_datang": fotoDatang,
