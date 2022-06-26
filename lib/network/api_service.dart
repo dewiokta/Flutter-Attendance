@@ -91,31 +91,6 @@ class ApiService {
     }
   }
 
-  // Future<RiwayatDatangResponse?> getPresensiDatang() async {
-  //   RiwayatDatangResponse? listRiwayat;
-  //   final token = await _loadToken();
-  //   try {
-  //     final _response = await _dio.get(Endpoint.getPresensiDatang,
-  //         options: Options(headers: {"authorization": "Bearer $token"}));
-  //     print(_response);
-  //     listRiwayat = RiwayatDatangResponse.fromJson(_response.data);
-  //     return listRiwayat;
-  //   } on DioError catch (e) {
-  //     // The request was made and the server responded with a status code
-  //     // that falls out of the range of 2xx and is also not 304.
-  //     if (e.response != null) {
-  //       print('Dio error!');
-  //       print('STATUS: ${e.response?.statusCode}');
-  //       print('DATA: ${e.response?.data}');
-  //       print('HEADERS: ${e.response?.headers}');
-  //     } else {
-  //       // Error due to setting up or sending the request
-  //       print('Error sending request!');
-  //       print(e.message);
-  //     }
-  //   }
-  //   return listRiwayat;
-  // }
   Future<RiwayatDatangResponse> getDataRiwayatDatang() async {
     final token = await _loadToken();
     final _response = await _dio.get(Endpoint.getPresensiDatang,

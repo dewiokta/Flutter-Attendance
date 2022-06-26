@@ -35,8 +35,9 @@ class RiwayatDatangDataResponse {
     required this.latitude,
     required this.longtitude,
     required this.fotoDatang,
-    required this.createdAt,
     required this.status,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   final int id;
@@ -44,8 +45,9 @@ class RiwayatDatangDataResponse {
   final String latitude;
   final String longtitude;
   final String fotoDatang;
+  final String status;
   final dynamic createdAt;
-  final dynamic status;
+  final dynamic updatedAt;
 
   factory RiwayatDatangDataResponse.fromJson(Map<String, dynamic> json) =>
       RiwayatDatangDataResponse(
@@ -54,8 +56,9 @@ class RiwayatDatangDataResponse {
         latitude: json["latitude"],
         longtitude: json["longtitude"],
         fotoDatang: json["foto_datang"],
-        createdAt: json["created_at"],
         status: json["status"],
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -64,7 +67,8 @@ class RiwayatDatangDataResponse {
         "latitude": latitude,
         "longtitude": longtitude,
         "foto_datang": fotoDatang,
-        "created_at": createdAt,
         "status": status,
+        "created_at": createdAt,
+        "updated_at": updatedAt,
       };
 }
