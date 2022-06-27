@@ -43,16 +43,19 @@ class ApiService {
       }
     }
     return listAnggota;
-  }
+  } //lohhhh wkwkwkwk tpi masu ga se?
 
+  //ini masih error ndak  layo haruse kan blom absen yak?TAKAS TAU MUTER E UDH GA GEDE WKWKWK, wuenaaakkkkkkkkkkkkkkkkkkk wkwkwk
   Future<PresensiDatangModel?> createPresensiDatang(String latitude,
       String longtitude, File? foto_datang, String status) async {
     try {
       final token = await _loadToken();
+      final String foto = foto_datang!.path.split('/').last;
       FormData formData = FormData.fromMap({
         'latitude': double.parse(latitude).toString(),
         'longtitude': double.parse(longtitude).toString(),
-        'foto_datang': await MultipartFile.fromFile(foto_datang!.path, filename: foto_datang.path.split('/').last ),
+        'foto_datang':
+            await MultipartFile.fromFile(foto_datang.path, filename: foto),
         'status': status
       });
       final response = await Dio().post(
