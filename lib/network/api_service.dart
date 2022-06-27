@@ -43,9 +43,8 @@ class ApiService {
       }
     }
     return listAnggota;
-  } //lohhhh wkwkwkwk tpi masu ga se?
+  }
 
-  //ini masih error ndak  layo haruse kan blom absen yak?TAKAS TAU MUTER E UDH GA GEDE WKWKWK, wuenaaakkkkkkkkkkkkkkkkkkk wkwkwk
   Future<PresensiDatangModel?> createPresensiDatang(String latitude,
       String longtitude, File? foto_datang, String status) async {
     try {
