@@ -56,7 +56,7 @@ class ApiService {
         'status': status
       });
       final response = await Dio().post(
-        Endpoint.createPresensiPulang,
+        Endpoint.createPresensiDatang,
         data: formData,
         options: Options(
             followRedirects: true,
@@ -89,10 +89,10 @@ class ApiService {
 
   Future<RiwayatDatangResponse> getDataRiwayatDatang() async {
     final token = await _loadToken();
-    final _response = await _dio.get(Endpoint.getPresensiDatang,
+    final _response = await _dio.get(Endpoint.createPresensiDatang,
         options: Options(headers: {"authorization": "Bearer $token"}));
     print(_response);
-    final listRiwayat = RiwayatDatangResponse.fromJson(_response.data);
-    return listRiwayat;
+    final ListRiwayat = RiwayatDatangResponse.fromJson(_response.data);
+    return ListRiwayat;
   }
 }
