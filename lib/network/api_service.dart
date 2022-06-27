@@ -45,27 +45,22 @@ class ApiService {
     return listAnggota;
   }
 
-  Future<PresensiDatangModel?> createPresensiDatang(
-      String latitude,
-      String longtitude,
-      File? foto_datang,
-      String status) async {
+  Future<PresensiDatangModel?> createPresensiDatang(String latitude,
+      String longtitude, File? foto_datang, String status) async {
     try {
       final token = await _loadToken();
+      FormData formData = FormData.fromMap({
+        'latitude': double.parse(latitude).toString(),
+        'longtitude': double.parse(longtitude).toString(),
+        'foto_datang': await MultipartFile.fromFile(foto_datang!.path, filename: foto_datang.path.split('/').last ),
+        'status': status
+      });
       final response = await Dio().post(
         Endpoint.createPresensiPulang,
-        data: {
-          'latitude': double.parse(latitude).toString(),
-          'longtitude': double.parse(longtitude).toString(),
-          'foto_datang': await MultipartFile.fromFile(foto_datang!.path),
-          'status': status
-        },
+        data: formData,
         options: Options(
             followRedirects: true,
             validateStatus: (status) => true,
-            // validateStatus: (status) {
-            //   return status! < 500;
-            // },
             headers: {
               "Accept": "application/json",
               "authorization": "Bearer $token"
@@ -80,8 +75,10 @@ class ApiService {
       } else {
         // print("data berhasil diupload");
         return PresensiDatangModel(
-            latitude: double.tryParse(response.data['latitude'].toString()) ?? 0,
-            longtitude: double.tryParse(response.data['longtitude'].toString()) ?? 0,
+            latitude:
+                double.tryParse(response.data['latitude'].toString()) ?? 0,
+            longtitude:
+                double.tryParse(response.data['longtitude'].toString()) ?? 0,
             fotoDatang: response.data['foto_datang'],
             status: response.data['status']);
       }
