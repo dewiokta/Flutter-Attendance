@@ -29,7 +29,7 @@ class PresensiPulang extends StatefulWidget {
 }
 
 class _PresensiPulangState extends State<PresensiPulang> {
-  PresensiDatangModel? presensi;
+  PresensiPulangModel? presensi;
   AuthBloc get _authBloc => widget.authBloc;
   ProfileBloc get _profileBloc => widget.profileBloc;
 
@@ -71,8 +71,8 @@ class _PresensiPulangState extends State<PresensiPulang> {
   }
 
   Future<void> _submit() async {
-    PresensiDatangModel? result = await ApiService()
-        .createPresensiDatang(_latitude, _longtitude, _image, _status);
+    PresensiPulangModel? result = await ApiService()
+        .createPresensiPulang(_latitude, _longtitude, _image, _status);
     print(_longtitude);
     print(_latitude);
     print(_status);
