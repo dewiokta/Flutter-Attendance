@@ -44,8 +44,8 @@ class _PresensiPulangState extends State<PresensiPulang> {
   var _address = "";
   var _status = "On Process";
   // var _user_id = "";
-  var _foto_datang = "coba.png";
-  // var image = ""; 
+  var _foto_datang = "";
+  // var image = "";
 
   File? _image;
   final imagePicker = ImagePicker();
@@ -72,8 +72,8 @@ class _PresensiPulangState extends State<PresensiPulang> {
   }
 
   Future<void> _submit() async {
-    PresensiDatangModel? result = await ApiService().createPresensiDatang(
-        _latitude, _longtitude, _image, _status);
+    PresensiDatangModel? result = await ApiService()
+        .createPresensiDatang(_latitude, _longtitude, _image, _status);
     print(_longtitude);
     print(_latitude);
     print(_status);
