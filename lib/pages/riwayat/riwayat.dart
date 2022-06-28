@@ -22,8 +22,6 @@ class RiwayatWidget extends StatefulWidget {
 }
 
 class _RiwayatWidgetState extends State<RiwayatWidget> {
-  DateTimeRange dateRange =
-      DateTimeRange(start: DateTime(2022, 2, 15), end: DateTime(2022, 3, 15));
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
   ProfileBloc get _profileBloc => widget.profileBloc;
@@ -61,9 +59,6 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
   }
 
   Widget _buildListView(List<RiwayatDatangDataResponse> datariwayat) {
-    final start = dateRange.start;
-    final end = dateRange.end;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Riwayat Presensi"),
@@ -96,47 +91,6 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
                             ],
                           ),
                           SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SizedBox(
-                                width: 140,
-                                child: GFButton(
-                                  onPressed: pickDate,
-                                  text:
-                                      "${start.year}/${start.month}/${start.day}",
-                                  shape: GFButtonShape.square,
-                                  type: GFButtonType.outline2x,
-                                  color: kPrimaryColor,
-                                ),
-                              ),
-                              const SizedBox(
-                                child: Icon(Icons.arrow_right),
-                              ),
-                              SizedBox(
-                                width: 140,
-                                child: GFButton(
-                                  onPressed: pickDate,
-                                  text: "${end.year}/${end.month}/${end.day}",
-                                  shape: GFButtonShape.square,
-                                  type: GFButtonType.outline2x,
-                                  color: kPrimaryColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            children: const [
-                              Text(
-                                "see all",
-                                style: TextStyle(
-                                    fontSize: 15, color: kPrimaryColor),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -193,16 +147,5 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
         ],
       ),
     );
-  }
-
-  Future pickDate() async {
-    DateTimeRange? newDateRange = await showDateRangePicker(
-      context: context,
-      initialDateRange: dateRange,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
-    );
-    if (newDateRange == null) return; //press X
-    setState(() => dateRange = newDateRange);
   }
 }
