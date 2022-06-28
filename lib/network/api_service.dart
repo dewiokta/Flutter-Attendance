@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_attendance/model/presensidatang_model.dart';
+import 'package:flutter_attendance/model/presensipulang_model.dart';
 import 'package:flutter_attendance/pages/riwayat/list_riwayat.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -80,6 +81,48 @@ class ApiService {
             longtitude:
                 double.tryParse(response.data['longtitude'].toString()) ?? 0,
             fotoDatang: response.data['foto_datang'],
+            status: response.data['status']);
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<PresensiPulangModel?> createPresensiPulang(String latitude,
+      String longtitude, File? foto_pulang, String status) async {
+    try {
+      final token = await _loadToken();
+      FormData formData = FormData.fromMap({
+        'latitude': double.parse(latitude).toString(),
+        'longtitude': double.parse(longtitude).toString(),
+        'foto_pulang': await MultipartFile.fromFile(foto_pulang!.path, filename: foto_pulang.path.split('/').last ),
+        'status': status
+      });
+      final response = await Dio().post(
+        Endpoint.createPresensiPulang,
+        data: formData,
+        options: Options(
+            followRedirects: true,
+            validateStatus: (status) => true,
+            headers: {
+              "Accept": "application/json",
+              "authorization": "Bearer $token"
+            }),
+      );
+      var _response = response.data.toString();
+      print(response.statusCode);
+      print(response.toString());
+      if (response.statusMessage == null) {
+        print("gagal");
+        return null;
+      } else {
+        // print("data berhasil diupload");
+        return PresensiPulangModel(
+            latitude:
+                double.tryParse(response.data['latitude'].toString()) ?? 0,
+            longtitude:
+                double.tryParse(response.data['longtitude'].toString()) ?? 0,
+            fotoPulang: response.data['foto_pulang'],
             status: response.data['status']);
       }
     } catch (e) {
