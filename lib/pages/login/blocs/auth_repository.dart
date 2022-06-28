@@ -96,8 +96,6 @@ class AuthRepository {
 
   Future unsetToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var value = null;
-    token = (prefs.getString('token_sanctum') ?? value);
-    return token;
+    prefs.remove('token_sanctum');
   }
 }

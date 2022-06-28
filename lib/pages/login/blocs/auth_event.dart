@@ -19,11 +19,7 @@ class GetDataWithToken extends AuthEvent {
   List<Object> get props => [token];
 }
 
-class LoggedOut extends AuthEvent {
-  // @override
-  // // TODO: implement props
-  // List<Object> get props => [];
-}
+class LoggedOut extends AuthEvent {}
 
 class LoginProcess extends AuthEvent {
   final String email;
@@ -34,12 +30,3 @@ class LoginProcess extends AuthEvent {
   @override
   List<Object> get props => [email, password];
 }
-
-// class GetDataAnggota extends AuthEvent {
-//   final String token;
-
-//   GetDataAnggota(this.token);
-
-//   @override
-//   List<Object> get props => [token];
-// }
