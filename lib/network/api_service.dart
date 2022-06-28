@@ -94,10 +94,12 @@ class ApiService {
       String longtitude, File? foto_pulang, String status) async {
     try {
       final token = await _loadToken();
+      final String foto = foto_pulang!.path.split('/').last;
       FormData formData = FormData.fromMap({
         'latitude': double.parse(latitude).toString(),
         'longtitude': double.parse(longtitude).toString(),
-        'foto_pulang': await MultipartFile.fromFile(foto_pulang!.path, filename: foto_pulang.path.split('/').last ),
+        'foto_pulang':
+            await MultipartFile.fromFile(foto_pulang.path, filename: foto),
         'status': status
       });
       final response = await Dio().post(
