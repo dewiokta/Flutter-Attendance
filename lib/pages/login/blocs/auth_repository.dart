@@ -94,9 +94,10 @@ class AuthRepository {
 
   String token = '';
 
-  Future _loadToken() async {
+  Future unsetToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = (prefs.getString('token_sanctum') ?? '');
+    var value = null;
+    token = (prefs.getString('token_sanctum') ?? value);
     return token;
   }
 }

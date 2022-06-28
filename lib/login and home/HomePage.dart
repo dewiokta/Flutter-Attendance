@@ -190,15 +190,13 @@ class _HomePageState extends State<HomePage> {
                         ),
                         ListTile(
                           onTap: () async {
-                            SharedPreferences pref =
-                                await SharedPreferences.getInstance();
-                            await pref.clear();
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      LoginPage(authBloc: _authBloc),
-                                ),
-                                (route) => false);
+                            _authBloc.add(LoggedOut());
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    LoginPage(authBloc: _authBloc),
+                              ),
+                            );
                           },
                           leading: Icon(
                             Icons.logout,

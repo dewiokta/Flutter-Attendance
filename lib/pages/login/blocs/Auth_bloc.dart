@@ -45,7 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         final Logout logout = await authRepository.userLogout(token);
         if (logout.message == "success") {
-          await authRepository.unsetLocalToken();
+          await authRepository.unsetToken();
           emit(AuthFailed());
         }
       } catch (e) {}
@@ -72,7 +72,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         final Logout logout = await authRepository.userLogout(token);
         if (logout.message == "success") {
-          await authRepository.unsetLocalToken();
+          await authRepository.unsetToken();
           emit(AuthFailed());
         }
       } catch (e) {}
@@ -94,7 +94,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         final Logout logout = await authRepository.userLogout(token);
         if (logout.message == "success") {
-          await authRepository.unsetLocalToken();
+          await authRepository.unsetToken();
           emit(AuthFailed());
         }
       } catch (e) {}
@@ -126,7 +126,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         final Logout logout = await authRepository.userLogout(token);
         if (logout.message == "success") {
-          await authRepository.unsetLocalToken();
+          await authRepository.unsetToken();
           emit(AuthFailed());
         }
       } catch (e) {}
