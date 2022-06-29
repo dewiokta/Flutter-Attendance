@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_attendance/model/presensidatang_model.dart';
 import 'package:flutter_attendance/model/presensipulang_model.dart';
@@ -75,6 +76,8 @@ class ApiService {
       if (response.statusMessage == null) {
         print("gagal");
         return null;
+      }else if (response.statusMessage == "Sudah Absen Tidak Perlu Absen Lagi"){
+        
       } else {
         // print("data berhasil diupload");
         return PresensiDatangModel(

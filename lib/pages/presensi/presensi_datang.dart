@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/model/presensidatang_model.dart';
@@ -60,17 +61,11 @@ class _PresensiDatangState extends State<PresensiDatang> {
       _address = pm[0].toString();
       _image = File(image!.path);
       _status;
-      // _foto_datang;
-      // _user_id = getID(_user_id);
     });
-    // print(_longtitude);
-    // print(_user_id);
-    // print(_latitude);
-    // print(_status);
-    // print(_image);
   }
 
   Future<void> _submit() async {
+    bool showSpinner = true ;
     PresensiDatangModel? result = await ApiService()
         .createPresensiDatang(_latitude, _longtitude, _image, _status);
     print(_longtitude);
@@ -80,9 +75,13 @@ class _PresensiDatangState extends State<PresensiDatang> {
     if (result != null) {
       setState(() {
         presensi = result;
-        // print(presensi);
       });
     }
+    CoolAlert.show(
+      context: context,
+      type: CoolAlertType.success,
+      text: 'Presensi Sukses! Anda tidak perlu presensi lagi !',
+      autoCloseDuration: Duration(seconds: 2),);
   }
 
   Future<Position> _determinePosition() async {
@@ -109,13 +108,6 @@ class _PresensiDatangState extends State<PresensiDatang> {
     return await Geolocator.getCurrentPosition();
   }
 
-  // Future getImage() async {
-  //   final image = await imagePicker.getImage(source: ImageSource.camera);
-  //   setState(() {
-  //     _image = File(image!.path);
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,9 +126,6 @@ class _PresensiDatangState extends State<PresensiDatang> {
               return Container();
             }
             if (state is AuthData) {
-              // var _id = state.id.toString();
-              // print(_id);
-              // getID(_id);
               return Container(
                 child: ListView(
                   children: [
@@ -160,8 +149,6 @@ class _PresensiDatangState extends State<PresensiDatang> {
                         menuAccount("Address", _address),
                         Padding(padding: EdgeInsets.only(top: 20)),
                         menuAccount("Status", _status),
-                        // Padding(padding: EdgeInsets.only(top: 20)),
-                        // menuAccount("User id", _user_id),
                       ],
                     ),
                     const SizedBox(

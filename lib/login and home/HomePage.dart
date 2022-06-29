@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                         ListTile(
                           onTap: () async {
                             _authBloc.add(LoggedOut());
-                            Navigator.of(context).push(
+                            Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 builder: (context) =>
                                     LoginPage(authBloc: _authBloc),
