@@ -4,7 +4,6 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_attendance/model/presensidatang_model.dart';
 import 'package:flutter_attendance/model/presensipulang_model.dart';
-import 'package:flutter_attendance/model/riwayat_datang.dart';
 import 'package:flutter_attendance/pages/riwayat/list_riwayat.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -138,12 +137,12 @@ class ApiService {
     }
   }
 
-  Future<RiwayatDatang> getDataRiwayatDatang() async {
+  Future<RiwayatDatangResponse> getDataRiwayatDatang() async {
     final token = await _loadToken();
     final _response = await _dio.get(Endpoint.createPresensiDatang,
         options: Options(headers: {"authorization": "Bearer $token"}));
     print(_response);
-    // return RiwayatDatang.fromJson(_response.body);
+    return RiwayatDatangResponse.fromJson(_response.data);
     // final listriwayat = riwayatdatangresponse.fromjson(_response.data);
     // return ListRiwayat;
   }

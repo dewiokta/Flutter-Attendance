@@ -7,6 +7,7 @@ import 'package:flutter_attendance/model/presensipulang_model.dart';
 import 'package:flutter_attendance/network/api_service.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
+import 'package:flutter_attendance/pages/presensi/presensi.dart';
 import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -34,18 +35,11 @@ class _PresensiDatangState extends State<PresensiDatang> {
   AuthBloc get _authBloc => widget.authBloc;
   ProfileBloc get _profileBloc => widget.profileBloc;
 
-  // getID(String id) {
-  //   _user_id = id;
-  //   // print(_user_id);
-  // }
-
   var _latitude = "";
   var _longtitude = "";
   var _address = "";
   var _status = "On Process";
-  // var _user_id = "";
   var _foto_datang = "coba.png";
-  // var image = "";
 
   File? _image;
   final imagePicker = ImagePicker();
@@ -64,8 +58,8 @@ class _PresensiDatangState extends State<PresensiDatang> {
     });
   }
 
-  Future<void> _submit() async {
-    bool showSpinner = true ;
+  Future<void> submit() async {
+    bool showSpinner = true;
     PresensiDatangModel? result = await ApiService()
         .createPresensiDatang(_latitude, _longtitude, _image, _status);
     print(_longtitude);
@@ -81,7 +75,8 @@ class _PresensiDatangState extends State<PresensiDatang> {
       context: context,
       type: CoolAlertType.success,
       text: 'Presensi Sukses! Anda tidak perlu presensi lagi !',
-      autoCloseDuration: Duration(seconds: 2),);
+      autoCloseDuration: Duration(seconds: 10),
+    );
   }
 
   Future<Position> _determinePosition() async {
@@ -130,6 +125,9 @@ class _PresensiDatangState extends State<PresensiDatang> {
                 child: ListView(
                   children: [
                     Column(children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Center(
                         child: _image == null
                             ? Text("Klik Icon Kamera untuk Presensi")
@@ -141,14 +139,8 @@ class _PresensiDatangState extends State<PresensiDatang> {
                     ]),
                     Column(
                       children: [
-                        Padding(padding: EdgeInsets.only(top: 40)),
-                        menuAccount("Longtitude", _longtitude),
-                        Padding(padding: EdgeInsets.only(top: 20)),
-                        menuAccount("Latitude", _latitude),
                         Padding(padding: EdgeInsets.only(top: 20)),
                         menuAccount("Address", _address),
-                        Padding(padding: EdgeInsets.only(top: 20)),
-                        menuAccount("Status", _status),
                       ],
                     ),
                     const SizedBox(
@@ -165,7 +157,16 @@ class _PresensiDatangState extends State<PresensiDatang> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        onPressed: _submit,
+                        onPressed: () {
+                          submit().then((value) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Presensi(
+                                        authBloc: _authBloc,
+                                        profileBloc: _profileBloc)));
+                          });
+                        },
                         child: const Text(
                           "Simpan",
                           style: TextStyle(
@@ -173,6 +174,9 @@ class _PresensiDatangState extends State<PresensiDatang> {
                           ),
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 20,
                     ),
                   ],
                 ),

@@ -10,6 +10,7 @@ import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_repository.dart';
 import '/login and home/HomePage.dart';
+import 'login and home/LoginPage.dart';
 
 class MainDrawer extends StatefulWidget {
   final AuthBloc authBloc;
@@ -114,8 +115,13 @@ class _MaindrawState extends State<MainDrawer> {
         title: Text("Riwayat Presensi"),
       ),
       ListTile(
-        onTap: () {
+        onTap: () async {
           _authBloc.add(LoggedOut());
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => LoginPage(authBloc: _authBloc),
+            ),
+          );
         },
         leading: Icon(
           Icons.logout,
