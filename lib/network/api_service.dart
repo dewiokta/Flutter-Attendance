@@ -4,6 +4,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_attendance/model/presensidatang_model.dart';
 import 'package:flutter_attendance/model/presensipulang_model.dart';
+import 'package:flutter_attendance/model/riwayat_datang.dart';
 import 'package:flutter_attendance/pages/riwayat/list_riwayat.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -76,8 +77,8 @@ class ApiService {
       if (response.statusMessage == null) {
         print("gagal");
         return null;
-      }else if (response.statusMessage == "Sudah Absen Tidak Perlu Absen Lagi"){
-        
+      } else if (response.statusMessage ==
+          "Sudah Absen Tidak Perlu Absen Lagi") {
       } else {
         // print("data berhasil diupload");
         return PresensiDatangModel(
@@ -137,12 +138,13 @@ class ApiService {
     }
   }
 
-  Future<RiwayatDatangResponse> getDataRiwayatDatang() async {
+  Future<RiwayatDatang> getDataRiwayatDatang() async {
     final token = await _loadToken();
     final _response = await _dio.get(Endpoint.createPresensiDatang,
         options: Options(headers: {"authorization": "Bearer $token"}));
     print(_response);
-    final ListRiwayat = RiwayatDatangResponse.fromJson(_response.data);
-    return ListRiwayat;
+    // return RiwayatDatang.fromJson(_response.body);
+    // final listriwayat = riwayatdatangresponse.fromjson(_response.data);
+    // return ListRiwayat;
   }
 }

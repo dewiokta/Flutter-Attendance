@@ -13,7 +13,6 @@ class AuthRepository {
         'email': _email,
         'password': _password,
       });
-
       var jsonResponse = json.decode(response.body);
       return LoginAuth.fromJson(jsonResponse);
     } catch (e) {

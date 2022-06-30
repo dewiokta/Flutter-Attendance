@@ -12,7 +12,7 @@ String presensiDatangModelToJson(PresensiDatangModel data) =>
 class PresensiDatangModel {
   final double latitude;
   final double longtitude;
-  final File? fotoDatang;
+  final String fotoDatang;
   final String status;
 
   PresensiDatangModel({
