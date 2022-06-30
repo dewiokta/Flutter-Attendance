@@ -65,7 +65,7 @@ class _PresensiDatangState extends State<PresensiDatang> {
   }
 
   Future<void> _submit() async {
-    bool showSpinner = true ;
+    bool showSpinner = true;
     PresensiDatangModel? result = await ApiService()
         .createPresensiDatang(_latitude, _longtitude, _image, _status);
     print(_longtitude);
@@ -81,7 +81,9 @@ class _PresensiDatangState extends State<PresensiDatang> {
       context: context,
       type: CoolAlertType.success,
       text: 'Presensi Sukses! Anda tidak perlu presensi lagi !',
-      autoCloseDuration: Duration(seconds: 2),);
+      autoCloseDuration: Duration(seconds: 2),
+    );
+    
   }
 
   Future<Position> _determinePosition() async {

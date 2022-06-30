@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/model/presensidatang_model.dart';
@@ -83,6 +84,12 @@ class _PresensiPulangState extends State<PresensiPulang> {
         // print(presensi);
       });
     }
+    CoolAlert.show(
+      context: context,
+      type: CoolAlertType.success,
+      text: 'Presensi Sukses! Anda tidak perlu presensi lagi !',
+      autoCloseDuration: Duration(seconds: 2),
+    );
   }
 
   Future<Position> _determinePosition() async {
