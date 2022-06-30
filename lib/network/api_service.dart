@@ -142,8 +142,7 @@ class ApiService {
     final _response = await _dio.get(Endpoint.createPresensiDatang,
         options: Options(headers: {"authorization": "Bearer $token"}));
     print(_response);
-    return RiwayatDatangResponse.fromJson(_response.data);
-    // final listriwayat = riwayatdatangresponse.fromjson(_response.data);
-    // return ListRiwayat;
+    final ListRiwayat = RiwayatDatangResponse.fromJson(_response.data);
+    return ListRiwayat;
   }
 }
