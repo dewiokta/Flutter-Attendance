@@ -75,7 +75,13 @@ class _PresensiPulangState extends State<PresensiPulang> {
       type: CoolAlertType.success,
       text: 'Presensi Sukses! Anda tidak perlu presensi lagi !',
       autoCloseDuration: Duration(seconds: 10),
-    );
+    ).then((value) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  Presensi(authBloc: _authBloc, profileBloc: _profileBloc)));
+    });
   }
 
   Future<Position> _determinePosition() async {
@@ -159,16 +165,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        onPressed: () {
-                          submit().then((value) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Presensi(
-                                        authBloc: _authBloc,
-                                        profileBloc: _profileBloc)));
-                          });
-                        },
+                        onPressed: submit,
                         child: const Text(
                           "Simpan",
                           style: TextStyle(
