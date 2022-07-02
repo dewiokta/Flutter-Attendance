@@ -4,7 +4,6 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_attendance/model/presensidatang_model.dart';
 import 'package:flutter_attendance/model/presensipulang_model.dart';
-import 'package:flutter_attendance/pages/riwayat/list_riwayat.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/anggota_model.dart';

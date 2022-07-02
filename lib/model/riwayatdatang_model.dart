@@ -42,17 +42,17 @@ class RiwayatDatangDataResponse {
   factory RiwayatDatangDataResponse.fromJson(Map<String, dynamic> json) =>
       RiwayatDatangDataResponse(
         latitude: json["latitude"].toString(),
-        longitude: json["longitude"].toString(),
+        longitude: json["longtitude"].toString(),
         fotoDatang: json["foto_datang"],
         status: json["status"],
-        waktu: json["waktu"],
+        waktu: json["created_at"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
-        "latitude": latitude,
-        "longitude": longitude,
+        "latitude": latitude.toString(),
+        "longitude": longitude.toString(),
         "foto_datang": fotoDatang,
         "status": status,
-        "waktu": waktu,
+        "waktu": waktu.toString(),
       };
 }
