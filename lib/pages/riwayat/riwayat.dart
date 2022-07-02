@@ -12,9 +12,7 @@ import '../login/blocs/auth_repository.dart';
 
 class RiwayatWidget extends StatefulWidget {
   final AuthBloc authBloc;
-  final ProfileBloc profileBloc;
-  const RiwayatWidget({Key? key, required this.authBloc, required this.profileBloc})
-      : super(key: key);
+  const RiwayatWidget({Key? key, required this.authBloc}) : super(key: key);
   @override
   State<RiwayatWidget> createState() => _RiwayatWidgetState();
 }
@@ -22,7 +20,7 @@ class RiwayatWidget extends StatefulWidget {
 class _RiwayatWidgetState extends State<RiwayatWidget> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
-  ProfileBloc get _profileBloc => widget.profileBloc;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +31,6 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
       drawer: Drawer(
         child: MainDrawer(
           authBloc: _authBloc,
-          profileBloc: _profileBloc,
         ),
       ),
       body: Container(
@@ -44,7 +41,6 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => RiwayatDatangWidget(
                         authBloc: _authBloc,
-                        profileBloc: _profileBloc,
                       ))),
               title: Text("Riwayat Datang"),
               trailing: Icon(Icons.arrow_forward),
@@ -54,7 +50,6 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => RiwayatPulangWidget(
                         authBloc: _authBloc,
-                        profileBloc: _profileBloc,
                       ))),
               title: const Text("Riwayat Pulang"),
               trailing: const Icon(Icons.arrow_forward),

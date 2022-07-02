@@ -14,10 +14,7 @@ import 'login and home/LoginPage.dart';
 
 class MainDrawer extends StatefulWidget {
   final AuthBloc authBloc;
-  final ProfileBloc profileBloc;
-  const MainDrawer(
-      {Key? key, required this.authBloc, required this.profileBloc})
-      : super(key: key);
+  const MainDrawer({Key? key, required this.authBloc}) : super(key: key);
   @override
   _MaindrawState createState() => _MaindrawState();
 }
@@ -30,7 +27,6 @@ class _MaindrawState extends State<MainDrawer> {
 
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
-  ProfileBloc get _profileBloc => widget.profileBloc;
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -62,7 +58,6 @@ class _MaindrawState extends State<MainDrawer> {
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => HomePage(
                   authBloc: _authBloc,
-                  profileBloc: _profileBloc,
                 ))),
         leading: Icon(
           Icons.home,
@@ -73,7 +68,6 @@ class _MaindrawState extends State<MainDrawer> {
       ListTile(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ProfilePage(
-                  profileBloc: _profileBloc,
                   authBloc: _authBloc,
                 ))),
         leading: Icon(
@@ -84,8 +78,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                Presensi(authBloc: _authBloc, profileBloc: _profileBloc))),
+            builder: (context) => Presensi(authBloc: _authBloc))),
         leading: Icon(
           Icons.camera_enhance_rounded,
           color: Colors.indigo[400],
@@ -94,8 +87,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                JadwalPages(authBloc: _authBloc, profileBloc: _profileBloc))),
+            builder: (context) => JadwalPages(authBloc: _authBloc))),
         leading: Icon(
           Icons.access_time_filled_outlined,
           color: Colors.indigo[400],
@@ -104,10 +96,7 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       ListTile(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => RiwayatWidget(
-                  authBloc: _authBloc,
-                  profileBloc: _profileBloc,
-                ))),
+            builder: (context) => RiwayatWidget(authBloc: _authBloc))),
         leading: Icon(
           Icons.history,
           color: Colors.indigo[400],

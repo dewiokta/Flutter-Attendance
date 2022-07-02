@@ -10,9 +10,7 @@ import '../login/blocs/auth_repository.dart';
 
 class Presensi extends StatefulWidget {
   final AuthBloc authBloc;
-  final ProfileBloc profileBloc;
-  const Presensi({Key? key, required this.authBloc, required this.profileBloc})
-      : super(key: key);
+  const Presensi({Key? key, required this.authBloc}) : super(key: key);
   @override
   State<Presensi> createState() => _PresensiState();
 }
@@ -20,7 +18,6 @@ class Presensi extends StatefulWidget {
 class _PresensiState extends State<Presensi> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
-  ProfileBloc get _profileBloc => widget.profileBloc;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +28,6 @@ class _PresensiState extends State<Presensi> {
       drawer: Drawer(
         child: MainDrawer(
           authBloc: _authBloc,
-          profileBloc: _profileBloc,
         ),
       ),
       body: Container(
@@ -42,7 +38,6 @@ class _PresensiState extends State<Presensi> {
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => PresensiDatang(
                         authBloc: _authBloc,
-                        profileBloc: _profileBloc,
                       ))),
               leading: const Image(
                 image: AssetImage("assets/images/presensi.png"),
@@ -55,7 +50,6 @@ class _PresensiState extends State<Presensi> {
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => PresensiPulang(
                         authBloc: _authBloc,
-                        profileBloc: _profileBloc,
                       ))),
               leading: const Image(
                 image: AssetImage("assets/images/riwayat.png"),

@@ -9,18 +9,14 @@ import 'package:flutter_attendance/theme.dart';
 import 'bloc/profile_bloc.dart';
 
 class ProfilePage extends StatefulWidget {
-  final ProfileBloc profileBloc;
   final AuthBloc authBloc;
-  const ProfilePage(
-      {Key? key, required this.profileBloc, required this.authBloc})
-      : super(key: key);
+  const ProfilePage({Key? key, required this.authBloc}) : super(key: key);
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
   final AuthRepository authRepository = AuthRepository();
-  ProfileBloc get _profileBloc => widget.profileBloc;
   AuthBloc get _authBloc => widget.authBloc;
   late BuildContext context;
   late ApiService apiService;
@@ -49,7 +45,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 drawer: Drawer(
                   child: MainDrawer(
-                    profileBloc: _profileBloc,
                     authBloc: _authBloc,
                   ),
                 ),

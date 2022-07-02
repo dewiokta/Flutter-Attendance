@@ -10,10 +10,7 @@ import '../login/blocs/auth_repository.dart';
 
 class JadwalPages extends StatefulWidget {
   final AuthBloc authBloc;
-  final ProfileBloc profileBloc;
-  const JadwalPages(
-      {Key? key, required this.authBloc, required this.profileBloc})
-      : super(key: key);
+  const JadwalPages({Key? key, required this.authBloc}) : super(key: key);
   @override
   State<JadwalPages> createState() => _JadwalPagesState();
 }
@@ -21,7 +18,6 @@ class JadwalPages extends StatefulWidget {
 class _JadwalPagesState extends State<JadwalPages> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
-  ProfileBloc get _profileBloc => widget.profileBloc;
   bool _isvisible = false;
   bool _isvisible2 = false;
   bool _isvisible3 = false;
@@ -36,7 +32,7 @@ class _JadwalPagesState extends State<JadwalPages> {
         backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
-        child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
+        child: MainDrawer(authBloc: _authBloc),
       ),
       body: SingleChildScrollView(
         child: Container(
