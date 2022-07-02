@@ -12,9 +12,7 @@ import '../login/blocs/auth_repository.dart';
 
 class RiwayatDatangWidget extends StatefulWidget {
   final AuthBloc authBloc;
-  final ProfileBloc profileBloc;
-  const RiwayatDatangWidget(
-      {Key? key, required this.authBloc, required this.profileBloc})
+  const RiwayatDatangWidget({Key? key, required this.authBloc})
       : super(key: key);
   @override
   State<RiwayatDatangWidget> createState() => _RiwayatWidgetState();
@@ -23,7 +21,6 @@ class RiwayatDatangWidget extends StatefulWidget {
 class _RiwayatWidgetState extends State<RiwayatDatangWidget> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
-  ProfileBloc get _profileBloc => widget.profileBloc;
   late BuildContext context;
   late ApiService apiService;
   @override
@@ -66,36 +63,36 @@ class _RiwayatWidgetState extends State<RiwayatDatangWidget> {
       drawer: Drawer(
         child: MainDrawer(
           authBloc: _authBloc,
-          profileBloc: _profileBloc,
         ),
       ),
       body: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          RiwayatDatangDataResponse profile = datariwayat[index];
-          return Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      profile.status,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    Text(profile.waktu),
-                    Text(profile.latitude),
-                  ],
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            RiwayatDatangDataResponse profile = datariwayat[index];
+            return Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        profile.status,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      Text(profile.waktu),
+                      Text(profile.latitude),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-        itemCount: datariwayat.length,
+            );
+          },
+          itemCount: datariwayat.length,
+        ),
       ),
-    ),);
+    );
   }
 }
