@@ -3,7 +3,6 @@ import 'package:flutter_attendance/components/rounded_button.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
-import 'package:flutter_attendance/pages/riwayat/list_riwayat.dart';
 import 'package:getwidget/getwidget.dart';
 
 import '../../model/riwayatdatang_model.dart';
