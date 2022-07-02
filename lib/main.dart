@@ -60,7 +60,6 @@ class MyApp extends StatelessWidget {
           if (state is AuthHasToken || state is AuthData)
             return HomePage(
               authBloc: authBloc,
-              profileBloc: profileBloc,
             );
           if (state is AuthFailed || state is LoginFailed)
             return LoginPage(authBloc: authBloc);

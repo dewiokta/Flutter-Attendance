@@ -22,10 +22,7 @@ import '../../theme.dart';
 
 class PresensiPulang extends StatefulWidget {
   final AuthBloc authBloc;
-  final ProfileBloc profileBloc;
-  const PresensiPulang(
-      {Key? key, required this.authBloc, required this.profileBloc})
-      : super(key: key);
+  const PresensiPulang({Key? key, required this.authBloc}) : super(key: key);
   @override
   _PresensiPulangState createState() => _PresensiPulangState();
 }
@@ -33,7 +30,6 @@ class PresensiPulang extends StatefulWidget {
 class _PresensiPulangState extends State<PresensiPulang> {
   PresensiPulangModel? presensi;
   AuthBloc get _authBloc => widget.authBloc;
-  ProfileBloc get _profileBloc => widget.profileBloc;
 
   var _latitude = "";
   var _longtitude = "";
@@ -79,8 +75,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  Presensi(authBloc: _authBloc, profileBloc: _profileBloc)));
+              builder: (context) => Presensi(authBloc: _authBloc)));
     });
   }
 
@@ -116,7 +111,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
         backgroundColor: Colors.indigo[400],
       ),
       drawer: Drawer(
-        child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
+        child: MainDrawer(authBloc: _authBloc),
       ),
       body: BlocBuilder<AuthBloc, AuthState>(
           bloc: _authBloc,

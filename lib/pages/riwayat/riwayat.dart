@@ -13,10 +13,7 @@ import '../login/blocs/auth_repository.dart';
 
 class RiwayatWidget extends StatefulWidget {
   final AuthBloc authBloc;
-  final ProfileBloc profileBloc;
-  const RiwayatWidget(
-      {Key? key, required this.authBloc, required this.profileBloc})
-      : super(key: key);
+  const RiwayatWidget({Key? key, required this.authBloc}) : super(key: key);
   @override
   State<RiwayatWidget> createState() => _RiwayatWidgetState();
 }
@@ -24,7 +21,6 @@ class RiwayatWidget extends StatefulWidget {
 class _RiwayatWidgetState extends State<RiwayatWidget> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
-  ProfileBloc get _profileBloc => widget.profileBloc;
   late BuildContext context;
   late ApiService apiService;
   @override
@@ -38,67 +34,73 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
     return SafeArea(
       child: FutureBuilder(
         future: apiService.getRiwayatDatang(),
-        builder: (BuildContext context,
-            AsyncSnapshot<RiwayatDatangResponse> snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                  "Something wrong with message: ${snapshot.error.toString()}"),
-            );
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            List<RiwayatDatangDataResponse>? datariwayat = snapshot.data?.data;
-            return _buildListView(datariwayat!);
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+        // builder: (BuildContext context,
+        //     AsyncSnapshot<RiwayatDatangResponse> snapshot) {
+        //   if (snapshot.hasError) {
+        //     return Center(
+        //       child: Text(
+        //           "Something wrong with message: ${snapshot.error.toString()}"),
+        //     );
+        //   } else if (snapshot.connectionState == ConnectionState.done) {
+        //     List<RiwayatDatangDataResponse>? datariwayat = snapshot.data?.data;
+        //     return _buildListView(datariwayat!);
+        //   } else {
+        //     return const Center(
+        //       child: CircularProgressIndicator(),
+        //     );
+        //   }
+        // },
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Text('OKE');
+          } else
+            return Text('Eror');
         },
       ),
     );
   }
 
-  Widget _buildListView(List<RiwayatDatangDataResponse> datariwayat) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Riwayat Presensi"),
-        backgroundColor: kPrimaryColor,
-      ),
-      drawer: Drawer(
-        child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
-      ),
-      body: ListView(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(20),
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                RiwayatDatangDataResponse profile = datariwayat[index];
-                return Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            profile.status,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          Text(profile.waktu),
-                          Text(profile.status),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
-              itemCount: datariwayat.length,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildListView(List<RiwayatDatangDataResponse> datariwayat) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       title: const Text("Riwayat Presensi"),
+  //       backgroundColor: kPrimaryColor,
+  //     ),
+  //     drawer: Drawer(
+  //       child: MainDrawer(authBloc: _authBloc, profileBloc: _profileBloc),
+  //     ),
+  //     body: ListView(
+  //       children: [
+  //         Container(
+  //           margin: const EdgeInsets.all(20),
+  //           child: ListView.builder(
+  //             itemBuilder: (context, index) {
+  //               RiwayatDatangDataResponse profile = datariwayat[index];
+  //               return Padding(
+  //                 padding: const EdgeInsets.only(top: 8.0),
+  //                 child: Card(
+  //                   child: Padding(
+  //                     padding: const EdgeInsets.all(16.0),
+  //                     child: Column(
+  //                       crossAxisAlignment: CrossAxisAlignment.start,
+  //                       children: <Widget>[
+  //                         Text(
+  //                           profile.status,
+  //                           style: Theme.of(context).textTheme.headline6,
+  //                         ),
+  //                         Text(profile.waktu),
+  //                         Text(profile.status),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                 ),
+  //               );
+  //             },
+  //             itemCount: datariwayat.length,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

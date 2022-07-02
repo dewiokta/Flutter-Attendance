@@ -16,10 +16,8 @@ import '../pages/riwayat/riwayat.dart';
 
 class HomePage extends StatefulWidget {
   final AuthBloc authBloc;
-  final ProfileBloc profileBloc;
 
-  const HomePage({Key? key, required this.authBloc, required this.profileBloc})
-      : super(key: key);
+  const HomePage({Key? key, required this.authBloc}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -27,7 +25,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
-  ProfileBloc get _profileBloc => widget.profileBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +36,6 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: MainDrawer(
           authBloc: _authBloc,
-          profileBloc: _profileBloc,
         ),
       ),
       backgroundColor: Colors.white,
@@ -123,7 +119,6 @@ class _HomePageState extends State<HomePage> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => HomePage(
                                         authBloc: _authBloc,
-                                        profileBloc: _profileBloc,
                                       ))),
                           leading: Icon(
                             Icons.home,
@@ -137,7 +132,6 @@ class _HomePageState extends State<HomePage> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => ProfilePage(
                                         authBloc: _authBloc,
-                                        profileBloc: _profileBloc,
                                       ))),
                           leading: Icon(
                             Icons.person,
@@ -151,7 +145,6 @@ class _HomePageState extends State<HomePage> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => Presensi(
                                         authBloc: _authBloc,
-                                        profileBloc: _profileBloc,
                                       ))),
                           leading: Icon(
                             Icons.camera_enhance_rounded,
@@ -165,7 +158,6 @@ class _HomePageState extends State<HomePage> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => JadwalPages(
                                         authBloc: _authBloc,
-                                        profileBloc: _profileBloc,
                                       ))),
                           leading: Icon(
                             Icons.access_time_filled_outlined,
@@ -179,7 +171,6 @@ class _HomePageState extends State<HomePage> {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => RiwayatWidget(
                                         authBloc: _authBloc,
-                                        profileBloc: _profileBloc,
                                       ))),
                           leading: Icon(
                             Icons.history,
