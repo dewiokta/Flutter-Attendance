@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_attendance/components/rounded_button.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
+import 'package:flutter_attendance/model/riwayatpulang_model.dart';
 import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:getwidget/getwidget.dart';
 
@@ -34,16 +35,16 @@ class _RiwayatPulangWidgetState extends State<RiwayatPulangWidget> {
     this.context = context;
     return SafeArea(
       child: FutureBuilder(
-        future: apiService.getRiwayatDatang(),
+        future: apiService.getRiwayatPulang(),
         builder: (BuildContext context,
-            AsyncSnapshot<RiwayatDatangResponse> snapshot) {
+            AsyncSnapshot<RiwayatPulangResponse> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(
                   "Something wrong with message: ${snapshot.error.toString()}"),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            List<RiwayatDatangDataResponse>? datariwayat = snapshot.data?.data;
+            List<RiwayatPulangDataResponse>? datariwayat = snapshot.data?.data;
             return _buildListView(datariwayat!);
           } else {
             return const Center(
@@ -55,7 +56,7 @@ class _RiwayatPulangWidgetState extends State<RiwayatPulangWidget> {
     );
   }
 
-  Widget _buildListView(List<RiwayatDatangDataResponse> datariwayat) {
+   Widget _buildListView(List<RiwayatPulangDataResponse> datariwayat) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Riwayat Presensi Datang"),
@@ -70,7 +71,7 @@ class _RiwayatPulangWidgetState extends State<RiwayatPulangWidget> {
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: ListView.builder(
           itemBuilder: (context, index) {
-            RiwayatDatangDataResponse profile = datariwayat[index];
+            RiwayatPulangDataResponse profile = datariwayat[index];
             return Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Card(
@@ -79,12 +80,39 @@ class _RiwayatPulangWidgetState extends State<RiwayatPulangWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        profile.status,
-                        style: Theme.of(context).textTheme.headline6,
+                      Row(
+                        
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: const <Widget>[
+                              Image(
+                                image: AssetImage("assets/images/riwayat.png"),
+                                height: 40,
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(profile.waktu),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(profile.status),
+                            ],
+                          ),
+                          Column(
+                            children: const <Widget>[
+                              Image(
+                                image: AssetImage(
+                                    "assets/images/centang-riwayat.png"),
+                                height: 20,
+                              )
+                            ],
+                          ),
+                        ],
                       ),
-                      Text(profile.waktu),
-                      Text(profile.latitude),
                     ],
                   ),
                 ),
