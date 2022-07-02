@@ -137,7 +137,7 @@ class ApiService {
     }
   }
 
-  Future<RiwayatDatangResponse> getDataRiwayatDatang() async {
+  Future<RiwayatDatangResponse> getRiwayatDatang() async {
     final token = await _loadToken();
     final _response = await _dio.get(Endpoint.createPresensiDatang,
         options: Options(headers: {"authorization": "Bearer $token"}));

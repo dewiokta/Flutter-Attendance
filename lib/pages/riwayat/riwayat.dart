@@ -37,7 +37,7 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
     this.context = context;
     return SafeArea(
       child: FutureBuilder(
-        future: apiService.getDataRiwayatDatang(),
+        future: apiService.getRiwayatDatang(),
         builder: (BuildContext context,
             AsyncSnapshot<RiwayatDatangResponse> snapshot) {
           if (snapshot.hasError) {
@@ -73,68 +73,21 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
             margin: const EdgeInsets.all(20),
             child: ListView.builder(
               itemBuilder: (context, index) {
-                RiwayatDatangDataResponse state = datariwayat[index];
+                RiwayatDatangDataResponse profile = datariwayat[index];
                 return Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Row(
-                            children: const [
-                              Text(
-                                "Detail Riwayat Mingguan",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
+                          Text(
+                            profile.status,
+                            style: Theme.of(context).textTheme.headline6,
                           ),
-                          SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                children: const <Widget>[
-                                  Image(
-                                    image:
-                                        AssetImage("assets/images/riwayat.png"),
-                                    height: 50,
-                                  )
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    state.waktu,
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: const <Widget>[
-                                  Text(
-                                    "Datang",
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    state.status,
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: const <Widget>[
-                                  Image(
-                                    image: AssetImage(
-                                        "assets/images/centang-riwayat.png"),
-                                    height: 20,
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
+                          Text(profile.waktu),
+                          Text(profile.status),
                         ],
                       ),
                     ),
