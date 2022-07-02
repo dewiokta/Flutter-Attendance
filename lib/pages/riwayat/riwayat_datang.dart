@@ -70,32 +70,66 @@ class _RiwayatWidgetState extends State<RiwayatDatangWidget> {
         ),
       ),
       body: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          RiwayatDatangDataResponse profile = datariwayat[index];
-          return Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      profile.status,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    Text(profile.waktu),
-                    Text(profile.latitude),
-                  ],
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            RiwayatDatangDataResponse profile = datariwayat[index];
+            return Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: const <Widget>[
+                              Image(
+                                image: AssetImage("assets/images/riwayat.png"),
+                                height: 40,
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(profile.waktu),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(profile.status),
+                            ],
+                          ),
+                          Column(
+                            children: const <Widget>[
+                              Image(
+                                image: AssetImage(
+                                    "assets/images/centang-riwayat.png"),
+                                height: 20,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      // Text(
+                      //   profile.status,
+                      //   style: Theme.of(context).textTheme.headline6,
+                      // ),
+                      // Text(profile.waktu),
+                      // Text(profile.latitude),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-        itemCount: datariwayat.length,
+            );
+          },
+          itemCount: datariwayat.length,
+        ),
       ),
-    ),);
+    );
   }
 }

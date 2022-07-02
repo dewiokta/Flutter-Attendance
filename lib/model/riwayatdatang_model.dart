@@ -37,7 +37,7 @@ class RiwayatDatangDataResponse {
   final String longitude;
   final String fotoDatang;
   final String status;
-  final dynamic waktu;
+  final String waktu;
 
   factory RiwayatDatangDataResponse.fromJson(Map<String, dynamic> json) =>
       RiwayatDatangDataResponse(
@@ -53,6 +53,6 @@ class RiwayatDatangDataResponse {
         "longitude": longitude.toString(),
         "foto_datang": fotoDatang,
         "status": status,
-        "waktu": waktu.toString(),
+        "waktu": waktu,
       };
 }

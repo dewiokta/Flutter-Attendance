@@ -77,7 +77,20 @@ class _HomePageState extends State<HomePage> {
                             color: kPrimaryColor,
                           ),
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Column(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 50,
+                                    backgroundColor: Color(00000),
+                                    child: Image.asset(
+                                      "assets/images/user2.png",
+                                      // fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               Column(
                                 children: [
                                   Row(
@@ -100,18 +113,6 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ],
                               ),
-                              Column(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 80,
-                                    backgroundColor: Color(00000),
-                                    child: Image.asset(
-                                      "assets/images/user2.png",
-                                      // fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         ),
