@@ -84,12 +84,12 @@ class _PresensiDatangState extends State<PresensiDatang> {
     bool serviceEnabled;
     LocationPermission permission;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    permission = await Geolocator.checkPermission();
 
     if (!serviceEnabled) {
       return Future.error('Location service are disabled!');
     }
 
-    permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission == await Geolocator.requestPermission();
 

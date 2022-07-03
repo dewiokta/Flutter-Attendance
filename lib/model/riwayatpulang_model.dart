@@ -28,30 +28,30 @@ class RiwayatPulangDataResponse {
   RiwayatPulangDataResponse({
     required this.latitude,
     required this.longitude,
-    required this.FotoPulang,
+    required this.fotoPulang,
     required this.status,
     required this.waktu,
   });
 
   final String latitude;
   final String longitude;
-  final String FotoPulang;
+  final String fotoPulang;
   final String status;
   final String waktu;
 
   factory RiwayatPulangDataResponse.fromJson(Map<String, dynamic> json) =>
       RiwayatPulangDataResponse(
         latitude: json["latitude"].toString(),
-        longitude: json["longtitude"].toString(),
-        FotoPulang: json["foto_pulang"],
+        longitude: json["longitude"].toString(),
+        fotoPulang: json["foto_pulang"],
         status: json["status"],
-        waktu: json["created_at"].toString(),
+        waktu: json["waktu"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
         "latitude": latitude.toString(),
         "longitude": longitude.toString(),
-        "foto_pulang": FotoPulang,
+        "foto_pulang": fotoPulang,
         "status": status,
         "waktu": waktu,
       };

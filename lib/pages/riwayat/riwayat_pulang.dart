@@ -59,7 +59,7 @@ class _RiwayatPulangWidgetState extends State<RiwayatPulangWidget> {
    Widget _buildListView(List<RiwayatPulangDataResponse> datariwayat) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Riwayat Presensi Datang"),
+        title: const Text("Riwayat Presensi Pulang"),
         backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
