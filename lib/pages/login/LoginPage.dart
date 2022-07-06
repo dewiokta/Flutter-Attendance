@@ -5,8 +5,8 @@ import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
 
-import '../pages/login/components/background.dart';
-import 'HomePage.dart';
+import 'components/background.dart';
+import '../home/HomePage.dart';
 
 class LoginPage extends StatefulWidget {
   final AuthBloc authBloc;
@@ -69,7 +69,7 @@ class _LoginFormState extends State<LoginForm> {
                     child: SingleChildScrollView(
                       child: Center(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -94,7 +94,7 @@ class _LoginFormState extends State<LoginForm> {
                                     fillColor: kPrimaryColorLight,
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(29),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: kPrimaryColorLight,
                                         )),
                                   ),
@@ -112,7 +112,7 @@ class _LoginFormState extends State<LoginForm> {
                                     fillColor: kPrimaryColorLight,
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(29),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: kPrimaryColorLight,
                                         )),
                                   ),
@@ -124,22 +124,23 @@ class _LoginFormState extends State<LoginForm> {
                                 child: FlatButton(
                                   onPressed: _login,
                                   child: (state is AuthLoading)
-                                      ? Text("Please wait")
-                                      : Text(
+                                      ? const Text("Please wait")
+                                      : const Text(
                                           "LOGIN",
-                                          style: TextStyle(color: Colors.white),
+                                          style: const TextStyle(
+                                              color: Colors.white),
                                         ),
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       vertical: 20, horizontal: 40),
                                   color: kPrimaryColor,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               (state is LoginFailed)
                                   ? Text(state.error)
-                                  : Text(""),
+                                  : const Text(""),
                             ],
                           ),
                         ),

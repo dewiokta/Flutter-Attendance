@@ -1,16 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/jadwal/jadwal.dart';
 import 'package:flutter_attendance/pages/presensi/presensi.dart';
-import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_attendance/pages/riwayat/riwayat.dart';
 import 'package:flutter_attendance/pages/profile/profile.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_repository.dart';
-import '/login and home/HomePage.dart';
-import 'login and home/LoginPage.dart';
+import 'pages/home/HomePage.dart';
+import 'pages/login/LoginPage.dart';
 
 class MainDrawer extends StatefulWidget {
   final AuthBloc authBloc;
@@ -74,7 +71,7 @@ class _MaindrawState extends State<MainDrawer> {
           Icons.person,
           color: Colors.indigo[400],
         ),
-        title: Text("Profile Account"),
+        title: const Text("Profile Account"),
       ),
       ListTile(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
@@ -83,7 +80,7 @@ class _MaindrawState extends State<MainDrawer> {
           Icons.camera_enhance_rounded,
           color: Colors.indigo[400],
         ),
-        title: Text("Presensi"),
+        title: const Text("Presensi"),
       ),
       ListTile(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
@@ -92,7 +89,7 @@ class _MaindrawState extends State<MainDrawer> {
           Icons.access_time_filled_outlined,
           color: Colors.indigo[400],
         ),
-        title: Text("Jadwal Presensi"),
+        title: const Text("Jadwal Presensi"),
       ),
       ListTile(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
@@ -101,7 +98,7 @@ class _MaindrawState extends State<MainDrawer> {
           Icons.history,
           color: Colors.indigo[400],
         ),
-        title: Text("Riwayat Presensi"),
+        title: const Text("Riwayat Presensi"),
       ),
       ListTile(
         onTap: () async {
@@ -116,7 +113,7 @@ class _MaindrawState extends State<MainDrawer> {
           Icons.logout,
           color: Colors.indigo[400],
         ),
-        title: Text("Sign Out"),
+        title: const Text("Sign Out"),
       ),
     ]);
   }

@@ -1,5 +1,3 @@
-import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
-
 class Endpoint {
   const Endpoint._();
 

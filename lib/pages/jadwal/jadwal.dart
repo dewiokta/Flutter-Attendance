@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_attendance/components/rounded_button.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
-import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
-import 'package:getwidget/getwidget.dart';
-
 import '../login/blocs/Auth_bloc.dart';
 import '../login/blocs/auth_repository.dart';
 
@@ -36,7 +32,7 @@ class _JadwalPagesState extends State<JadwalPages> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           child: Column(
             children: [
               Row(

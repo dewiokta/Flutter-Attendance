@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_attendance/constants.dart';
-import 'package:flutter_attendance/pages/login/login_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_attendance/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_repository.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
-import 'package:flutter_attendance/login and home/HomePage.dart';
+import 'package:flutter_attendance/pages/home/HomePage.dart';
 import 'pages/login/blocs/Auth_bloc.dart';
 import 'pages/login/blocs/auth_event.dart';
-import 'login and home/LoginPage.dart';
+import 'pages/login/LoginPage.dart';
 
 void main() {
   final AuthRepository authRepository = AuthRepository();
@@ -23,7 +17,6 @@ void main() {
       child: MyApp(
         authRepository: authRepository,
         authBloc: AuthBloc(authRepository: authRepository),
-        profileBloc: ProfileBloc(authRepository),
       ),
     )),
   );
@@ -32,14 +25,12 @@ void main() {
 class MyApp extends StatelessWidget {
   final AuthRepository authRepository;
   final AuthBloc authBloc;
-  final ProfileBloc profileBloc;
 
-  const MyApp(
-      {Key? key,
-      required this.authRepository,
-      required this.authBloc,
-      required this.profileBloc})
-      : super(key: key);
+  const MyApp({
+    Key? key,
+    required this.authRepository,
+    required this.authBloc,
+  }) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -52,7 +43,7 @@ class MyApp extends StatelessWidget {
           if (state is AuthInit) {
             authBloc.add(AuthCheck());
             return Container(
-              child: Center(
+              child: const Center(
                 child: CircularProgressIndicator(),
               ),
             );
@@ -67,8 +58,8 @@ class MyApp extends StatelessWidget {
           if (state is AuthLoading)
             return Container(
               color: Colors.white,
-              child: Center(
-                child: CircularProgressIndicator(),
+              child: const Center(
+                child: const CircularProgressIndicator(),
               ),
             );
 

@@ -3,8 +3,6 @@ import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_datang.dart';
 import 'package:flutter_attendance/pages/presensi/presensi_pulang.dart';
-import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
-
 import '../login/blocs/Auth_bloc.dart';
 import '../login/blocs/auth_repository.dart';
 
@@ -31,7 +29,7 @@ class _PresensiState extends State<Presensi> {
         ),
       ),
       body: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: Column(
           children: [
             ListTile(
@@ -42,8 +40,8 @@ class _PresensiState extends State<Presensi> {
               leading: const Image(
                 image: AssetImage("assets/images/presensi.png"),
               ),
-              title: Text("Presensi Datang"),
-              trailing: Icon(Icons.arrow_forward),
+              title: const Text("Presensi Datang"),
+              trailing: const Icon(Icons.arrow_forward),
             ),
             const SizedBox(height: 10),
             ListTile(

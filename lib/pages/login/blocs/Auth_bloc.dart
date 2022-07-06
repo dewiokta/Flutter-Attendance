@@ -5,20 +5,14 @@ import 'package:flutter_attendance/pages/login/blocs/auth_repository.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  // AuthBloc({required this.authRepository}) : assert(authRepository != null);
-
   AuthBloc({required this.authRepository})
-      // ignore: unnecessary_null_comparison
       : assert(authRepository != null),
         super(AuthInit()) {
     on<AuthCheck>(_onAuthCheck);
     on<LoginProcess>(_onAuthLoginProcess);
     on<GetDataWithToken>(_onGetData);
-    // on<GetDataAnggota>(_onGetDataAnggota);
     on<LoggedOut>(_onLogout);
   }
-
-  // AuthState get initialState => AuthInit();
 
   final AuthRepository authRepository;
 
@@ -85,9 +79,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       final user = await authRepository.getData(event.token);
       emit(AuthData(email: user.email, name: user.name, id: user.id));
-      // print(user.name);
-      // print(user.email);
-      // print(user.id);
     }
     if (event is LoggedOut) {
       final String token = await authRepository.hasToken();
@@ -100,25 +91,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } catch (e) {}
     }
   }
-
-  // void _onGetDataAnggota(AuthEvent event, Emitter<AuthState> emit) async {
-  //   if (event is GetDataAnggota) {
-  //     emit(AuthLoading());
-
-  //     final anggota = await authRepository.getDataAnggota(event.token);
-  //     emit(DataAnggota(
-  //         name: anggota.name,
-  //         ttl: anggota.ttl,
-  //         alamat: anggota.alamat,
-  //         jabatan: anggota.jabatan,
-  //         jenisKelamin: anggota.jenisKelamin));
-  //     // print(anggota.ttl);
-  //     // print(anggota.name);
-  //     // print(anggota.alamat);
-  //     // print(anggota.jabatan);
-  //     // print(anggota.jenisKelamin);
-  //   }
-  // }
 
   void _onLogout(AuthEvent event, Emitter<AuthState> emit) async {
     if (event is LoggedOut) {

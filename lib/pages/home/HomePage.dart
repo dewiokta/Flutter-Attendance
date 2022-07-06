@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/pages/jadwal/jadwal.dart';
 import 'package:flutter_attendance/pages/presensi/presensi.dart';
-import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_repository.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
-import 'package:flutter_attendance/login and home/LoginPage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../constants.dart';
-import '../maindrawer.dart';
-import '../pages/profile/profile.dart';
-import '../pages/riwayat/riwayat.dart';
+import 'package:flutter_attendance/pages/login/LoginPage.dart';
+import '../../constants.dart';
+import '../../maindrawer.dart';
+import '../profile/profile.dart';
+import '../riwayat/riwayat.dart';
 
 class HomePage extends StatefulWidget {
   final AuthBloc authBloc;
@@ -30,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Asistencia"),
+        title: const Text("Asistencia"),
         backgroundColor: kPrimaryColor,
       ),
       drawer: Drawer(
@@ -49,7 +47,7 @@ class _HomePageState extends State<HomePage> {
             if (state is AuthData) {
               return Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.all(18),
+                padding: const EdgeInsets.all(18),
                 child: ListView(
                   children: [
                     Column(
@@ -65,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                           height: 10,
                         ),
                         Container(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           height: 200,
                           width: 300,
                           decoration: const BoxDecoration(
@@ -79,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   CircleAvatar(
                                     radius: 50,
-                                    backgroundColor: Color(00000),
+                                    backgroundColor: const Color(00000),
                                     child: Image.asset(
                                       "assets/images/user2.png",
                                       // fit: BoxFit.fill,
@@ -102,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Text(
                                         "" + state.name,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 30, color: Colors.white),
                                       ),
                                     ],
@@ -112,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         ListTile(
@@ -138,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                             Icons.person,
                             color: Colors.indigo[400],
                           ),
-                          title: Text("Profile Account"),
+                          title: const Text("Profile Account"),
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                         ListTile(
@@ -151,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                             Icons.camera_enhance_rounded,
                             color: Colors.indigo[400],
                           ),
-                          title: Text("Presensi"),
+                          title: const Text("Presensi"),
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                         ListTile(
@@ -164,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                             Icons.access_time_filled_outlined,
                             color: Colors.indigo[400],
                           ),
-                          title: Text("Jadwal Presensi"),
+                          title: const Text("Jadwal Presensi"),
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                         ListTile(
@@ -177,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                             Icons.history,
                             color: Colors.indigo[400],
                           ),
-                          title: Text("Riwayat Presensi"),
+                          title: const Text("Riwayat Presensi"),
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                         ListTile(
@@ -194,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                             Icons.logout,
                             color: Colors.indigo[400],
                           ),
-                          title: Text("Sign Out"),
+                          title: const Text("Sign Out"),
                           trailing: const Icon(Icons.arrow_forward),
                         ),
                       ],

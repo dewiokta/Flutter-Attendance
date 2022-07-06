@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_attendance/components/rounded_button.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
 import 'package:flutter_attendance/model/riwayatpulang_model.dart';
-import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
-import 'package:getwidget/getwidget.dart';
-
-import '../../model/riwayatdatang_model.dart';
 import '../../network/api_service.dart';
 import '../login/blocs/Auth_bloc.dart';
 import '../login/blocs/auth_repository.dart';
@@ -56,7 +51,7 @@ class _RiwayatPulangWidgetState extends State<RiwayatPulangWidget> {
     );
   }
 
-   Widget _buildListView(List<RiwayatPulangDataResponse> datariwayat) {
+  Widget _buildListView(List<RiwayatPulangDataResponse> datariwayat) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Riwayat Presensi Pulang"),
@@ -81,7 +76,6 @@ class _RiwayatPulangWidgetState extends State<RiwayatPulangWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Row(
-                        
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(

@@ -2,21 +2,16 @@ import 'dart:io';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/maindrawer.dart';
-import 'package:flutter_attendance/model/presensidatang_model.dart';
 import 'package:flutter_attendance/model/presensipulang_model.dart';
 import 'package:flutter_attendance/network/api_service.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
 import 'package:flutter_attendance/pages/presensi/presensi.dart';
-import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'dart:async';
-import 'package:path_provider/path_provider.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../login/blocs/Auth_bloc.dart';
 import '../../theme.dart';
 
@@ -70,7 +65,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
       context: context,
       type: CoolAlertType.success,
       text: 'Presensi Sukses! Anda tidak perlu presensi lagi !',
-      autoCloseDuration: Duration(seconds: 10),
+      autoCloseDuration: const Duration(seconds: 10),
     ).then((value) {
       Navigator.push(
           context,
@@ -107,7 +102,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Asistencia"),
+        title: const Text("Asistencia"),
         backgroundColor: Colors.indigo[400],
       ),
       drawer: Drawer(
@@ -133,7 +128,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
                     Column(children: [
                       Center(
                         child: _image == null
-                            ? Text("Klik Icon Kamera untuk Presensi")
+                            ? const Text("Klik Icon Kamera untuk Presensi")
                             : Image.file(_image!, width: 250),
                       ),
                       const SizedBox(
@@ -142,7 +137,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
                     ]),
                     Column(
                       children: [
-                        Padding(padding: EdgeInsets.only(top: 20)),
+                        const Padding(padding: const EdgeInsets.only(top: 20)),
                         menuAccount("Address", _address),
                       ],
                     ),
@@ -181,7 +176,7 @@ class _PresensiPulangState extends State<PresensiPulang> {
       floatingActionButton: FloatingActionButton(
         onPressed: _updatePosition,
         backgroundColor: const Color.fromARGB(255, 120, 100, 210),
-        child: Icon(Icons.camera_alt),
+        child: const Icon(Icons.camera_alt),
       ),
     );
   }

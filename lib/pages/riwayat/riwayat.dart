@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_attendance/maindrawer.dart';
-import 'package:flutter_attendance/pages/presensi/presensi_datang.dart';
-import 'package:flutter_attendance/pages/presensi/presensi_pulang.dart';
-import 'package:flutter_attendance/pages/profile/bloc/profile_bloc.dart';
 import 'package:flutter_attendance/pages/riwayat/riwayat_datang.dart';
 import 'package:flutter_attendance/pages/riwayat/riwayat_pulang.dart';
 
@@ -34,7 +31,7 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
         ),
       ),
       body: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: Column(
           children: [
             ListTile(
@@ -42,8 +39,8 @@ class _RiwayatWidgetState extends State<RiwayatWidget> {
                   builder: (context) => RiwayatDatangWidget(
                         authBloc: _authBloc,
                       ))),
-              title: Text("Riwayat Datang"),
-              trailing: Icon(Icons.arrow_forward),
+              title: const Text("Riwayat Datang"),
+              trailing: const Icon(Icons.arrow_forward),
             ),
             const SizedBox(height: 10),
             ListTile(
