@@ -7,8 +7,8 @@ import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_repository.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
 import 'package:flutter_attendance/pages/login/LoginPage.dart';
-import '../../constants.dart';
 import '../../maindrawer.dart';
+import '../../ui/constants.dart';
 import '../profile/profile.dart';
 import '../riwayat/riwayat.dart';
 

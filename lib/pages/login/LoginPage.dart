@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_attendance/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
-
+import '../../ui/constants.dart';
 import 'components/background.dart';
 import '../home/HomePage.dart';
 
