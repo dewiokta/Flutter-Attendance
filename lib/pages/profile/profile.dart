@@ -109,18 +109,20 @@ class _ProfilePageState extends State<ProfilePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              data,
-              style: text,
-            ),
-            Text(
-              data1,
-              style: desc,
-            )
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                data,
+                style: text,
+              ),
+              Text(
+                data1,
+                style: desc,
+              )
+            ],
+          ),
         ),
       ],
     );

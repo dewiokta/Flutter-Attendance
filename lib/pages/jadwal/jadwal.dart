@@ -70,7 +70,7 @@ class _JadwalPagesState extends State<JadwalPages> {
                           size: 24.0,
                         ),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 15),
+                            horizontal: 20, vertical: 15),
                       ),
                     ],
                   ),
@@ -122,7 +122,7 @@ class _JadwalPagesState extends State<JadwalPages> {
                           size: 24.0,
                         ),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 15),
+                            horizontal: 20, vertical: 15),
                       ),
                     ],
                   ),
@@ -174,7 +174,7 @@ class _JadwalPagesState extends State<JadwalPages> {
                           size: 24.0,
                         ),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 15),
+                            horizontal: 20, vertical: 15),
                       ),
                     ],
                   ),
@@ -226,7 +226,7 @@ class _JadwalPagesState extends State<JadwalPages> {
                           size: 24.0,
                         ),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 15),
+                            horizontal: 20, vertical: 15),
                       ),
                     ],
                   ),
@@ -278,7 +278,7 @@ class _JadwalPagesState extends State<JadwalPages> {
                           size: 24.0,
                         ),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 15),
+                            horizontal: 20, vertical: 15),
                       ),
                     ],
                   ),
