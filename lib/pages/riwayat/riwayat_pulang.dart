@@ -17,7 +17,6 @@ class RiwayatPulangWidget extends StatefulWidget {
 class _RiwayatPulangWidgetState extends State<RiwayatPulangWidget> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
-
   late BuildContext context;
   late ApiService apiService;
   @override
@@ -62,72 +61,65 @@ class _RiwayatPulangWidgetState extends State<RiwayatPulangWidget> {
           authBloc: _authBloc,
         ),
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                RiwayatPulangDataResponse profile = datariwayat[index];
-                return Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: const <Widget>[
-                                    Image(
-                                      image: AssetImage(
-                                          "assets/images/riwayat.png"),
-                                      height: 40,
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(profile.waktu),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(profile.status),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: const <Widget>[
-                                    Image(
-                                      image: AssetImage(
-                                          "assets/images/centang-riwayat.png"),
-                                      height: 20,
-                                    )
-                                  ],
-                                ),
-                              ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            RiwayatPulangDataResponse profile = datariwayat[index];
+            return Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: const <Widget>[
+                                Image(
+                                  image:
+                                      AssetImage("assets/images/riwayat.png"),
+                                  height: 40,
+                                )
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(profile.waktu),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(profile.status),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            children: const <Widget>[
+                              Image(
+                                image: AssetImage(
+                                    "assets/images/centang-riwayat.png"),
+                                height: 20,
+                              )
                             ],
                           ),
                         ],
                       ),
-                    ),
+                    ],
                   ),
-                );
-              },
-              itemCount: datariwayat.length,
-            ),
-          ),
+                ),
+              ),
+            );
+          },
+          itemCount: datariwayat.length,
         ),
       ),
     );

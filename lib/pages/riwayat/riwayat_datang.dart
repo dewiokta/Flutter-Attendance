@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/maindrawer.dart';
-import '../../model/riwayatdatang_model.dart';
+import 'package:flutter_attendance/model/riwayatdatang_model.dart';
 import '../../network/api_service.dart';
 import '../../ui/constants.dart';
 import '../login/blocs/Auth_bloc.dart';
@@ -11,10 +11,10 @@ class RiwayatDatangWidget extends StatefulWidget {
   const RiwayatDatangWidget({Key? key, required this.authBloc})
       : super(key: key);
   @override
-  State<RiwayatDatangWidget> createState() => _RiwayatWidgetState();
+  State<RiwayatDatangWidget> createState() => _RiwayatDatangWidgetState();
 }
 
-class _RiwayatWidgetState extends State<RiwayatDatangWidget> {
+class _RiwayatDatangWidgetState extends State<RiwayatDatangWidget> {
   final AuthRepository authRepository = AuthRepository();
   AuthBloc get _authBloc => widget.authBloc;
   late BuildContext context;
@@ -61,72 +61,71 @@ class _RiwayatWidgetState extends State<RiwayatDatangWidget> {
           authBloc: _authBloc,
         ),
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                RiwayatDatangDataResponse profile = datariwayat[index];
-                return Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: const <Widget>[
-                                    Image(
-                                      image: AssetImage(
-                                          "assets/images/riwayat.png"),
-                                      height: 40,
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(profile.waktu),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(profile.status),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: const <Widget>[
-                                    Image(
-                                      image: AssetImage(
-                                          "assets/images/centang-riwayat.png"),
-                                      height: 20,
-                                    )
-                                  ],
-                                ),
-                              ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            RiwayatDatangDataResponse profile = datariwayat[index];
+            return Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: const <Widget>[
+                                Image(
+                                  image:
+                                      AssetImage("assets/images/riwayat.png"),
+                                  height: 40,
+                                )
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(profile.waktu),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(profile.status),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            children: const <Widget>[
+                              Image(
+                                image: AssetImage(
+                                    "assets/images/centang-riwayat.png"),
+                                height: 20,
+                              )
                             ],
                           ),
                         ],
                       ),
-                    ),
+                      // Text(
+                      //   profile.status,
+                      //   style: Theme.of(context).textTheme.headline6,
+                      // ),
+                      // Text(profile.waktu),
+                      // Text(profile.latitude),
+                    ],
                   ),
-                );
-              },
-              itemCount: datariwayat.length,
-            ),
-          ),
+                ),
+              ),
+            );
+          },
+          itemCount: datariwayat.length,
         ),
       ),
     );
