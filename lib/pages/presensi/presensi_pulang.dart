@@ -65,7 +65,6 @@ class _PresensiPulangState extends State<PresensiPulang> {
       context: context,
       type: CoolAlertType.success,
       text: 'Presensi Sukses! Anda tidak perlu presensi lagi !',
-      autoCloseDuration: const Duration(seconds: 10),
     ).then((value) {
       Navigator.push(
           context,
