@@ -1,52 +1,60 @@
+import 'dart:convert';
+
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_attendance/pages/login/LoginPage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/Auth_bloc.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_event.dart';
 import 'package:flutter_attendance/pages/login/blocs/auth_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../network/networkregist.dart';
 import '../../ui/constants.dart';
-import '../regis/regis.dart';
+import '../login/components/background.dart';
 import '../regis/register.dart';
-import 'components/background.dart';
 import '../home/HomePage.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final AuthBloc authBloc;
 
-  const LoginPage({Key? key, required this.authBloc}) : super(key: key);
+  const RegisterPage({Key? key, required this.authBloc}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   AuthBloc get _authBloc => widget.authBloc;
 
+  // TextEditingController nameController = TextEditingController();
+  // TextEditingController emailController = TextEditingController();
+  // TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => _authBloc,
-      child: LoginForm(
+      child: SignUpForm(
         authBloc: _authBloc,
       ),
     );
   }
 }
 
-class LoginForm extends StatefulWidget {
+class SignUpForm extends StatefulWidget {
   final AuthBloc authBloc;
 
-  LoginForm({Key? key, required this.authBloc}) : super(key: key);
+  SignUpForm({Key? key, required this.authBloc}) : super(key: key);
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<SignUpForm> createState() => _SignUpFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _SignUpFormState extends State<SignUpForm> {
   AuthBloc get _authBloc => widget.authBloc;
   final TextEditingController emailController = TextEditingController(text: "");
-
   final TextEditingController passwordController =
       TextEditingController(text: "");
+  TextEditingController nameController = TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +83,7 @@ class _LoginFormState extends State<LoginForm> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               const Text(
-                                "LOGIN",
+                                "Sign Up",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Color.fromARGB(255, 29, 126, 172),
@@ -84,6 +92,23 @@ class _LoginFormState extends State<LoginForm> {
                               SizedBox(height: size.height * 0.03),
                               Image.asset("assets/images/logo.png",
                                   height: size.height * 0.2),
+                              SizedBox(height: size.height * 0.03),
+                              SizedBox(
+                                width: 300,
+                                child: TextField(
+                                  controller: nameController,
+                                  decoration: InputDecoration(
+                                    labelText: "Username",
+                                    filled: true,
+                                    fillColor: kPrimaryColorLight,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(29),
+                                        borderSide: const BorderSide(
+                                          color: kPrimaryColorLight,
+                                        )),
+                                  ),
+                                ),
+                              ),
                               SizedBox(height: size.height * 0.03),
                               SizedBox(
                                 width: 300,
@@ -123,11 +148,11 @@ class _LoginFormState extends State<LoginForm> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(29),
                                 child: FlatButton(
-                                  onPressed: _login,
+                                  onPressed: _handleLogin,
                                   child: (state is AuthLoading)
                                       ? const Text("Please wait")
                                       : const Text(
-                                          "LOGIN",
+                                          "Sign Up",
                                           style: const TextStyle(
                                               color: Colors.white),
                                         ),
@@ -139,9 +164,6 @@ class _LoginFormState extends State<LoginForm> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              (state is LoginFailed)
-                                  ? Text(state.error)
-                                  : const Text(""),
                               Padding(
                                 padding: const EdgeInsets.only(top: 20),
                                 child: InkWell(
@@ -149,12 +171,12 @@ class _LoginFormState extends State<LoginForm> {
                                     Navigator.push(
                                         context,
                                         new MaterialPageRoute(
-                                            builder: (context) => RegisterPage(
+                                            builder: (context) => LoginPage(
                                                   authBloc: _authBloc,
                                                 )));
                                   },
                                   child: Text(
-                                    'Create New Account',
+                                    'Already Have an Account? Please Login',
                                     textDirection: TextDirection.ltr,
                                     style: TextStyle(
                                       color: Colors.black,
@@ -179,5 +201,25 @@ class _LoginFormState extends State<LoginForm> {
       email: emailController.text,
       password: passwordController.text,
     ));
+  }
+
+  void _handleLogin() async {
+    var data = {
+      'name': nameController.text,
+      'email': emailController.text,
+      'password': passwordController.text,
+    };
+
+    var res = await CallApi().postData(data, 'register');
+    CoolAlert.show(
+      context: context,
+      type: CoolAlertType.success,
+      text: 'Create Account Succes! Silahkan Login Untuk Masuk Sistem',
+    ).then((value) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => LoginPage(authBloc: _authBloc)));
+    });
   }
 }
