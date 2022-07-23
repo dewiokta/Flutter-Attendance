@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:intl/intl.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/maindrawer.dart';
@@ -29,14 +30,18 @@ class _PresensiDatangState extends State<PresensiDatang> {
   var _latitude = "";
   var _longtitude = "";
   var _address = "";
-  var _status = "On Process";
+  var _status = "";
+  var _waktu ="";
   var _foto_datang = "coba.png";
+
 
   File? _image;
   final imagePicker = ImagePicker();
 
   Future<void> _updatePosition() async {
     Position pos = await _determinePosition();
+    DateTime now = DateTime.now();
+    String time = DateFormat.Hms().format(now);
     List pm = await placemarkFromCoordinates(pos.latitude, pos.longitude);
     final image = await imagePicker.getImage(source: ImageSource.camera);
     // ignore: unused_element
@@ -45,7 +50,12 @@ class _PresensiDatangState extends State<PresensiDatang> {
       _longtitude = pos.longitude.toString();
       _address = pm[0].toString();
       _image = File(image!.path);
-      _status;
+      _waktu = time;
+      if (_waktu == "08:00:00" || _waktu == "07:00:00") {
+        _status = "On Time";
+      }else{
+        _status = "Late";
+      }
     });
   }
 
@@ -100,6 +110,7 @@ class _PresensiDatangState extends State<PresensiDatang> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text("Asistencia"),
@@ -136,6 +147,8 @@ class _PresensiDatangState extends State<PresensiDatang> {
                       children: [
                         const Padding(padding: const EdgeInsets.only(top: 20)),
                         menuAccount("Address", _address),
+                         const Padding(padding: const EdgeInsets.only(top: 20)),
+                        menuAccount("Time", _waktu),
                       ],
                     ),
                     const SizedBox(

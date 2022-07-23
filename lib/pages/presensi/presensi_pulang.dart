@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:intl/intl.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_attendance/maindrawer.dart';
@@ -29,7 +30,8 @@ class _PresensiPulangState extends State<PresensiPulang> {
   var _latitude = "";
   var _longtitude = "";
   var _address = "";
-  var _status = "On Process";
+  var _status = "";
+  var _waktu ="";
   var _foto_datang = "";
 
   File? _image;
@@ -37,6 +39,8 @@ class _PresensiPulangState extends State<PresensiPulang> {
 
   Future<void> _updatePosition() async {
     Position pos = await _determinePosition();
+    DateTime now = DateTime.now();
+    String time = DateFormat.Hms().format(now);
     List pm = await placemarkFromCoordinates(pos.latitude, pos.longitude);
     final image = await imagePicker.getImage(source: ImageSource.camera);
     // ignore: unused_element
@@ -45,7 +49,12 @@ class _PresensiPulangState extends State<PresensiPulang> {
       _longtitude = pos.longitude.toString();
       _address = pm[0].toString();
       _image = File(image!.path);
-      _status;
+      _waktu = time;
+      if (_waktu == "16:00:00" || _waktu == "15:00:00") {
+        _status = "On Time";
+      }else{
+        _status = "Late";
+      }
     });
   }
 
